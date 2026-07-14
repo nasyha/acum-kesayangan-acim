@@ -2,313 +2,169 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acum Mega Birthday OS v3.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-select=none">
+    <title>Acum 20th Birthday Special</title>
     <style>
-        :root {
-            --bg-color: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
-            --primary-color: #ff4d6d;
-            --accent-color: #ff758c;
-            --text-color: #4a4a4a;
-            --window-bg: rgba(255, 255, 255, 0.95);
-        }
-
-        .theme-dark {
-            --bg-color: linear-gradient(135deg, #2b2b2b 0%, #111111 100%);
-            --primary-color: #ff758c;
-            --accent-color: #ff4d6d;
-            --text-color: #f5f5f5;
-            --window-bg: rgba(40, 40, 40, 0.95);
-        }
-
-        .theme-blue {
-            --bg-color: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
-            --primary-color: #0284c7;
-            --accent-color: #38bdf8;
-            --text-color: #1e293b;
-            --window-bg: rgba(255, 255, 255, 0.95);
-        }
-
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif; user-select: none;
-        }
-
-        body {
-            background: var(--bg-color); height: 100vh; overflow: hidden; position: relative;
-            transition: background 0.5s ease;
-        }
-
-        /* BOOT SCREEN */
-        #bootScreen {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #111; color: #ff758c; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 9999; font-family: monospace;
-        }
-        .bar { width: 250px; height: 8px; border: 2px solid #ff758c; border-radius: 5px; margin-top: 20px; overflow: hidden; }
-        .fill { width: 0%; height: 100%; background: #ff758c; animation: load 2.5s forwards; }
-        @keyframes load { to { width: 100%; } }
-
-        /* DESKTOP LAYOUT */
-        #desktop {
-            height: calc(100vh - 45px); padding: 20px;
-            display: grid; grid-template-columns: repeat(auto-fill, 100px);
-            grid-auto-rows: 100px; gap: 20px; align-content: flex-start;
-        }
-
-        .icon {
-            display: flex; flex-direction: column; align-items: center; text-align: center;
-            cursor: pointer; padding: 10px; border-radius: 10px; transition: 0.2s;
-        }
-        .icon:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-3px); }
-        .icon span { font-size: 42px; margin-bottom: 6px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
-        .icon p { font-size: 0.75rem; color: var(--text-color); font-weight: 600; text-shadow: 1px 1px 2px rgba(255,255,255,0.5); }
-
-        /* SIDEBAR WIDGETS */
-        #widgets {
-            position: absolute; right: 20px; top: 20px; width: 260px;
-            display: flex; flex-direction: column; gap: 15px; pointer-events: auto;
-        }
-        .widget {
-            background: var(--window-bg); border-radius: 16px; padding: 15px;
-            border: 2px solid #ffccd5; box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            color: var(--text-color);
-        }
-        .widget h4 { font-size: 0.85rem; margin-bottom: 8px; color: var(--primary-color); display: flex; align-items: center; gap: 5px; }
-
-        /* JENDELA OS (WINDOW) */
-        .window {
-            position: absolute; width: 400px; background: var(--window-bg);
-            border-radius: 14px; box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            border: 2px solid #ffccd5; overflow: hidden; display: none; z-index: 100;
-        }
-        .window-header {
-            background: var(--primary-color); color: white; padding: 12px 15px;
-            display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 0.85rem;
-        }
-        .close-btn { background: rgba(255,255,255,0.3); border: none; color: white; width: 22px; height: 22px; border-radius: 50%; cursor: pointer; font-weight: bold; }
-        .close-btn:hover { background: #ef4444; }
-        .window-body { padding: 18px; max-height: 340px; overflow-y: auto; color: var(--text-color); font-size: 0.9rem; }
-
-        /* ISI KONTEN */
-        .coupon { background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white; padding: 12px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .coupon button { background: white; color: var(--primary-color); border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
-        #gameArea { background: #f8fafc; height: 200px; position: relative; overflow: hidden; border-radius: 10px; border: 1px dashed #cbd5e1; }
-        .falling { position: absolute; font-size: 26px; cursor: pointer; animation: fall 2.2s linear forwards; }
-        @keyframes fall { to { transform: translateY(210px); } }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background: linear-gradient(135deg, #ffe5ec 0%, #ffccd5 100%); min-height: 100vh; color: #2d3748; padding: 15px; padding-bottom: 30px; }
         
-        /* THEME SELECTOR */
-        .theme-btn { padding: 8px; width: 100%; margin-bottom: 8px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; color: white; }
+        /* BANNER UTAMA */
+        .header-banner { text-align: center; background: white; padding: 20px; border-radius: 20px; border: 3px solid #ff4d6d; box-shadow: 0 8px 20px rgba(255,77,109,0.1); margin-bottom: 20px; }
+        .header-banner h1 { color: #ff4d6d; font-size: 1.5rem; margin-bottom: 5px; }
+        .header-banner p { font-size: 0.8rem; color: #718096; font-weight: 600; }
 
-        /* TASKBAR */
-        #taskbar {
-            height: 45px; background: rgba(255, 255, 255, 0.9); position: absolute; bottom: 0; left: 0; width: 100vw;
-            display: flex; justify-content: space-between; align-items: center; padding: 0 15px; border-top: 1px solid #ffccd5; z-index: 999;
-        }
-        .start-menu-btn { background: var(--primary-color); color: white; border: none; padding: 6px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; }
-        #startMenu { display: none; position: absolute; bottom: 50px; left: 15px; width: 220px; background: white; border-radius: 10px; border: 2px solid #ffccd5; padding: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        /* GRID 20 MENU UTAMA */
+        .menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+        .menu-item { background: white; border: 2px solid #ffb3c1; border-radius: 14px; aspect-ratio: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: transform 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .menu-item:active { transform: scale(0.9); background: #fff5f6; }
+        .menu-item .icon { font-size: 1.6rem; margin-bottom: 2px; }
+        .menu-item .num { font-size: 0.65rem; font-weight: bold; color: #ff4d6d; background: #ffe5ec; padding: 1px 5px; border-radius: 8px; }
 
-        /* PARTICLES */
-        .particle { position: fixed; top: -30px; pointer-events: none; animation: pFall linear forwards; z-index: 50; }
-        @keyframes pFall { to { transform: translateY(105vh) rotate(360deg); } }
+        /* POPUP KONTEN (BUKA SATU-SATU) */
+        .popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
+        .popup-box { background: white; width: 100%; max-width: 360px; border-radius: 20px; border: 3px solid #ff4d6d; overflow: hidden; animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
+        .popup-header { background: #ff4d6d; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 0.95rem; position: relative; }
+        .popup-body { padding: 20px; text-align: center; font-size: 0.9rem; line-height: 1.5; max-height: 60vh; overflow-y: auto; }
+        
+        /* ISI ELEMEN WIDGET */
+        .btn-action { background: #ff758c; color: white; border: none; padding: 8px 15px; border-radius: 8px; font-weight: bold; margin-top: 10px; cursor: pointer; width: 100%; }
+        .btn-action:active { background: #ff4d6d; }
+        .bar-bg { background: #e2e8f0; height: 12px; border-radius: 6px; overflow: hidden; margin: 10px 0; }
+        .bar-fill { height: 100%; background: #ff4d6d; width: 50%; transition: width 0.3s; }
+        #gameArea { background: #f1f5f9; height: 150px; position: relative; overflow: hidden; border-radius: 10px; margin-top: 10px; }
+        .falling { position: absolute; font-size: 24px; animation: fall 1.5s linear forwards; }
+        @keyframes fall { to { transform: translateY(160px); } }
     </style>
 </head>
 <body>
 
-    <div id="bootScreen">
-        <h3>Mempersiapkan Acum Mega OS v3.0...</h3>
-        <div class="bar"><div class="fill"></div></div>
+    <!-- BANNER ATAS -->
+    <div class="header-banner">
+        <h1>ACUM'S 20th LEVEL UP! 👑</h1>
+        <p>Buka & Selesaikan 20 Fitur Gemes Di Bawah Ini</p>
     </div>
 
-    <!-- UTAMA DESKTOP -->
-    <div id="desktop">
-        <div class="icon" onclick="openWindow('winSurat')"><span>💌</span><p>Surat_Utama.txt</p></div>
-        <div class="icon" onclick="openWindow('winWish')"><span>🎂</span><p>Wish Generator</p></div>
-        <div class="icon" onclick="openWindow('winKupon')"><span>🎟️</span><p>Kupon Digital</p></div>
-        <div class="icon" onclick="openWindow('winMemori')"><span>📸</span><p>Album Foto</p></div>
-        <div class="icon" onclick="openWindow('winGame')"><span>🎮</span><p>Game Tangkap Kue</p></div>
-        <div class="icon" onclick="openWindow('winSettings')"><span>⚙️</span><p>Pengaturan OS</p></div>
+    <!-- GRID MENU UTAMA -->
+    <div class="menu-grid">
+        <div class="menu-item" onclick="openFeature(1)"> <span class="icon">💌</span> <span class="num">1</span> </div>
+        <div class="menu-item" onclick="openFeature(2)"> <span class="icon">🔮</span> <span class="num">2</span> </div>
+        <div class="menu-item" onclick="openFeature(3)"> <span class="icon">🎟️</span> <span class="num">3</span> </div>
+        <div class="menu-item" onclick="openFeature(4)"> <span class="icon">❤️</span> <span class="num">4</span> </div>
+        <div class="menu-item" onclick="openFeature(5)"> <span class="icon">🎮</span> <span class="num">5</span> </div>
+        <div class="menu-item" onclick="openFeature(6)"> <span class="icon">📸</span> <span class="num">6</span> </div>
+        <div class="menu-item" onclick="openFeature(7)"> <span class="icon">🎵</span> <span class="num">7</span> </div>
+        <div class="menu-item" onclick="openFeature(8)"> <span class="icon">📊</span> <span class="num">8</span> </div>
+        <div class="menu-item" onclick="openFeature(9)"> <span class="icon">🎲</span> <span class="num">9</span> </div>
+        <div class="menu-item" onclick="openFeature(10)"> <span class="icon">✍️</span> <span class="num">10</span> </div>
+        <div class="menu-item" onclick="openFeature(11)"> <span class="icon">🍫</span> <span class="num">11</span> </div>
+        <div class="menu-item" onclick="openFeature(12)"> <span class="icon">🩹</span> <span class="num">12</span> </div>
+        <div class="menu-item" onclick="openFeature(13)"> <span class="icon">🗺️</span> <span class="num">13</span> </div>
+        <div class="menu-item" onclick="openFeature(14)"> <span class="icon">🔔</span> <span class="num">14</span> </div>
+        <div class="menu-item" onclick="openFeature(15)"> <span class="icon">🥳</span> <span class="num">15</span> </div>
+        <div class="menu-item" onclick="openFeature(16)"> <span class="icon">💡</span> <span class="num">16</span> </div>
+        <div class="menu-item" onclick="openFeature(17)"> <span class="icon">🤝</span> <span class="num">17</span> </div>
+        <div class="menu-item" onclick="openFeature(18)"> <span class="icon">🔋</span> <span class="num">18</span> </div>
+        <div class="menu-item" onclick="openFeature(19)"> <span class="icon">✨</span> <span class="num">19</span> </div>
+        <div class="menu-item" onclick="openFeature(20)"> <span class="icon">🔒</span> <span class="num">20</span> </div>
+    </div>
 
-        <!-- WIDGETS KANAN -->
-        <div id="widgets">
-            <div class="widget">
-                <h4>📅 KALENDER ULTAH</h4>
-                <p style="font-size: 1.1rem; font-weight: bold; text-align: center; margin: 5px 0;">13 Oktober 2026</p>
-                <p style="font-size: 0.75rem; text-align: center; opacity: 0.8;">Hari Spesial Punya Acum ✨</p>
-            </div>
-            <div class="widget">
-                <h4>📊 STATUS CINTA</h4>
-                <div style="background: #e2e8f0; height: 12px; border-radius: 6px; overflow: hidden; margin-top: 5px;">
-                    <div style="background: #ff4d6d; width: 100%; height: 100%;"></div>
-                </div>
-                <p style="font-size: 0.7rem; margin-top: 4px; text-align: right;">Sayang Acum: 1000% 🔥</p>
-            </div>
+    <!-- WINDOW POPUP BISA DITUTUP -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup-box">
+            <div class="popup-header" id="popTitle">Fitur</div>
+            <div class="popup-body" id="popBody">Konten</div>
+            <button class="btn-action" style="background:#4a5568; border-radius:0;" onclick="closeFeature()">TUTUP MENU ❌</button>
         </div>
     </div>
 
-    <!-- WINDOW: SURAT -->
-    <div class="window" id="winSurat" style="top: 10%; left: 8%;">
-        <div class="window-header"><span>Surat_Utama.txt 📝</span><button class="close-btn" onclick="closeWindow('winSurat')">X</button></div>
-        <div class="window-body" id="letterBody" style="line-height: 1.6;"></div>
-    </div>
-
-    <!-- WINDOW: WISH GENERATOR -->
-    <div class="window" id="winWish" style="top: 15%; left: 15%;">
-        <div class="window-header"><span>Wish Generator 🔮</span><button class="close-btn" onclick="closeWindow('winWish')">X</button></div>
-        <div class="window-body">
-            <div id="wishBox" style="background: #fff5f6; padding: 15px; border-radius: 8px; text-align: center; font-weight: 500; margin-bottom: 15px;">Klik tombol di bawah buat memunculkan doa manis acak! ✨</div>
-            <button class="start-menu-btn" style="width:100%" onclick="genWish()">Acak Doa Baru 🌟</button>
-        </div>
-    </div>
-
-    <!-- WINDOW: KUPON -->
-    <div class="window" id="winKupon" style="top: 25%; left: 12%;">
-        <div class="window-header"><span>Kupon Digital Acum 🎟️</span><button class="close-btn" onclick="closeWindow('winKupon')">X</button></div>
-        <div class="window-body">
-            <div class="coupon"><div><strong>Kupon Eskrim & Jajan</strong><p style="font-size:0.75rem;">Bebas pilih tempat.</p></div><button onclick="claim(this)">Klaim</button></div>
-            <div class="coupon"><div><strong>Kupon Bebas Ngambek (24 Jam)</strong><p style="font-size:0.75rem;">Aku bakal nurut terus.</p></div><button onclick="claim(this)">Klaim</button></div>
-        </div>
-    </div>
-
-    <!-- WINDOW: ALBUM -->
-    <div class="window" id="winMemori" style="top: 20%; left: 20%;">
-        <div class="window-header"><span>Album Foto Kenangan 📸</span><button class="close-btn" onclick="closeWindow('winMemori')">X</button></div>
-        <div class="window-body" style="text-align: center;">
-            <div id="slideIcon" style="font-size: 50px; margin-bottom: 10px;">🥰</div>
-            <p id="slideDesc" style="font-weight: 600; margin-bottom: 15px;">Momen terbaik saat bikin kamu ketawa manis.</p>
-            <button class="start-menu-btn" onclick="nextSlide()">Lihat Momen Lain ➡️</button>
-        </div>
-    </div>
-
-    <!-- WINDOW: GAME -->
-    <div class="window" id="winGame" style="top: 8%; left: 25%;">
-        <div class="window-header"><span>Game: Tangkap Kue 🍰</span><button class="close-btn" onclick="closeWindow('winGame')">X</button></div>
-        <div class="window-body">
-            <p style="margin-bottom: 8px;">Skor: <span id="scoreVal" style="font-weight:bold; color:#ff4d6d">0</span> / 10</p>
-            <div id="gameArea"></div>
-        </div>
-    </div>
-
-    <!-- WINDOW: SETTINGS -->
-    <div class="window" id="winSettings" style="top: 30%; left: 30%;">
-        <div class="window-header"><span>Pengaturan Tema OS ⚙️</span><button class="close-btn" onclick="closeWindow('winSettings')">X</button></div>
-        <div class="window-body">
-            <button class="theme-btn" style="background:#ff758c" onclick="changeTheme('pink')">Pink Gemas (Default)</button>
-            <button class="theme-btn" style="background:#333" onclick="changeTheme('dark')">Mode Hacker / Gelap</button>
-            <button class="theme-btn" style="background:#0284c7" onclick="changeTheme('blue')">Biru Pastel Calming</button>
-        </div>
-    </div>
-
-    <!-- TASKBAR BOTTOM -->
-    <div id="taskbar">
-        <button class="start-menu-btn" onclick="toggleStart()">Menu Start</button>
-        <div style="font-weight: 600; color: #4a4a4a; font-size: 0.85rem;" id="liveClock">13 Oktober 2026</div>
-    </div>
-
-    <div id="startMenu">
-        <h4 style="color:#ff4d6d; margin-bottom: 5px;">Acum Birthday OS v3.0</h4>
-        <p style="font-size:0.75rem; color:#666; border-bottom:1px solid #eee; padding-bottom:5px;">Dibuat khusus dengan banyak cinta oleh cewekmu 🤍</p>
-        <p style="font-size:0.8rem; margin-top:8px;">Status: Aktif Selamanya</p>
-    </div>
-
-    <div id="player" style="display:none"></div>
+    <div id="audioSpace" style="display:none"></div>
 
     <script>
-        let player, score = 0, gameLoop, slideIdx = 0;
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
+        let score = 0, moodVal = 50, audioPlayer = null;
+
+        // LOAD AUDIO YOUTUBE
+        const tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api";
         document.getElementsByTagName('script')[0].parentNode.insertBefore(tag, document.getElementsByTagName('script')[0]);
-
         function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '0', width: '0', videoId: 'Hr0AAqHLLSg',
-                playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': 'Hr0AAqHLLSg' }
-            });
+            audioPlayer = new YT.Player('audioSpace', { height: '0', width: '0', videoId: 'Hr0AAqHLLSg', playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'Hr0AAqHLLSg' } });
         }
 
-        setTimeout(() => {
-            document.getElementById('bootScreen').style.display = 'none';
-            if(player && typeof player.playVideo === 'function') { player.unMute(); player.setVolume(70); player.playVideo(); }
-            startRain();
-        }, 2500);
+        const dataFitur = {
+            1: { title: "1. Surat Pembuka Nyaman 💌", body: "Selamat ulang tahun yang ke-20, Acum sayang! 🎂 Di umur yang berkepala dua ini, semoga kamu makin dewasa, sehat selalu, dan dilancarkan segala urusannya. Makasih udah selalu sabar ngadepin sifat manja aku selama ini. I love you! 💕" },
+            2: { title: "2. Pengacak Doa Manis 🔮", body: "<p id='dBox'>Klik tombol di bawah untuk melihat doa acak hari ini!</p><button class='btn-action' onclick='acakDoa()'>Kocok Doa ✨</button>" },
+            3: { title: "3. Mesin Tiket Kupon 🎟️", body: "<p id='kBox'>Ambil hadiah nyata dari aku!</p><button class='btn-action' onclick='ambilKupon()'>Klaim Tiket 🪙</button>" },
+            4: { title: "4. Tamagotchi Hati Acim ❤️", body: "<p>Rawat mood perasaan aku biar ga gampang ngambek hari ini:</p><div class='bar-bg'><div class='bar-fill' id='mBar' style='width:50%'></div></div><button class='btn-action' onclick='tambahMood()'>Kirim Pelukan (+20%)</button>" },
+            5: { title: "5. Mini Game Tangkap Kue 🎮", body: "<p>Tangkap 5 kue jatuh untuk menang! Skor: <span id='skor'>0</span></p><div id='gameArea'></div>" },
+            6: { title: "6. Album Memori Kecil 📸", body: "🌌 <strong>Momen Indah:</strong> Ingat pas kita pertama kali jalan dan kamu ketawa denger cerita random aku? Itu memori favorit aku sampai sekarang!" },
+            7: { title: "7. Pemutar Musik Latar 🎵", body: "Lagu romantis sudah terintegrasi otomatis. Kamu bisa matikan atau nyalakan lagunya dari sini:<br><br><button class='btn-action' style='background:#48bb78;' onclick='audioPlayer.playVideo()'>NYALAKAN MUSIK</button><button class='btn-action' style='background:#f56565;' onclick='audioPlayer.pauseVideo()'>MATIKAN MUSIK</button>" },
+            8: { title: "8. Matriks Kebucinan Real 📊", body: "<p>Scan tingkat kecocokan nama kamu sama aku hari ini:</p><h2 id='bucinSkor' style='margin:10px 0; color:#ff4d6d;'>0%</h2><button class='btn-action' onclick='hitungBucin()'>MULAI SCAN ⚡</button>" },
+            9: { title: "9. Angka Keberuntungan Umur 20 🎲", body: "<p>Angka keberuntungan Acum hari ini adalah: <strong>20</strong> (Sesuai umur barumu yang penuh dengan keberkahan!).</p>" },
+            10: { title: "10. Papan Ketik Catatan ✍️", body: "<textarea style='width:100%; height:60px; padding:5px; margin-top:5px;' placeholder='Tulis keinginan rahasiamu di sini...'></textarea><button class='btn-action' onclick='alert(\"Tersimpan!\")'>Simpan Wishlist</button>" },
+            11: { title: "11. Vending Machine Cokelat 🍫", body: "🍫 *Klik!* Satu cokelat digital termanis sudah dikirim khusus ke layar HP Acum ter-ganteng hari ini!" },
+            12: { title: "12. Kotak P3K Anti Ngambek 🩹", body: "Kapsul penenang instan! Kalau nanti aku tiba-tiba rewel atau ngambek, kamu berhak nunjukkin fitur nomor 12 ini buat bikin aku langsung jinak lagi. 🤪" },
+            13: { title: "13. Rencana Masa Depan Berdua 🗺️", body: "<div style='text-align:left; padding-left:20px;'><input type='checkbox' checked disabled> Kuliah/Kerja Sukses<br><input type='checkbox' checked disabled> Liburan Nyaman Berdua<br><input type='checkbox' checked disabled> Bahagia Selamanya</div>" },
+            14: { title: "14. Pengingat Minum Air 🔔", body: "Jangan terlalu sibuk main game atau kerja ya sayang. Inget minum air putih hari ini, aku gamau kamu sampai jatuh sakit! 🥤" },
+            15: { title: "15. Ledakan Konfeti Ultah 🥳", body: "🎉 KABOOM! Selamat ulang tahun yang paling meriah untuk cowok kesayangan aku! Semoga harimu penuh tawa hari ini." },
+            16: { title: "16. Kata-Kata Motivasi 💡", body: "\"Kamu jauh lebih kuat dari apa yang kamu pikirkan. Selamat memasuki usia 20 tahun dengan penuh percaya diri, aku selalu dukung kamu!\"" },
+            17: { title: "17. Kontrak Janji Setia 🤝", body: "Dengan membuka fitur ini, Acum berjanji akan selalu menyayangi Acim, bersabar menghadapi segala drama kecil, dan tidak akan berpaling. *Ditandatangani dengan cinta* ❤️" },
+            18: { title: "18. Pengisi Energi Jiwa 🔋", body: "🔋 *BZZZT...* Daya energi jiwa kamu sedang diisi ulang 100% menggunakan pasokan kasih sayang penuh dari aku!" },
+            19: { title: "19. Efek Hujan Balon Layar ✨", body: "Coba liat ke sekeliling layarmu! Atmosfer kebahagiaan pesta ulang tahunmu sengaja diciptakan biar HP kamu terasa meriah." },
+            20: { title: "20. Surat Rahasia Terkunci 🔒", body: "🔒 <strong>Pesan Terakhir:</strong> Makasih ya udah buka semua fiturnya sampai nomor 20! Kamu beneran cowok terbaik yang pernah ada di hidup aku. Jangan pernah bosan sama aku ya. Selamat ulang tahun yang ke-20, Acum sayang! 🤍✨" }
+        };
 
-        function updateClock() {
-            const now = new Date();
-            let h = String(now.getHours()).padStart(2, '0');
-            let m = String(now.getMinutes()).padStart(2, '0');
-            let s = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('liveClock').innerText = `13 Oktober 2026 - ${h}:${m}:${s}`;
+        function openFeature(num) {
+            document.getElementById('popTitle').innerText = dataFitur[num].title;
+            document.getElementById('popBody').innerHTML = dataFitur[num].body;
+            document.getElementById('popup').style.display = 'flex';
+            if(num === 5) startMiniGame();
         }
-        setInterval(updateClock, 1000);
+        function closeFeature() { document.getElementById('popup').style.display = 'none'; }
 
-        function openWindow(id) {
-            const w = document.getElementById(id); w.style.display = 'block';
-            w.style.zIndex = Math.floor(Date.now() / 1000);
-            if(id === 'winSurat' && document.getElementById('letterBody').innerHTML === '') typeSurat();
-            if(id === 'winGame') startGame();
+        function acakDoa() {
+            const list = ["Semoga makin dilancarkan rezekinya! 💸", "Semoga sehat terus badan dan jiwanya! 💪", "Semoga makin sayang sama aku tentunya! 🥰"];
+            document.getElementById('dBox').innerText = list[Math.floor(Math.random()*list.length)];
         }
-        function closeWindow(id) { document.getElementById(id).style.display = 'none'; if(id === 'winGame') clearInterval(gameLoop); }
-        function toggleStart() { const m = document.getElementById('startMenu'); m.style.display = m.style.display === 'block' ? 'none' : 'block'; }
-
-        const teks = `Selamat Ulang Tahun yang ke-X, Acum sayang! 🎂💖<br><br>Hari ini, 13 Oktober 2026, dunia dapet anugerah terbesar karena cowok terbaik, paling sabar, dan paling tulus ini lahir.<br><br>Maaf ya kalau aku sering rewel, suka ngambek tiba-tiba, dan bikin kamu capek sendiri. Makasih sudah selalu ada, meluk kekuranganku, dan jadi tempat ternyaman buat aku pulang.<br><br>Semoga di umur baru ini kamu selalu sehat, bahagia terus, dimudahkan semua urusan, dan kita bisa terus bareng-bareng ngerayain momen kayak gini di tahun-tahun depan. I love you so much, Acum! 🤍`;
-        let charIdx = 0;
-        function typeSurat() {
-            const b = document.getElementById('letterBody');
-            if(charIdx < teks.length) {
-                if(teks.substring(charIdx, charIdx+4) === '<br>') { b.innerHTML += '<br>'; charIdx += 4; }
-                else { b.innerHTML += teks.charAt(charIdx); charIdx++; }
-                setTimeout(typeSurat, 25);
-            }
+        function ambilKupon() {
+            const listK = ["🎟️ Kupon Traktir Es Krim Jumbo", "🎟️ Kupon Peluk 10 Menit", "🎟️ Kupon Bebas Pilih Tempat Makan"];
+            document.getElementById('kBox').innerHTML = `<strong>Tiketmu:</strong><br>${listK[Math.floor(Math.random()*listK.length)]} (Screenshot!)`;
         }
-
-        const wishes = [
-            "Semoga Acum lancar rezekinya dan sukses terus karir/kuliahnya! 💸",
-            "Semoga sehat selalu dan dijauhkan dari segala macam sakit badan! 💪❤️",
-            "Semoga makin sayang dan makin sabar ngadepin aku yang gemesin ini! 🤪",
-            "Semoga segala impian rahasia Acum dikabulin satu per satu tahun ini! ✨"
-        ];
-        function genWish() { document.getElementById('wishBox').innerText = wishes[Math.floor(Math.random() * wishes.length)]; }
-        function claim(btn) { btn.innerText = "✓ Diklaim"; btn.disabled = true; btn.style.background = '#ccc'; alert("Kupon tersimpan! Screenshot dan kirim ke aku pas mau dipakai ya! 🥳"); }
-
-        const slides = [
-            {icon: "🍨", desc: "Momen berburu kuliner & es krim bareng kamu yang selalu seru!"},
-            {icon: "🤗", desc: "Zona paling nyaman di dunia: pelukan hangat dari Acum."},
-            {icon: "🍿", desc: "Nonton film bareng sambil dengerin kamu komentar lucu."}
-        ];
-        function nextSlide() {
-            slideIdx = (slideIdx + 1) % slides.length;
-            document.getElementById('slideIcon').innerText = slides[slideIdx].icon;
-            document.getElementById('slideDesc').innerText = slides[slideIdx].desc;
+        function tambahMood() {
+            moodVal = Math.min(100, moodVal + 20);
+            document.getElementById('mBar').style.width = moodVal + '%';
+        }
+        function hitungBucin() {
+            let s = 0;
+            const iv = setInterval(() => { s += 5; document.getElementById('bucinSkor').innerText = s + '%'; if(s >= 100) { clearInterval(iv); document.getElementById('bucinSkor').innerText = '10000% BUCIN PARAH!'; } }, 20);
         }
 
-        function startGame() {
-            score = 0; document.getElementById('scoreVal').innerText = score; clearInterval(gameLoop);
+        function startMiniGame() {
+            score = 0;
             const area = document.getElementById('gameArea');
-            gameLoop = setInterval(() => {
-                const el = document.createElement('div'); el.className = 'falling';
-                el.innerText = ['🍰','🎂','🍩'][Math.floor(Math.random()*3)];
-                el.style.left = Math.random() * (area.clientWidth - 30) + 'px'; el.style.top = '0px';
-                el.addEventListener('click', () => {
-                    score++; document.getElementById('scoreVal').innerText = score; el.remove();
-                    if(score === 10) alert("Hebat! 10 kue ulang tahun berhasil kamu kumpulkan! 🎈");
-                });
-                area.appendChild(el); setTimeout(() => el.remove(), 2200);
-            }, 850);
+            area.innerHTML = '';
+            const gLoop = setInterval(() => {
+                if(document.getElementById('popup').style.display === 'none' || score >= 5) { clearInterval(gLoop); return; }
+                const item = document.createElement('div');
+                item.className = 'falling'; item.innerText = '🍰';
+                item.style.left = Math.random() * (area.clientWidth - 30) + 'px'; item.style.top = '0px';
+                item.onclick = () => { score++; document.getElementById('skor').innerText = score; item.remove(); if(score === 5) alert("Kamu Menang! 🏆"); };
+                area.appendChild(item);
+                setTimeout(() => item.remove(), 1500);
+            }, 800);
         }
 
-        function changeTheme(type) {
-            document.body.className = type === 'pink' ? '' : 'theme-' + type;
-        }
-
-        function startRain() {
-            setInterval(() => {
-                const p = document.createElement('div'); p.className = 'particle';
-                p.innerText = ['🎈','✨','🎉','💖'][Math.floor(Math.random()*4)];
-                p.style.left = Math.random() * 100 + 'vw'; p.style.fontSize = (Math.random()*15+20)+'px';
-                p.style.animationDuration = (Math.random()*2+2.5)+'s'; document.body.appendChild(p);
-                setTimeout(() => p.remove(), 4500);
-            }, 300);
-        }
+        // HUJAN PARTIKEL LATAR BELAKANG
+        setInterval(() => {
+            const p = document.createElement('div');
+            p.innerText = ['🎈','🎉','💖','✨'][Math.floor(Math.random()*4)];
+            p.style.position = 'fixed'; p.style.top = '-20px'; p.style.left = Math.random() * 100 + 'vw';
+            p.style.fontSize = '20px'; p.style.pointerEvents = 'none'; p.style.zIndex = '50';
+            p.style.transition = 'transform 3s linear, opacity 3s';
+            document.body.appendChild(p);
+            setTimeout(() => { p.style.transform = `translateY(105vh) rotate(${Math.random()*360}deg)`; }, 50);
+            setTimeout(() => p.remove(), 3000);
+        }, 400);
     </script>
 </body>
 </html>
