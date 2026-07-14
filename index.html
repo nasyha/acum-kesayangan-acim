@@ -3,168 +3,686 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-select=none">
-    <title>Acum 20th Birthday Special</title>
+    <title>Acum's 20th Level Up! 👑</title>
+    <!-- Tailwind CSS untuk styling modern -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome untuk Icon Premium -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        romantic: ['"Dancing Script"', 'cursive'],
+                    },
+                    colors: {
+                        love: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background: linear-gradient(135deg, #ffe5ec 0%, #ffccd5 100%); min-height: 100vh; color: #2d3748; padding: 15px; padding-bottom: 30px; }
-        
-        /* BANNER UTAMA */
-        .header-banner { text-align: center; background: white; padding: 20px; border-radius: 20px; border: 3px solid #ff4d6d; box-shadow: 0 8px 20px rgba(255,77,109,0.1); margin-bottom: 20px; }
-        .header-banner h1 { color: #ff4d6d; font-size: 1.5rem; margin-bottom: 5px; }
-        .header-banner p { font-size: 0.8rem; color: #718096; font-weight: 600; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b070d;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-        /* GRID 20 MENU UTAMA */
-        .menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
-        .menu-item { background: white; border: 2px solid #ffb3c1; border-radius: 14px; aspect-ratio: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: transform 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
-        .menu-item:active { transform: scale(0.9); background: #fff5f6; }
-        .menu-item .icon { font-size: 1.6rem; margin-bottom: 2px; }
-        .menu-item .num { font-size: 0.65rem; font-weight: bold; color: #ff4d6d; background: #ffe5ec; padding: 1px 5px; border-radius: 8px; }
+        /* Ambient glowing background */
+        .ambient-blob-1 {
+            position: fixed; top: 10%; left: -10%; width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(244,63,94,0.35) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(50px); z-index: 0; pointer-events: none; animation: floatBlob 12s infinite alternate;
+        }
+        .ambient-blob-2 {
+            position: fixed; bottom: 15%; right: -10%; width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(168,85,247,0.3) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(50px); z-index: 0; pointer-events: none; animation: floatBlob 16s infinite alternate-reverse;
+        }
 
-        /* POPUP KONTEN (BUKA SATU-SATU) */
-        .popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
-        .popup-box { background: white; width: 100%; max-width: 360px; border-radius: 20px; border: 3px solid #ff4d6d; overflow: hidden; animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        @keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        
-        .popup-header { background: #ff4d6d; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 0.95rem; position: relative; }
-        .popup-body { padding: 20px; text-align: center; font-size: 0.9rem; line-height: 1.5; max-height: 60vh; overflow-y: auto; }
-        
-        /* ISI ELEMEN WIDGET */
-        .btn-action { background: #ff758c; color: white; border: none; padding: 8px 15px; border-radius: 8px; font-weight: bold; margin-top: 10px; cursor: pointer; width: 100%; }
-        .btn-action:active { background: #ff4d6d; }
-        .bar-bg { background: #e2e8f0; height: 12px; border-radius: 6px; overflow: hidden; margin: 10px 0; }
-        .bar-fill { height: 100%; background: #ff4d6d; width: 50%; transition: width 0.3s; }
-        #gameArea { background: #f1f5f9; height: 150px; position: relative; overflow: hidden; border-radius: 10px; margin-top: 10px; }
-        .falling { position: absolute; font-size: 24px; animation: fall 1.5s linear forwards; }
-        @keyframes fall { to { transform: translateY(160px); } }
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, 30px) scale(1.15); }
+        }
+
+        /* Glassmorphism card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Shimmer effect for titles */
+        .shimmer-text {
+            background: linear-gradient(to right, #f43f5e, #c084fc, #f43f5e);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 3s linear infinite;
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(244,63,94,0.3); border-radius: 10px; }
     </style>
 </head>
-<body>
+<body class="flex justify-center items-center min-h-screen">
 
-    <!-- BANNER ATAS -->
-    <div class="header-banner">
-        <h1>ACUM'S 20th LEVEL UP! 👑</h1>
-        <p>Buka & Selesaikan 20 Fitur Gemes Di Bawah Ini</p>
-    </div>
+    <!-- Ambient background blobs -->
+    <div class="ambient-blob-1"></div>
+    <div class="ambient-blob-2"></div>
 
-    <!-- GRID MENU UTAMA -->
-    <div class="menu-grid">
-        <div class="menu-item" onclick="openFeature(1)"> <span class="icon">💌</span> <span class="num">1</span> </div>
-        <div class="menu-item" onclick="openFeature(2)"> <span class="icon">🔮</span> <span class="num">2</span> </div>
-        <div class="menu-item" onclick="openFeature(3)"> <span class="icon">🎟️</span> <span class="num">3</span> </div>
-        <div class="menu-item" onclick="openFeature(4)"> <span class="icon">❤️</span> <span class="num">4</span> </div>
-        <div class="menu-item" onclick="openFeature(5)"> <span class="icon">🎮</span> <span class="num">5</span> </div>
-        <div class="menu-item" onclick="openFeature(6)"> <span class="icon">📸</span> <span class="num">6</span> </div>
-        <div class="menu-item" onclick="openFeature(7)"> <span class="icon">🎵</span> <span class="num">7</span> </div>
-        <div class="menu-item" onclick="openFeature(8)"> <span class="icon">📊</span> <span class="num">8</span> </div>
-        <div class="menu-item" onclick="openFeature(9)"> <span class="icon">🎲</span> <span class="num">9</span> </div>
-        <div class="menu-item" onclick="openFeature(10)"> <span class="icon">✍️</span> <span class="num">10</span> </div>
-        <div class="menu-item" onclick="openFeature(11)"> <span class="icon">🍫</span> <span class="num">11</span> </div>
-        <div class="menu-item" onclick="openFeature(12)"> <span class="icon">🩹</span> <span class="num">12</span> </div>
-        <div class="menu-item" onclick="openFeature(13)"> <span class="icon">🗺️</span> <span class="num">13</span> </div>
-        <div class="menu-item" onclick="openFeature(14)"> <span class="icon">🔔</span> <span class="num">14</span> </div>
-        <div class="menu-item" onclick="openFeature(15)"> <span class="icon">🥳</span> <span class="num">15</span> </div>
-        <div class="menu-item" onclick="openFeature(16)"> <span class="icon">💡</span> <span class="num">16</span> </div>
-        <div class="menu-item" onclick="openFeature(17)"> <span class="icon">🤝</span> <span class="num">17</span> </div>
-        <div class="menu-item" onclick="openFeature(18)"> <span class="icon">🔋</span> <span class="num">18</span> </div>
-        <div class="menu-item" onclick="openFeature(19)"> <span class="icon">✨</span> <span class="num">19</span> </div>
-        <div class="menu-item" onclick="openFeature(20)"> <span class="icon">🔒</span> <span class="num">20</span> </div>
-    </div>
+    <!-- MAIN APP WRAPPER (MOCKUP HP LUXURY) -->
+    <div class="w-full max-w-md min-h-screen md:min-h-[850px] md:max-h-[850px] md:rounded-[40px] md:border-[10px] md:border-neutral-800 bg-[#0c0a0f] relative overflow-hidden flex flex-col shadow-2xl z-10">
+        
+        <!-- TOP APP BAR -->
+        <header class="glass-card sticky top-0 z-50 px-6 py-4 flex justify-between items-center border-b border-white/5">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-love-500 to-purple-500 flex items-center justify-center shadow-lg shadow-love-500/20">
+                    <span class="text-xl">👑</span>
+                </div>
+                <div>
+                    <h1 class="text-sm font-extrabold text-white tracking-wider">ACUM LEVEL 20</h1>
+                    <p class="text-[10px] text-love-300 font-bold uppercase tracking-widest">Birthday OS v4.0</p>
+                </div>
+            </div>
+            <!-- Battery Indicator Widget -->
+            <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+                <i class="fa-solid fa-battery-three-quarters text-love-400 animate-pulse"></i>
+                <span class="text-xs font-bold text-white/90">20th YO</span>
+            </div>
+        </header>
 
-    <!-- WINDOW POPUP BISA DITUTUP -->
-    <div class="popup-overlay" id="popup">
-        <div class="popup-box">
-            <div class="popup-header" id="popTitle">Fitur</div>
-            <div class="popup-body" id="popBody">Konten</div>
-            <button class="btn-action" style="background:#4a5568; border-radius:0;" onclick="closeFeature()">TUTUP MENU ❌</button>
+        <!-- APP CONTENT AREA -->
+        <main class="flex-1 overflow-y-auto px-6 py-6 pb-20 relative z-10">
+            <!-- Greeting Banner -->
+            <div class="glass-card rounded-2xl p-5 mb-6 relative overflow-hidden border border-love-500/30">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-love-500/10 rounded-full blur-xl"></div>
+                <h2 class="text-xs font-bold text-love-400 uppercase tracking-widest mb-1">Interactive Dashboard</h2>
+                <h3 class="text-xl font-extrabold text-white tracking-tight">Hii Gantengku, <span class="shimmer-text">Acum</span>!</h3>
+                <p class="text-xs text-neutral-300 mt-2 leading-relaxed">Selamat ulang tahun yang ke-20 sayang. Aku buat sistem interaktif ini khusus buat nemenin kamu di hari spesial ini. Selesaikan 20 misi gemes di bawah ini ya! ✨</p>
+            </div>
+
+            <!-- THE 20 GRID ITEMS -->
+            <div class="grid grid-cols-4 gap-3.5 mb-8">
+                <!-- Gunakan looping JS untuk render tombol agar rapi, namun template HTML disiapkan -->
+                <script>
+                    const icons = [
+                        "fa-envelope-open-text", "fa-fingerprint", "fa-ticket", "fa-heartpulse", 
+                        "fa-gamepad", "fa-images", "fa-music", "fa-face-flushed", 
+                        "fa-wand-magic-sparkles", "fa-glass-water", "fa-star", "fa-kit-medical", 
+                        "fa-map-location-dot", "fa-cookie-bite", "fa-fireworks", "fa-lightbulb", 
+                        "fa-handshake-simple", "fa-battery-full", "fa-snowflake", "fa-lock-open"
+                    ];
+                    
+                    for (let i = 1; i <= 20; i++) {
+                        document.write(`
+                            <button onclick="openFeature(${i})" class="glass-card aspect-square rounded-2xl flex flex-col justify-center items-center relative transition-all duration-300 hover:scale-105 active:scale-95 border border-white/10 group overflow-hidden hover:border-love-500/40">
+                                <div class="absolute -top-4 -right-4 w-10 h-10 bg-love-500/5 group-hover:bg-love-500/15 rounded-full transition-all duration-300"></div>
+                                <i class="fa-solid ${icons[i-1]} text-xl text-love-400 group-hover:text-love-300 transition-colors duration-300 mb-2"></i>
+                                <span class="text-[10px] font-extrabold text-white/40 group-hover:text-love-300/80 tracking-widest uppercase transition-colors duration-300">LVL ${i}</span>
+                            </button>
+                        `);
+                    }
+                </script>
+            </div>
+        </main>
+
+        <!-- PREMIUM GLASS POPUP -->
+        <div id="popup" class="fixed inset-0 bg-[#08050a]/80 backdrop-filter backdrop-blur-xl z-50 flex justify-center items-center p-6 hidden transition-all duration-500">
+            <div class="glass-card w-full max-w-sm rounded-[32px] overflow-hidden border border-white/15 flex flex-col shadow-2xl relative">
+                <!-- Glow ring -->
+                <div class="absolute -top-12 -left-12 w-36 h-36 bg-love-500/20 rounded-full blur-2xl"></div>
+                
+                <div class="px-6 py-5 border-b border-white/10 flex justify-between items-center relative z-10 bg-white/5">
+                    <span id="popTitle" class="text-sm font-extrabold text-white tracking-wider flex items-center gap-2">Detail</span>
+                    <button onclick="closeFeature()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-love-500/20 flex items-center justify-center text-white/80 hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-xmark text-xs"></i>
+                    </button>
+                </div>
+                
+                <div class="px-6 py-6 text-sm text-neutral-200 leading-relaxed max-h-[480px] overflow-y-auto relative z-10" id="popBody">
+                    Konten
+                </div>
+            </div>
+        </div>
+
+        <!-- STICKY AUDIO WIDGET -->
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-40 bg-white/5 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center gap-3 shadow-lg">
+            <button onclick="toggleMusic()" class="w-8 h-8 rounded-full bg-love-500 flex items-center justify-center text-white text-xs shadow-md shadow-love-500/20 active:scale-95 transition-transform duration-200">
+                <i id="musicIcon" class="fa-solid fa-play"></i>
+            </button>
+            <div class="text-[10px] font-extrabold tracking-wider text-white/90">AFGAN - TERIMA KASIH CINTA</div>
         </div>
     </div>
 
-    <div id="audioSpace" style="display:none"></div>
+    <!-- Hidden Video Player for music -->
+    <div id="ytPlayer" class="hidden"></div>
 
     <script>
-        let score = 0, moodVal = 50, audioPlayer = null;
+        let playerObj = null;
+        let isMusicPlaying = false;
+        let activeConfetti = null;
 
-        // LOAD AUDIO YOUTUBE
-        const tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api";
-        document.getElementsByTagName('script')[0].parentNode.insertBefore(tag, document.getElementsByTagName('script')[0]);
-        function onYouTubeIframeAPIReady() {
-            audioPlayer = new YT.Player('audioSpace', { height: '0', width: '0', videoId: 'Hr0AAqHLLSg', playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'Hr0AAqHLLSg' } });
+        // Web Audio API Synthesizer (Untuk sound effect premium buatan sendiri)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playChime() {
+            try {
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, now); // C5
+                osc.frequency.exponentialRampToValueAtTime(1046.50, now + 0.3); // C6
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.4);
+            } catch (e) { console.log(e); }
         }
 
-        const dataFitur = {
-            1: { title: "1. Surat Pembuka Nyaman 💌", body: "Selamat ulang tahun yang ke-20, Acum sayang! 🎂 Di umur yang berkepala dua ini, semoga kamu makin dewasa, sehat selalu, dan dilancarkan segala urusannya. Makasih udah selalu sabar ngadepin sifat manja aku selama ini. I love you! 💕" },
-            2: { title: "2. Pengacak Doa Manis 🔮", body: "<p id='dBox'>Klik tombol di bawah untuk melihat doa acak hari ini!</p><button class='btn-action' onclick='acakDoa()'>Kocok Doa ✨</button>" },
-            3: { title: "3. Mesin Tiket Kupon 🎟️", body: "<p id='kBox'>Ambil hadiah nyata dari aku!</p><button class='btn-action' onclick='ambilKupon()'>Klaim Tiket 🪙</button>" },
-            4: { title: "4. Tamagotchi Hati Acim ❤️", body: "<p>Rawat mood perasaan aku biar ga gampang ngambek hari ini:</p><div class='bar-bg'><div class='bar-fill' id='mBar' style='width:50%'></div></div><button class='btn-action' onclick='tambahMood()'>Kirim Pelukan (+20%)</button>" },
-            5: { title: "5. Mini Game Tangkap Kue 🎮", body: "<p>Tangkap 5 kue jatuh untuk menang! Skor: <span id='skor'>0</span></p><div id='gameArea'></div>" },
-            6: { title: "6. Album Memori Kecil 📸", body: "🌌 <strong>Momen Indah:</strong> Ingat pas kita pertama kali jalan dan kamu ketawa denger cerita random aku? Itu memori favorit aku sampai sekarang!" },
-            7: { title: "7. Pemutar Musik Latar 🎵", body: "Lagu romantis sudah terintegrasi otomatis. Kamu bisa matikan atau nyalakan lagunya dari sini:<br><br><button class='btn-action' style='background:#48bb78;' onclick='audioPlayer.playVideo()'>NYALAKAN MUSIK</button><button class='btn-action' style='background:#f56565;' onclick='audioPlayer.pauseVideo()'>MATIKAN MUSIK</button>" },
-            8: { title: "8. Matriks Kebucinan Real 📊", body: "<p>Scan tingkat kecocokan nama kamu sama aku hari ini:</p><h2 id='bucinSkor' style='margin:10px 0; color:#ff4d6d;'>0%</h2><button class='btn-action' onclick='hitungBucin()'>MULAI SCAN ⚡</button>" },
-            9: { title: "9. Angka Keberuntungan Umur 20 🎲", body: "<p>Angka keberuntungan Acum hari ini adalah: <strong>20</strong> (Sesuai umur barumu yang penuh dengan keberkahan!).</p>" },
-            10: { title: "10. Papan Ketik Catatan ✍️", body: "<textarea style='width:100%; height:60px; padding:5px; margin-top:5px;' placeholder='Tulis keinginan rahasiamu di sini...'></textarea><button class='btn-action' onclick='alert(\"Tersimpan!\")'>Simpan Wishlist</button>" },
-            11: { title: "11. Vending Machine Cokelat 🍫", body: "🍫 *Klik!* Satu cokelat digital termanis sudah dikirim khusus ke layar HP Acum ter-ganteng hari ini!" },
-            12: { title: "12. Kotak P3K Anti Ngambek 🩹", body: "Kapsul penenang instan! Kalau nanti aku tiba-tiba rewel atau ngambek, kamu berhak nunjukkin fitur nomor 12 ini buat bikin aku langsung jinak lagi. 🤪" },
-            13: { title: "13. Rencana Masa Depan Berdua 🗺️", body: "<div style='text-align:left; padding-left:20px;'><input type='checkbox' checked disabled> Kuliah/Kerja Sukses<br><input type='checkbox' checked disabled> Liburan Nyaman Berdua<br><input type='checkbox' checked disabled> Bahagia Selamanya</div>" },
-            14: { title: "14. Pengingat Minum Air 🔔", body: "Jangan terlalu sibuk main game atau kerja ya sayang. Inget minum air putih hari ini, aku gamau kamu sampai jatuh sakit! 🥤" },
-            15: { title: "15. Ledakan Konfeti Ultah 🥳", body: "🎉 KABOOM! Selamat ulang tahun yang paling meriah untuk cowok kesayangan aku! Semoga harimu penuh tawa hari ini." },
-            16: { title: "16. Kata-Kata Motivasi 💡", body: "\"Kamu jauh lebih kuat dari apa yang kamu pikirkan. Selamat memasuki usia 20 tahun dengan penuh percaya diri, aku selalu dukung kamu!\"" },
-            17: { title: "17. Kontrak Janji Setia 🤝", body: "Dengan membuka fitur ini, Acum berjanji akan selalu menyayangi Acim, bersabar menghadapi segala drama kecil, dan tidak akan berpaling. *Ditandatangani dengan cinta* ❤️" },
-            18: { title: "18. Pengisi Energi Jiwa 🔋", body: "🔋 *BZZZT...* Daya energi jiwa kamu sedang diisi ulang 100% menggunakan pasokan kasih sayang penuh dari aku!" },
-            19: { title: "19. Efek Hujan Balon Layar ✨", body: "Coba liat ke sekeliling layarmu! Atmosfer kebahagiaan pesta ulang tahunmu sengaja diciptakan biar HP kamu terasa meriah." },
-            20: { title: "20. Surat Rahasia Terkunci 🔒", body: "🔒 <strong>Pesan Terakhir:</strong> Makasih ya udah buka semua fiturnya sampai nomor 20! Kamu beneran cowok terbaik yang pernah ada di hidup aku. Jangan pernah bosan sama aku ya. Selamat ulang tahun yang ke-20, Acum sayang! 🤍✨" }
+        function playPop() {
+            try {
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(150, now);
+                osc.frequency.exponentialRampToValueAtTime(600, now + 0.15);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.15);
+            } catch (e) { console.log(e); }
+        }
+
+        // Youtube Player Integration
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.getElementsByTagName('script')[0].parentNode.insertBefore(tag, document.getElementsByTagName('script')[0]);
+
+        function onYouTubeIframeAPIReady() {
+            playerObj = new YT.Player('ytPlayer', {
+                height: '0', width: '0', videoId: 'Hr0AAqHLLSg',
+                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'Hr0AAqHLLSg' },
+                events: {
+                    'onReady': (event) => {
+                        event.target.mute();
+                        event.target.setVolume(70);
+                    }
+                }
+            });
+        }
+
+        function toggleMusic() {
+            if (!playerObj || typeof playerObj.playVideo !== 'function') return;
+            const icon = document.getElementById('musicIcon');
+            if (isMusicPlaying) {
+                playerObj.pauseVideo();
+                icon.className = 'fa-solid fa-play';
+                isMusicPlaying = false;
+            } else {
+                playerObj.unMute();
+                playerObj.playVideo();
+                icon.className = 'fa-solid fa-pause';
+                isMusicPlaying = true;
+                playChime();
+            }
+        }
+
+        // DATA 20 FITUR DENGAN TULISAN PREMIUM & SALTING MAKSIMAL
+        const contentData = {
+            1: {
+                title: "<i class='fa-solid fa-envelope-open-text text-love-400'></i> 1. Kapsul Surat Cinta Pembuka",
+                body: `
+                    <div class="text-center">
+                        <span class="text-4xl">💌</span>
+                        <h4 class="font-bold text-white mt-3 text-base">Selamat Level Up ke-20, Sayang!</h4>
+                        <p class="text-xs text-neutral-300 mt-3 text-justify leading-relaxed">
+                            Hari ini, 13 Oktober 2026, cowok terbaik yang pernah lahir ke bumi resmi berumur 20 tahun. Aku sengaja bikin sistem ini biar hari kamu beneran spesial dan penuh senyuman. Makasih ya sudah lahir, sudah jagain aku, dan selalu jadi pelukan paling aman buat aku. Aku beneran sayang banget sama kamu, hari ini dan selamanya. ❤️
+                        </p>
+                    </div>
+                `
+            },
+            2: {
+                title: "<i class='fa-solid fa-fingerprint text-love-400'></i> 2. Pemindai Tingkat Kesetiaan",
+                body: `
+                    <div class="text-center flex flex-col items-center">
+                        <p class="text-xs text-neutral-300 mb-4">Letakkan dan tahan jarimu di tombol sensor di bawah ini:</p>
+                        <button id="scannerBtn" onmousedown="startFingerprint()" ontouchstart="startFingerprint()" class="w-20 h-20 rounded-full border-2 border-love-500/50 flex items-center justify-center text-love-400 text-3xl animate-pulse active:scale-95 transition-all bg-love-500/10">
+                            <i class="fa-solid fa-fingerprint"></i>
+                        </button>
+                        <div id="scanMsg" class="text-xs font-bold text-love-300 mt-4 h-6">Menunggu sidik jari...</div>
+                    </div>
+                `
+            },
+            3: {
+                title: "<i class='fa-solid fa-ticket text-love-400'></i> 3. Mesin Vending Kupon Manja",
+                body: `
+                    <div class="text-center">
+                        <span class="text-4xl">🎰</span>
+                        <p class="text-xs text-neutral-300 mt-2">Dapatkan tiket hadiah nyata dari aku secara acak!</p>
+                        <div id="ticketArea" class="my-4 p-4 border border-white/10 rounded-2xl bg-white/5 min-h-[60px] flex items-center justify-center font-bold text-love-300"></div>
+                        <button onclick="drawTicket()" class="w-full bg-gradient-to-r from-love-500 to-purple-500 py-2.5 rounded-xl font-bold text-white text-xs active:scale-95 transition-all">TEKAN UNTUK KELUARKAN TIKET 🪙</button>
+                    </div>
+                `
+            },
+            4: {
+                title: "<i class='fa-solid fa-heartpulse text-love-400'></i> 4. Tamagotchi Mood Acim",
+                body: `
+                    <div class="text-center">
+                        <div class="text-5xl my-2" id="petAvatar">🥺🤍</div>
+                        <p class="text-xs text-neutral-300 mb-3">Sifat manja aku lagi labil. Rawat mood aku biar senyum terus ya!</p>
+                        <div class="bg-white/5 h-3 rounded-full overflow-hidden mb-4 border border-white/10">
+                            <div id="petBar" class="bg-gradient-to-r from-love-500 to-pink-400 h-full transition-all duration-500" style="width: 50%"></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="feedPet(20, '🥰')" class="bg-white/10 py-2 rounded-xl text-xs font-bold text-white active:scale-95 transition-all hover:bg-love-500/20">Beri Pelukan</button>
+                            <button onclick="feedPet(15, '🍿')" class="bg-white/10 py-2 rounded-xl text-xs font-bold text-white active:scale-95 transition-all hover:bg-love-500/20">Sogok Seblak</button>
+                        </div>
+                    </div>
+                `
+            },
+            5: {
+                title: "<i class='fa-solid fa-gamepad text-love-400'></i> 5. Game: Tangkap Kado Cinta",
+                body: `
+                    <div class="text-center">
+                        <p class="text-xs text-neutral-300 mb-2">Tangkap 5 kado jatuh untuk menangkan kejutan! Skor: <span id="gameSkor" class="font-extrabold text-love-400">0</span></p>
+                        <div id="canvasBox" class="bg-[#0f0b14] h-40 rounded-2xl border border-white/10 relative overflow-hidden"></div>
+                    </div>
+                `
+            },
+            6: {
+                title: "<i class='fa-solid fa-images text-love-400'></i> 6. Polaroid Buku Kenangan",
+                body: `
+                    <div class="text-center flex flex-col items-center">
+                        <div class="bg-white p-3 pb-8 rounded-xl shadow-xl border border-neutral-300 max-w-[200px] transform -rotate-2">
+                            <div class="w-full h-32 bg-gradient-to-tr from-love-100 to-purple-100 flex items-center justify-center text-4xl">🍧</div>
+                        </div>
+                        <p class="text-xs font-romantic text-love-400 text-lg mt-4">"Momen Kulineran Pertama Berdua"</p>
+                        <p class="text-[11px] text-neutral-400 mt-2 leading-relaxed">Tiap kali nyari makan malam bareng kamu tuh selalu jadi memori paling manis dan ga pernah bosenin. Kamu selalu tau cara bikin aku tertawa lepas.</p>
+                    </div>
+                `
+            },
+            7: {
+                title: "<i class='fa-solid fa-music text-love-400'></i> 7. Piringan Hitam Kontrol",
+                body: `
+                    <div class="text-center flex flex-col items-center">
+                        <div class="w-24 h-24 rounded-full bg-neutral-900 border-4 border-love-500 flex items-center justify-center animate-spin" style="animation-duration: 6s;">
+                            <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-xs">💿</div>
+                        </div>
+                        <p class="text-xs text-neutral-300 my-4">Nyalakan pemutar lagu romantis latar belakang untuk melengkapi petualangan OS-mu!</p>
+                        <button onclick="toggleMusic()" class="w-full bg-love-500 hover:bg-love-600 text-white py-2.5 rounded-xl text-xs font-bold transition-all active:scale-95">PLAY / PAUSE AUDIO 🎵</button>
+                    </div>
+                `
+            },
+            8: {
+                title: "<i class='fa-solid fa-face-flushed text-love-400'></i> 8. Kamera Detektor Salting",
+                body: `
+                    <div class="text-center">
+                        <span class="text-4xl">📸</span>
+                        <p class="text-xs text-neutral-300 mt-2">Detektor sedang memantau rona merah di pipimu...</p>
+                        <div id="saltingBox" class="my-4 text-lg font-extrabold text-love-300">0% SALTING</div>
+                        <button onclick="runSaltingScan()" class="w-full bg-gradient-to-r from-love-500 to-purple-500 py-2.5 rounded-xl font-bold text-white text-xs active:scale-95 transition-all">PINDAI WAJAH GANTENG ⚡</button>
+                    </div>
+                `
+            },
+            9: {
+                title: "<i class='fa-solid fa-wand-magic-sparkles text-love-400'></i> 9. Puisi Akrostik Nama ACUM",
+                body: `
+                    <div class="text-left bg-white/5 p-4 rounded-2xl border border-white/10">
+                        <p class="text-sm my-1.5"><strong class="text-love-400 text-base">A</strong>ku bersyukur memilikimu di sisiku,</p>
+                        <p class="text-sm my-1.5"><strong class="text-love-400 text-base">C</strong>inta tulusmu menghapus sepi hatiku,</p>
+                        <p class="text-sm my-1.5"><strong class="text-love-400 text-base">U</strong>ntuk selamanya genggamlah jemariku,</p>
+                        <p class="text-sm my-1.5"><strong class="text-love-400 text-base">M</strong>enua bersamamu adalah takdir terindahku. ❤️</p>
+                    </div>
+                `
+            },
+            10: {
+                title: "<i class='fa-solid fa-glass-water text-love-400'></i> 10. Pengingat Minum Sayang",
+                body: `
+                    <div class="text-center">
+                        <span class="text-4xl text-blue-400">🥤</span>
+                        <h4 class="font-bold text-white mt-2">Hidrasi Cinta Hari Ini</h4>
+                        <p class="text-xs text-neutral-300 mt-2 leading-relaxed">
+                            Aku tau kamu sering fokus kerja atau main game sampai lupa minum. Jangan sampai dehidrasi ya sayang, aku gamau cowok gantengku ini jatuh sakit. Yuk ambil air segelas dulu terus minum! 🤍
+                        </p>
+                    </div>
+                `
+            },
+            11: {
+                title: "<i class='fa-solid fa-star text-love-400'></i> 11. Kotak Doa & Harapan",
+                body: `
+                    <div class="text-center">
+                        <span class="text-4xl">🔮</span>
+                        <p class="text-xs text-neutral-300 mt-2">Klik tombol buat memunculkan doa manis untuk masa depan kita:</p>
+                        <div id="wishOutput" class="my-4 p-4 border border-white/10 rounded-2xl bg-white/5 min-h-[50px] flex items-center justify-center text-xs font-semibold text-love-300 leading-relaxed"></div>
+                        <button onclick="rollWish()" class="w-full bg-purple-600 hover:bg-purple-700 py-2.5 rounded-xl font-bold text-white text-xs active:scale-95 transition-all">AMBIL DOA BARU ✨</button>
+                    </div>
+                `
+            },
+            12: {
+                title: "<i class='fa-solid fa-kit-medical text-love-400'></i> 12. P3K Penenang Anti Ngambek",
+                body: `
+                    <div class="text-center">
+                        <span class="text-4xl">🩹</span>
+                        <p class="text-xs text-neutral-300 mt-2 leading-relaxed">
+                            Kapsul penenang darurat! Kalau di kemudian hari aku mulai rewel, ngambek tanpa sebab, atau bikin kamu pusing, tunjukkan screenshot menu Level 12 ini. Aku janji bakal langsung nurut dan peluk kamu erat-erat! 🤫
+                        </p>
+                    </div>
+                `
+            },
+            13: {
+                title: "<i class='fa-solid fa-map-location-dot text-love-400'></i> 13. Peta Rencana Masa Depan",
+                body: `
+                    <div class="text-left bg-white/5 p-4 rounded-2xl border border-white/10 space-y-3">
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" checked disabled class="accent-love-500 w-4 h-4">
+                            <span class="text-xs text-neutral-300">Merayakan ulang tahun ke-20 Acum (Berhasil! 🎂)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" checked disabled class="accent-love-500 w-4 h-4">
+                            <span class="text-xs text-neutral-300">Nge-es krim bareng tiap weekend</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" class="accent-love-500 w-4 h-4" onclick="playPop()">
+                            <span class="text-xs text-neutral-300">Keliling kota malam-malam berdua</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" class="accent-love-500 w-4 h-4" onclick="playPop()">
+                            <span class="text-xs text-neutral-300">Membangun rumah impian masa depan</span>
+                        </div>
+                    </div>
+                `
+            },
+            14: {
+                title: "<i class='fa-solid fa-cookie-bite text-love-400'></i> 14. Vending Machine Cokelat",
+                body: `
+                    <div class="text-center">
+                        <span class="text-4xl">🍫</span>
+                        <h4 class="font-bold text-white mt-2">Satu Cokelat Manis Terkirim!</h4>
+                        <p class="text-xs text-neutral-300 mt-2 leading-relaxed">
+                            Cokelat digital termanis sudah mendarat di layar HP-mu. Semoga rasa manisnya sampai ke hatimu dan bikin mood-mu hari ini ceria banget ya sayang! Mwah! 💋
+                        </p>
+                    </div>
+                `
+            },
+            15: {
+                title: "<i class='fa-solid fa-fireworks text-love-400'></i> 15. Tiup Lilin Kue Virtual",
+                body: `
+                    <div class="text-center flex flex-col items-center">
+                        <div class="text-5xl" id="candle">🎂🕯️</div>
+                        <p class="text-xs text-neutral-300 mt-3 mb-4">Ketuk lilin di atas untuk meniup dan merayakan hari jadimu!</p>
+                        <button onclick="blowCandle()" class="w-full bg-gradient-to-r from-love-500 to-yellow-500 py-2.5 rounded-xl font-bold text-white text-xs active:scale-95 transition-all">TIUP LILINNYA! 🎉</button>
+                    </div>
+                `
+            },
+            16: {
+                title: "<i class='fa-solid fa-lightbulb text-love-400'></i> 16. Lentera Kata Penyemangat",
+                body: `
+                    <div class="text-center">
+                        <span class="text-4xl">💡</span>
+                        <h4 class="font-bold text-white mt-2 mb-3">Pesan Penguat Hatimu</h4>
+                        <p class="text-xs text-neutral-300 leading-relaxed italic">
+                            "Kamu jauh lebih hebat, kuat, dan luar biasa dari yang kamu duga. Jangan pernah ragu dengan kemampuanmu sendiri ya ganteng. Aku akan selalu ada di belakangmu, mendukung semua mimpimu."
+                        </p>
+                    </div>
+                `
+            },
+            17: {
+                title: "<i class='fa-solid fa-handshake-simple text-love-400'></i> 17. Surat Kontrak Komitmen",
+                body: `
+                    <div class="text-left bg-white/5 p-4 rounded-2xl border border-white/10">
+                        <p class="text-xs text-neutral-300 leading-relaxed mb-4">
+                            Dengan membuka level ini, Acum berjanji akan terus memeluk erat Acim, tidak gampang bosan, sabar menghadapi tingkah gemesku, dan selalu setia selamanya. ❤️
+                        </p>
+                        <button onclick="alert('Kontrak ditandatangani dengan cinta selamanya!')" class="w-full bg-love-500 text-white py-2 rounded-xl text-xs font-bold active:scale-95 transition-all">TANDA TANGANI KONTRAK ✍️</button>
+                    </div>
+                `
+            },
+            18: {
+                title: "<i class='fa-solid fa-battery-full text-love-400'></i> 18. Pengisi Daya Energi Jiwa",
+                body: `
+                    <div class="text-center">
+                        <span class="text-4xl">⚡</span>
+                        <p class="text-xs text-neutral-300 mt-2">Daya energi jiwa kamu terdeteksi lemah akibat rutinitas:</p>
+                        <div class="bg-white/5 h-4 rounded-full overflow-hidden my-4 border border-white/10 relative">
+                            <div id="batBar" class="bg-green-500 h-full transition-all duration-1000" style="width: 20%"></div>
+                            <span id="batVal" class="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-white">20%</span>
+                        </div>
+                        <button onclick="chargeEnergy()" class="w-full bg-green-600 text-white py-2 rounded-xl text-xs font-bold active:scale-95 transition-all">ISI ULANG DENGAN CINTA ACIM 🔋</button>
+                    </div>
+                `
+            },
+            19: {
+                title: "<i class='fa-solid fa-snowflake text-love-400'></i> 19. Hujan Salju Romantis",
+                body: `
+                    <div class="text-center">
+                        <span class="text-4xl">❄️</span>
+                        <h4 class="font-bold text-white mt-2">Atmosfer Dingin tapi Hangat</h4>
+                        <p class="text-xs text-neutral-300 mt-2 leading-relaxed">
+                            Aku menyalakan fitur hujan partikel khusus untuk mendinginkan pikiranmu yang lelah seharian. Rasakan ketenangan ini sambil dengerin lagunya ya sayang...
+                        </p>
+                    </div>
+                `
+            },
+            20: {
+                title: "<i class='fa-solid fa-lock-open text-love-400'></i> 20. Kotak Surat Rahasia Terdalam",
+                body: `
+                    <div class="text-center">
+                        <span class="text-4xl">🔒</span>
+                        <p class="text-xs text-neutral-300 mt-2 mb-4">Misi terakhir selesai! Akses surat rahasia pamungkas dari relung hati terdalamku:</p>
+                        <button onclick="revealUltimateLetter()" class="w-full bg-gradient-to-r from-love-600 to-purple-600 text-white py-3 rounded-xl text-xs font-bold shadow-lg shadow-love-500/20 active:scale-95 transition-all">BUKA SURAT UTAMA 👑</button>
+                    </div>
+                `
+            }
         };
 
         function openFeature(num) {
-            document.getElementById('popTitle').innerText = dataFitur[num].title;
-            document.getElementById('popBody').innerHTML = dataFitur[num].body;
+            playPop();
+            const f = contentData[num];
+            document.getElementById('popTitle').innerHTML = f.title;
+            document.getElementById('popBody').innerHTML = f.body;
             document.getElementById('popup').style.display = 'flex';
-            if(num === 5) startMiniGame();
-        }
-        function closeFeature() { document.getElementById('popup').style.display = 'none'; }
-
-        function acakDoa() {
-            const list = ["Semoga makin dilancarkan rezekinya! 💸", "Semoga sehat terus badan dan jiwanya! 💪", "Semoga makin sayang sama aku tentunya! 🥰"];
-            document.getElementById('dBox').innerText = list[Math.floor(Math.random()*list.length)];
-        }
-        function ambilKupon() {
-            const listK = ["🎟️ Kupon Traktir Es Krim Jumbo", "🎟️ Kupon Peluk 10 Menit", "🎟️ Kupon Bebas Pilih Tempat Makan"];
-            document.getElementById('kBox').innerHTML = `<strong>Tiketmu:</strong><br>${listK[Math.floor(Math.random()*listK.length)]} (Screenshot!)`;
-        }
-        function tambahMood() {
-            moodVal = Math.min(100, moodVal + 20);
-            document.getElementById('mBar').style.width = moodVal + '%';
-        }
-        function hitungBucin() {
-            let s = 0;
-            const iv = setInterval(() => { s += 5; document.getElementById('bucinSkor').innerText = s + '%'; if(s >= 100) { clearInterval(iv); document.getElementById('bucinSkor').innerText = '10000% BUCIN PARAH!'; } }, 20);
+            
+            // Inisialisasi game jika membuka panel game
+            if(num === 5) setTimeout(initGame, 100);
         }
 
-        function startMiniGame() {
-            score = 0;
-            const area = document.getElementById('gameArea');
-            area.innerHTML = '';
-            const gLoop = setInterval(() => {
-                if(document.getElementById('popup').style.display === 'none' || score >= 5) { clearInterval(gLoop); return; }
-                const item = document.createElement('div');
-                item.className = 'falling'; item.innerText = '🍰';
-                item.style.left = Math.random() * (area.clientWidth - 30) + 'px'; item.style.top = '0px';
-                item.onclick = () => { score++; document.getElementById('skor').innerText = score; item.remove(); if(score === 5) alert("Kamu Menang! 🏆"); };
-                area.appendChild(item);
-                setTimeout(() => item.remove(), 1500);
-            }, 800);
+        function closeFeature() {
+            playPop();
+            document.getElementById('popup').style.display = 'none';
         }
 
-        // HUJAN PARTIKEL LATAR BELAKANG
+        // Feature 2: Fingerprint Scan
+        function startFingerprint() {
+            playPop();
+            const msg = document.getElementById('scanMsg');
+            msg.innerText = "Menganalisis detak jantung...";
+            setTimeout(() => {
+                msg.innerText = "Membaca tingkat kecocokan...";
+                setTimeout(() => {
+                    msg.innerHTML = "<span class='text-love-400 text-sm'>9999% SETIA & BUCIN PARAH!</span>";
+                    playChime();
+                }, 1200);
+            }, 1000);
+        }
+
+        // Feature 3: Ticket Drawing
+        const tickets = [
+            "🎟️ BEBAS PILIH TEMPAT MAKAN (Aku yang traktir!)",
+            "🎟️ PELUKAN ERAT 15 MENIT NONSTOP",
+            "🎟️ BEBAS MARAH-MARAH SEHARIAN (Aku nurut terus)",
+            "🎟️ DITEMENIN MAIN GAME SAMPAI BEGADANG"
+        ];
+        function drawTicket() {
+            playPop();
+            const res = tickets[Math.floor(Math.random() * tickets.length)];
+            document.getElementById('ticketArea').innerHTML = `<div class='animate-bounce text-xs text-center'>${res}<br><span class='text-[10px] text-white/50 font-normal mt-1 block'>*Screenshot tiket ini buat diklaim ke aku!</span></div>`;
+            playChime();
+        }
+
+        // Feature 4: Tamagotchi
+        let petMood = 50;
+        function feedPet(amount, emoji) {
+            playPop();
+            petMood = Math.min(100, petMood + amount);
+            document.getElementById('petBar').style.width = petMood + '%';
+            const avatar = document.getElementById('petAvatar');
+            avatar.innerText = emoji;
+            avatar.classList.add('scale-125');
+            setTimeout(() => {
+                avatar.classList.remove('scale-125');
+                if (petMood >= 95) {
+                    avatar.innerText = "🥰✨❤️";
+                    playChime();
+                }
+            }, 300);
+        }
+
+        // Feature 5: Catch Game
+        let gameScore = 0;
+        function initGame() {
+            gameScore = 0;
+            const canvas = document.getElementById('canvasBox');
+            if(!canvas) return;
+            canvas.innerHTML = '';
+            
+            const loop = setInterval(() => {
+                if(!document.getElementById('canvasBox') || gameScore >= 5) {
+                    clearInterval(loop);
+                    return;
+                }
+                const gift = document.createElement('div');
+                gift.className = 'falling cursor-pointer absolute';
+                gift.innerText = ['🎁','💝','💖','⭐'][Math.floor(Math.random()*4)];
+                gift.style.left = Math.random() * (canvas.clientWidth - 30) + 'px';
+                gift.style.top = '0px';
+                
+                gift.onclick = () => {
+                    playPop();
+                    gameScore++;
+                    document.getElementById('gameSkor').innerText = gameScore;
+                    gift.remove();
+                    if(gameScore === 5) {
+                        playChime();
+                        alert("Hore! Semua kado cinta sudah kamu kumpulkan! 🏆🎁");
+                    }
+                };
+                canvas.appendChild(gift);
+                setTimeout(() => gift.remove(), 1500);
+            }, 900);
+        }
+
+        // Feature 8: Salting Detector
+        function runSaltingScan() {
+            playPop();
+            const box = document.getElementById('saltingBox');
+            box.innerText = "Mengukur suhu pipi...";
+            setTimeout(() => {
+                box.innerHTML = "<span class='text-red-500 text-2xl animate-pulse'>1000% SALTING MAMPUS!</span><br><span class='text-xs text-neutral-300 font-normal mt-2 block'>Hayo ngaku, pipi kamu langsung merah merona kan pas buka web ini? 😜</span>";
+                playChime();
+            }, 1500);
+        }
+
+        // Feature 11: Wish jar
+        const wishes = [
+            "Semoga kamu sehat selalu, gak gampang capek badannya ya ganteng! 💪",
+            "Lancar rezekinya, sukses kuliah atau kerjanya, dimudahkan semua urusan! 💸",
+            "Makin sayang, makin sabar, dan menua bersamaku selamanya! 🥰",
+            "Semoga semua impian besarmu terkabul satu per satu tahun ini! ✨"
+        ];
+        function rollWish() {
+            playPop();
+            document.getElementById('wishOutput').innerText = wishes[Math.floor(Math.random() * wishes.length)];
+            playChime();
+        }
+
+        // Feature 15: Blow Candle
+        function blowCandle() {
+            playPop();
+            const candle = document.getElementById('candle');
+            candle.innerText = "🎂✨🎉";
+            playChime();
+            alert("Lilin ditiup! Selamat ulang tahun kesayangan aku! Semoga panjang umur dan bahagia selalu! 🥳🎂");
+        }
+
+        // Feature 18: Soul Charger
+        function chargeEnergy() {
+            playPop();
+            document.getElementById('batBar').style.width = '100%';
+            document.getElementById('batVal').innerText = '100% ENERGY FULL';
+            playChime();
+        }
+
+        // Feature 20: Ultimate Letter
+        function revealUltimateLetter() {
+            playPop();
+            document.getElementById('popBody').innerHTML = `
+                <div class="text-justify leading-relaxed space-y-4">
+                    <p class="font-romantic text-2xl text-center text-love-400">Teruntuk Acum, Semesta Cintaku.</p>
+                    <p class="text-xs text-neutral-300 leading-relaxed">
+                        Makasih banyak ya sudah mau berjuang bareng aku sampai sejauh ini. Aku tau aku jauh dari kata sempurna, sering rewel, kekanakan, bahkan suka bikin kamu capek sendiri ngadepin tingkah laku aku. 😔
+                    </p>
+                    <p class="text-xs text-neutral-300 leading-relaxed">
+                        Tapi kamu tetep milih tinggal, tetep sabar, tetep meluk semua kekurangan aku tanpa pernah ngeluh. Kehadiran kamu tuh beneran jadi berkah paling indah di hidup aku. Aku gak bisa bayangin hari-hariku tanpa canda tawa dan pesan manis darimu.
+                    </p>
+                    <p class="text-xs text-neutral-300 leading-relaxed">
+                        Selamat ulang tahun yang ke-20 ya, sayangku. Semoga kita bisa terus bergandengan tangan, melewati banyak rintangan, dan merayakan ulang tahun berikutnya bareng-bareng lagi. Aku sayang kamu hari ini, esok, dan selamanya. Mwah! 🤍✨
+                    </p>
+                    <p class="text-right font-romantic text-lg text-love-400">— Sayangmu, Acim 💖</p>
+                </div>
+            `;
+            playChime();
+        }
+
+        // GLOBAL BACKGROUND CONFETTI ANIMATION EFFECT
         setInterval(() => {
             const p = document.createElement('div');
-            p.innerText = ['🎈','🎉','💖','✨'][Math.floor(Math.random()*4)];
-            p.style.position = 'fixed'; p.style.top = '-20px'; p.style.left = Math.random() * 100 + 'vw';
-            p.style.fontSize = '20px'; p.style.pointerEvents = 'none'; p.style.zIndex = '50';
-            p.style.transition = 'transform 3s linear, opacity 3s';
+            p.innerText = ['🎈','💖','✨','🌸'][Math.floor(Math.random()*4)];
+            p.style.position = 'fixed';
+            p.style.top = '-20px';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.fontSize = Math.floor(Math.random() * 15 + 15) + 'px';
+            p.style.pointerEvents = 'none';
+            p.style.zIndex = '5';
+            p.style.opacity = '0.7';
+            p.style.transition = 'transform 3.5s linear, opacity 3.5s';
             document.body.appendChild(p);
-            setTimeout(() => { p.style.transform = `translateY(105vh) rotate(${Math.random()*360}deg)`; }, 50);
-            setTimeout(() => p.remove(), 3000);
-        }, 400);
+            
+            setTimeout(() => {
+                p.style.transform = `translateY(105vh) rotate(${Math.random()*360}deg)`;
+            }, 50);
+            
+            setTimeout(() => p.remove(), 3500);
+        }, 500);
     </script>
 </body>
 </html>
