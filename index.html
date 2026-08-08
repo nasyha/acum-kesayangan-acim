@@ -73,7 +73,7 @@
         #lockScreen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(13, 6, 20, 0.85);
+            background: rgba(13, 6, 20, 0.88);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
             z-index: 999;
@@ -180,17 +180,17 @@
             padding: 20px;
         }
         .modal-box {
-            background: linear-gradient(145deg, rgba(35, 18, 50, 0.9), rgba(20, 10, 30, 0.95));
+            background: linear-gradient(145deg, rgba(35, 18, 50, 0.95), rgba(20, 10, 30, 0.98));
             border: 1px solid rgba(255, 255, 255, 0.3);
             width: 100%;
-            max-width: 360px;
+            max-width: 370px;
             border-radius: 28px;
             padding: 24px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(255,77,109,0.2);
             text-align: center;
             animation: modalPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            max-height: 80vh;
+            max-height: 82vh;
             overflow-y: auto;
         }
         @keyframes modalPop {
@@ -198,8 +198,8 @@
             to { transform: scale(1) translateY(0); opacity: 1; }
         }
 
-        .modal-title { font-size: 1.1rem; font-weight: 700; color: #ff758c; margin-bottom: 12px; }
-        .modal-body { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.9); }
+        .modal-title { font-size: 1.15rem; font-weight: 700; color: #ff758c; margin-bottom: 14px; }
+        .modal-body { font-size: 0.88rem; line-height: 1.65; color: rgba(255,255,255,0.92); text-align: left; }
 
         .btn-main {
             background: linear-gradient(135deg, #ff4d6d, #ff758c);
@@ -218,9 +218,9 @@
         .btn-main:active { transform: scale(0.95); }
         .btn-close {
             background: rgba(255,255,255,0.15);
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.8);
             border: 1px solid rgba(255,255,255,0.2);
-            margin-top: 8px;
+            margin-top: 12px;
         }
 
         /* WIDGETS SPESIFIK */
@@ -232,7 +232,7 @@
         .falling-item { position: absolute; font-size: 24px; cursor: pointer; animation: fallAnim 1.8s linear forwards; }
         @keyframes fallAnim { to { transform: translateY(170px); } }
 
-        .music-bar { display: flex; align-items: center; justify-content: center; gap: 4px; height: 30px; margin: 10px 0; }
+        .music-bar { display: flex; align-items: center; justify-content: center; gap: 4px; height: 30px; margin: 12px 0; }
         .bar-line { width: 4px; background: #ff4d6d; border-radius: 4px; animation: bounce 0.6s infinite alternate ease-in-out; }
         .bar-line:nth-child(2) { animation-delay: 0.15s; }
         .bar-line:nth-child(3) { animation-delay: 0.3s; }
@@ -240,14 +240,19 @@
         @keyframes bounce { from { height: 6px; } to { height: 26px; } }
 
         /* CAMERA SALTING DENGAN FOTO */
-        .cam-frame { width: 100%; height: 200px; background: #000; border-radius: 14px; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; border: 2px solid #ff4d6d; }
+        .cam-frame { width: 100%; height: 210px; background: #000; border-radius: 16px; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; border: 2px solid #ff4d6d; }
         .cam-frame img { width: 100%; height: 100%; object-fit: cover; }
         .cam-scanline { position: absolute; width: 100%; height: 3px; background: #ff4d6d; top: 0; animation: scan 1.5s infinite linear; box-shadow: 0 0 12px #ff4d6d; z-index: 2; }
-        .cam-overlay-text { position: absolute; bottom: 8px; left: 0; width: 100%; background: rgba(0,0,0,0.65); padding: 5px; z-index: 3; }
+        .cam-overlay-text { position: absolute; bottom: 8px; left: 0; width: 100%; background: rgba(0,0,0,0.65); padding: 6px; z-index: 3; text-align: center; }
         @keyframes scan { to { top: 100%; } }
     </style>
 </head>
 <body>
+
+    <!-- PEMUTAR AUDIO LATAR REVOLUSIONER -->
+    <audio id="bgAudio" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="ambient-bg">
         <div class="blob blob-1"></div>
@@ -258,7 +263,7 @@
     <!-- LOCK SCREEN -->
     <div id="lockScreen">
         <div class="lock-time" id="lockClock">00:00</div>
-        <div class="lock-date">Selasa, 13 Oktober 2026</div>
+        <div class="lock-date">Spesial Usia 20 Tahun</div>
         <div class="lock-title">Masukkan PIN Ulang Tahun Acum</div>
         
         <div class="pin-dots" id="pinDots">
@@ -282,14 +287,14 @@
             <div class="key" onclick="pressKey('0')">0</div>
             <div class="key" onclick="deleteKey()">⌫</div>
         </div>
-        <div class="key-hint">Clue: Tanggal Ultah (1310) / Umur (20)</div>
+        <div class="key-hint">Clue: PIN Ulang Tahun (1310) / Umur (20)</div>
     </div>
 
     <!-- MAIN APP CONTAINER -->
     <div class="app-container">
         <div class="header">
             <h1>ACUM'S 20th ULTIMATE OS 👑</h1>
-            <p>Glassmorphic Edition • Spesial Hari Ulang Tahun</p>
+            <p>Glassmorphic Special Edition • Happy Birthday!</p>
         </div>
 
         <div class="grid" id="cardGrid"></div>
@@ -303,8 +308,6 @@
             <button class="btn-main btn-close" onclick="closeModal()">Tutup Menu ✖</button>
         </div>
     </div>
-
-    <div id="ytPlayerSpace" style="display:none"></div>
 
     <script>
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -368,6 +371,7 @@
         function checkPin() {
             if(validPins.includes(inputPin) || inputPin === "20") {
                 playUnlockSound();
+                startMusic(); // Putar musik otomatis setelah terbukanya lockscreen
                 document.getElementById('lockScreen').style.transform = 'translateY(-100%)';
                 document.getElementById('lockScreen').style.opacity = '0';
                 setTimeout(() => document.getElementById('lockScreen').style.display = 'none', 600);
@@ -383,40 +387,123 @@
             }
         }
 
-        let ytPlayer;
-        const tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api";
-        document.getElementsByTagName('script')[0].parentNode.insertBefore(tag, document.getElementsByTagName('script')[0]);
-        function onYouTubeIframeAPIReady() {
-            ytPlayer = new YT.Player('ytPlayerSpace', {
-                height: '0', width: '0', videoId: 'Hr0AAqHLLSg',
-                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'Hr0AAqHLLSg' }
-            });
+        const bgAudio = document.getElementById('bgAudio');
+        function startMusic() {
+            bgAudio.play().catch(e => console.log("Audio waiting for user click"));
+        }
+        function toggleMusic() {
+            if (bgAudio.paused) {
+                bgAudio.play();
+            } else {
+                bgAudio.pause();
+            }
         }
 
-        /* DIRECT IMAGE LINK FROM IMGBB PAGE */
-        const photoUrl = "https://i.ibb.co.com/wNXBwTzX/image.jpg";
+        /* FOTO TERHUBUNG */
+        const photoUrl = "https://i.ibb.co.com/vxGVQbjG/IMG-2605.png";
 
+        // KONTEN SWEET & ROMANTIS DENGAN KATA-KATA PANJANG
         const cards = [
-            { icon: "💌", title: "1. Surat Pembuka Nyaman", body: "Selamat ulang tahun yang ke-20, Acum sayang! 🎂<br><br>Di umur kepala dua ini, semoga makin dewasa, sehat selalu, dan lancar rezekinya. Makasih udah selalu sabar ngadepin aku selama ini. You are my safe place! 💕" },
-            { icon: "🔮", title: "2. Pengacak Doa Manis", body: "<p id='dBox'>Klik tombol di bawah buat kocok doa hari ini!</p><button class='btn-main' onclick='acakDoa()'>Kocok Doa ✨</button>" },
-            { icon: "🎟️", title: "3. Vending Kupon Hadiah", body: "<p id='kBox'>Ambil tiket hadiah nyata khusus dari aku!</p><button class='btn-main' onclick='ambilKupon()'>Klaim Tiket 🪙</button>" },
-            { icon: "❤️", title: "4. Tamagotchi Hati Acim", body: "<p>Rawat mood aku biar ga gampang ngambek hari ini:</p><div style='background:rgba(255,255,255,0.1); height:12px; border-radius:6px; margin:15px 0; overflow:hidden;'><div id='mBar' style='width:50%; height:100%; background:#ff4d6d; transition:0.3s;'></div></div><button class='btn-main' onclick='tambahMood()'>Kirim Pelukan (+20%) 🤗</button>" },
-            { icon: "🎮", title: "5. Game Tangkap Kue Ultah", body: "<p>Tangkap 5 kue jatuh! Skor: <span id='skor' style='color:#ff758c; font-weight:bold;'>0</span></p><div id='gameCanvas'></div>" },
-            { icon: "📸", title: "6. Digital Memory Album", body: "🌌 <strong>Momen Favorit:</strong> Ingat pas kita jalan bareng dan kamu ketawa denger cerita random aku? Momen simpel tapi paling bikin aku bahagia banget!" },
-            { icon: "🎵", title: "7. Pemutar Latar Musik", body: "<p>Lagu romantis sudah terintegrasi otomatis.</p><div class='music-bar'><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div></div><button class='btn-main' style='background:#2ec4b6;' onclick='ytPlayer.playVideo()'>▶ Play</button><button class='btn-main' style='background:#e71d36; margin-top:5px;' onclick='ytPlayer.pauseVideo()'>⏸ Pause</button>" },
-            { icon: "📷", title: "8. Detektor Salting Face Scan", body: `<div class="cam-frame"><img src="${photoUrl}" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400';" alt="Acum"><div class="cam-scanline"></div><div class="cam-overlay-text"><p id="camTxt" style="font-size:0.8rem; font-weight:bold; color:#ffb3c1;">Menguji Tingkat Salting...</p></div></div><button class="btn-main" onclick="scanSalting()">Pindai Wajah Acum ⚡</button>` },
-            { icon: "☝️", title: "9. Pindai Sidik Jari Bucin", body: "<p>Tahan jempol kamu di bawah untuk verifikasi:</p><div class='finger-box' id='fBox' onmousedown='startFinger()' onmouseup='endFinger()' ontouchstart='startFinger()' ontouchend='endFinger()'>👍</div><p id='fTxt' style='font-size:0.75rem; color:#ffb3c1;'>Tekan & Tahan 2 Detik</p>" },
-            { icon: "✍️", title: "10. Catatan Wishlist Acum", body: "<textarea style='width:100%; height:70px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.2); border-radius:10px; color:white; padding:8px; font-size:0.8rem; resize:none;' placeholder='Tulis keinginan kamu di umur 20...'></textarea><button class='btn-main' onclick='alert(\"Catatan tersimpan!\")'>Simpan Ke Sistem</button>" },
-            { icon: "🍫", title: "11. Vending Cokelat Manis", body: "🍫 *KLIK!* Satu batang cokelat digital termanis berhasil dikirim ke layar HP Acum ter-ganteng hari ini!" },
-            { icon: "🩹", title: "12. Penawar Instan Ngambek", body: "Kapsul Penenang Instan! 💊<br>Kalau nanti aku tiba-tiba ngambek atau rewel, kamu berhak nunjukkin fitur nomor 12 ini buat bikin aku jinak lagi. 🤪" },
-            { icon: "🗺️", title: "13. Rencana Target Berdua", body: "<div style='text-align:left; font-size:0.85rem; line-height:2;'><input type='checkbox' checked disabled> Lulus & Sukses Karir<br><input type='checkbox' checked disabled> Culinary Date Berdua<br><input type='checkbox' checked disabled> Menua Bersama Selamanya</div>" },
-            { icon: "🔔", title: "14. Pengingat Sehat Sayang", body: "Jangan terlalu sibuk main game/kerja ya. Inget minum air putih hari ini, aku ga mau kamu sampai sakit! 🥤" },
-            { icon: "🥳", title: "15. Efek Pesta Konfeti", body: "🎉 KABOOM! Selamat Ulang Tahun yang paling meriah untuk cowok kesayangan aku! 🎉" },
-            { icon: "💡", title: "16. Pesan Motivasi Umur 20", body: "\"Kamu jauh lebih hebat dan kuat dari apa yang kamu pikirkan. Selamat memasuki usia 20 tahun dengan percaya diri!\" 💪✨" },
-            { icon: "🤝", title: "17. Kontrak Janji Setia", body: "Dengan membuka fitur ini, Acum berjanji akan selalu sayang sama Acim, bersabar menghadapi segala drama kecil, dan tidak berpaling. ❤️" },
-            { icon: "🔋", title: "18. Pengisi Energi Jiwa", body: "🔋 *BZZZT...* Daya energi jiwa kamu sedang diisi ulang 100% pakai pasokan cinta penuh dari aku!" },
-            { icon: "✨", title: "19. Efek Hujan Balon", body: "🎈 Atmosfer kebahagiaan pesta ulang tahunmu diciptakan khusus biar HP kamu terasa sangat meriah!" },
-            { icon: "🔒", title: "20. Surat Terkunci Kapsul Waktu", body: "🔒 <strong>Pesan Rahasia Terakhir:</strong><br><br>Makasih udah buka semua fiturnya sampai nomor 20! Kamu beneran cowok terbaik yang pernah ada di hidup aku. Jangan pernah bosan sama aku ya. Happy 20th Birthday, Acum sayang! 🤍✨" }
+            { 
+                icon: "💌", 
+                title: "1. Surat Terbuka Usia 20", 
+                body: "Selamat ulang tahun yang ke-20, Acum sayang! 🎂✨<br><br>Memasuki angka kepala dua adalah awal dari babak baru yang luar biasa. Terima kasih sudah bertumbuh jadi pribadi yang sangat luar biasa, sabar, dan selalu hangat.<br><br>Di usia yang makin dewasa ini, semoga langkahmu selalu dipermudah, diberikan kesehatan, ketenangan hati, dan kebahagiaan yang melimpah. Ingat ya, apa pun proses yang kamu jalani, aku bakal selalu ada di sini mendukungmu. You mean so much to me! 💕" 
+            },
+            { 
+                icon: "🔮", 
+                title: "2. Pengacak Doa Manis", 
+                body: "<p id='dBox' style='text-align:center;'>Klik tombol di bawah untuk mengambil doa khusus hari ini!</p><button class='btn-main' onclick='acakDoa()'>Kocok Doa Indah ✨</button>" 
+            },
+            { 
+                icon: "🎟️", 
+                title: "3. Vending Kupon Hadiah", 
+                body: "<p id='kBox' style='text-align:center;'>Klaim tiket spesial yang bisa kamu gunakan kapan saja!</p><button class='btn-main' onclick='ambilKupon()'>Ambil Kupon 🪙</button>" 
+            },
+            { 
+                icon: "❤️", 
+                title: "4. Meteran Kebahagiaan Acum", 
+                body: "<p style='text-align:center;'>Isi ulang pasokan kasih sayang & semangat hari ini:</p><div style='background:rgba(255,255,255,0.1); height:14px; border-radius:7px; margin:15px 0; overflow:hidden;'><div id='mBar' style='width:60%; height:100%; background:linear-gradient(to right, #ff4d6d, #ff758c); transition:0.3s;'></div></div><button class='btn-main' onclick='tambahMood()'>Kirim Pelukan Hangat (+20%) 🤗</button>" 
+            },
+            { 
+                icon: "🎮", 
+                title: "5. Tangkap Kue Ultah", 
+                body: "<p style='text-align:center;'>Kumpulkan 5 kue ulang tahun! Skor: <span id='skor' style='color:#ff758c; font-weight:bold;'>0</span></p><div id='gameCanvas'></div>" 
+            },
+            { 
+                icon: "📸", 
+                title: "6. Kenangan Terindah", 
+                body: "🌌 <strong>Momen Favoritku Bersamamu:</strong><br><br>Setiap momen sederhana yang kita lewati berdua selalu punya tempat spesial. Cara kamu tersenyum, tertawa, dan mendengarkan ceritaku selalu berhasil bikin hariku terasa jauh lebih hangat dan menyenangkan." 
+            },
+            { 
+                icon: "🎵", 
+                title: "7. Pemutar Latar Musik", 
+                body: "<p style='text-align:center;'>Lagu santai & romantis menemani momen ulang tahunmu.</p><div class='music-bar'><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div></div><button class='btn-main' style='background:#ff4d6d;' onclick='toggleMusic()'>⏯ Play / Pause Musik</button>" 
+            },
+            { 
+                icon: "📷", 
+                title: "8. Detektor Salting Face Scan", 
+                body: `<div class="cam-frame"><img src="${photoUrl}" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400';" alt="Acum"><div class="cam-scanline"></div><div class="cam-overlay-text"><p id="camTxt" style="font-size:0.8rem; font-weight:bold; color:#ffb3c1;">Memindai Tingkat Salting...</p></div></div><button class="btn-main" onclick="scanSalting()">Pindai Senyuman Acum ⚡</button>` 
+            },
+            { 
+                icon: "☝️", 
+                title: "9. Pindai Sidik Jari Bucin", 
+                body: "<p style='text-align:center;'>Tahan jarimu di icon bawah untuk verifikasi:</p><div class='finger-box' id='fBox' onmousedown='startFinger()' onmouseup='endFinger()' ontouchstart='startFinger()' ontouchend='endFinger()'>👍</div><p id='fTxt' style='font-size:0.75rem; color:#ffb3c1; text-align:center;'>Tekan & Tahan 2 Detik</p>" 
+            },
+            { 
+                icon: "✍️", 
+                title: "10. Catatan Harapan Usia 20", 
+                body: "<textarea style='width:100%; height:80px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.2); border-radius:12px; color:white; padding:10px; font-size:0.85rem; resize:none;' placeholder='Tulis impian terbesar kamu di umur 20 ini...'></textarea><button class='btn-main' onclick='alert(\"Harapan indahmu berhasil disimpan! ✨\")'>Simpan Ke Kapsul Harapan</button>" 
+            },
+            { 
+                icon: "🍫", 
+                title: "11. Vending Cokelat Manis", 
+                body: "🍫 <strong>Cokelat Spesial Dikirim!</strong><br><br>Satu kotak cokelat digital termanis berhasil mendarat khusus untuk cowok paling baik dan paling ganteng hari ini! Semoga harimu semanis cokelat ini." 
+            },
+            { 
+                icon: "🩹", 
+                title: "12. Penawar Instan Lelah", 
+                body: "💊 <strong>Kapsul Penenang & Penguat:</strong><br><br>Kalau suatu saat kamu merasa lelah, capek, atau jenuh sama rutinitas, buka fitur ini ya. Kamu sudah melakukan yang terbaik, dan aku bangga banget sama kamu!" 
+            },
+            { 
+                icon: "🗺️", 
+                title: "13. Rencana Perjalanan Berdua", 
+                body: "<div style='text-align:left; font-size:0.88rem; line-height:2.2;'><input type='checkbox' checked disabled> Sukses Kuliah & Karir Bersama ✨<br><input type='checkbox' checked disabled> Wisata Kuliner Makanan Favorit 🍲<br><input type='checkbox' checked disabled> Jalan-jalan Santai Tanpa Beban 🚲<br><input type='checkbox' checked disabled> Menua Bersama dengan Bahagia ❤️</div>" 
+            },
+            { 
+                icon: "🔔", 
+                title: "14. Pengingat Sayang", 
+                body: "🥤 <strong>Pesan Perhatian:</strong><br><br>Jangan terlalu memaksakan diri kalau lagi capek ya. Jaga kesehatan, jangan lupa makan tepat waktu dan banyak minum air putih. Kamu itu berharga banget!" 
+            },
+            { 
+                icon: "🥳", 
+                title: "15. Efek Pesta Konfeti", 
+                body: "🎉 <strong>HAPPY BIRTHDAY!</strong><br><br>Selamat merayakan umur 20 tahun dengan penuh suka cita dan senyuman paling cerah! Semoga tahun ini membawa banyak kejutan manis." 
+            },
+            { 
+                icon: "💡", 
+                title: "16. Pesan Motivasi Indah", 
+                body: "\"Kamu jauh lebih kuat dari yang kamu bayangkan, lebih berbakat dari yang kamu sadari, dan sangat dicintai lebih dari yang kamu tahu. Selamat melangkah di usia 20!\" 💪✨" 
+            },
+            { 
+                icon: "🤝", 
+                title: "17. Janji Kebersamaan", 
+                body: "🤍 Dengan membuka kartu ini, kita berjanji untuk saling mendukung, saling mendengarkan, dan saling menjaga satu sama lain di setiap proses kedewasaan kita." 
+            },
+            { 
+                icon: "🔋", 
+                title: "18. Pengisi Energi Jiwa", 
+                body: "🔋 <i>BZZZT...</i> Energi dan semangatmu sedang diisi ulang 100% menggunakan pasokan cinta dan doa tulus tanpa batas!" 
+            },
+            { 
+                icon: "✨", 
+                title: "19. Hujan Kebahagiaan", 
+                body: "🎈 Atmosfer kebahagiaan diciptakan khusus di layar HP kamu hari ini biar hari lahirmu terasa makin meriah dan istimewa!" 
+            },
+            { 
+                icon: "🔒", 
+                title: "20. Pesan Rahasia Kapsul Waktu", 
+                body: "🔒 <strong>Terima Kasih Sudah Membuka Semuanya:</strong><br><br>Acum, terima kasih ya sudah menjadi bagian paling indah dalam hidupku. Di usia 20 tahun ini, aku berharap kamu bisa meraih semua yang kamu cita-citakan tanpa ragu.<br><br>Tetap jadi diri kamu yang hangat, penyabar, dan luar biasa. Aku akan selalu ada untuk mendukung dan menemani setiap langkahmu. Happy 20th Birthday, my favorite person! 🤍✨" 
+            }
         ];
 
         const gridEl = document.getElementById('cardGrid');
@@ -443,17 +530,27 @@
 
         function acakDoa() {
             playTone(900, 'sine', 0.1);
-            const list = ["Semoga makin lancar rezekinya! 💸", "Semoga sehat terus badan & jiwanya! 💪", "Semoga makin sayang sama aku! 🥰"];
-            document.getElementById('dBox').innerText = list[Math.floor(Math.random()*list.length)];
+            const list = [
+                "✨ Semoga segala urusan dan proses belajar/karirmu dipermudah jalan kelancarannya!",
+                "🌿 Semoga hatimu selalu diberikan ketenangan dan kebahagiaan yang tak pernah putus.",
+                "💫 Semoga fisik dan mentalmu selalu sehat serta dikelilingi orang-orang baik.",
+                "💸 Semoga rezeki dan kebaikan selalu mengalir lancar dalam hidupmu!"
+            ];
+            document.getElementById('dBox').innerHTML = list[Math.floor(Math.random()*list.length)];
         }
 
         function ambilKupon() {
             playTone(1000, 'triangle', 0.15);
-            const listK = ["🎟️ Kupon Traktir Es Krim Jumbo", "🎟️ Kupon Peluk 10 Menit", "🎟️ Kupon Bebas Pilih Tempat Makan"];
-            document.getElementById('kBox').innerHTML = `<strong>Tiket Keluar:</strong><br>${listK[Math.floor(Math.random()*listK.length)]} (Screenshot!)`;
+            const listK = [
+                "🎟️ Kupon Bebas Pilih Tempat Makan / Jajan",
+                "🎟️ Kupon Ditraktir Minuman / Makanan Favorit",
+                "🎟️ Kupon Temani Ngobrol / Dengar Cerita Kapan Saja",
+                "🎟️ Kupon Jam Istirahat Bebas Stress 1 Hari"
+            ];
+            document.getElementById('kBox').innerHTML = `<div style='text-align:center;'><strong>Tiket Terpilih:</strong><br><span style='color:#ff758c; font-weight:bold;'>${listK[Math.floor(Math.random()*listK.length)]}</span><br><small>(Simpan/Screenshot tiket ini untuk diklaim!)</small></div>`;
         }
 
-        let mVal = 50;
+        let mVal = 60;
         function tambahMood() {
             playTone(1100, 'sine', 0.1);
             mVal = Math.min(100, mVal + 20);
@@ -473,7 +570,7 @@
                 item.onclick = () => {
                     playTone(1200, 'sine', 0.08);
                     gScore++; document.getElementById('skor').innerText = gScore; item.remove();
-                    if(gScore === 5) alert("Hebat! Target 5 Kue Terkumpul! 🏆");
+                    if(gScore === 5) alert("Luar Biasa! 5 Kue Ulang Tahun Berhasil Ditangkap! 🏆🥳");
                 };
                 area.appendChild(item);
                 setTimeout(() => item.remove(), 1700);
@@ -482,10 +579,10 @@
 
         function scanSalting() {
             playTone(700, 'sawtooth', 0.2);
-            document.getElementById('camTxt').innerText = "Memindai Rona Pipi...";
+            document.getElementById('camTxt').innerText = "Memindai Rona Pipi & Senyuman...";
             setTimeout(() => {
                 playTone(1400, 'sine', 0.3);
-                document.getElementById('camTxt').innerText = "RESULT: 1000% SALTING MAMPUS! 😳❤️";
+                document.getElementById('camTxt').innerText = "HASIL: 100% SENYUMAN MANIS & BIKIN SALTING! 😳❤️";
             }, 1500);
         }
 
@@ -496,7 +593,7 @@
             document.getElementById('fTxt').innerText = "Memindai...";
             fTimer = setTimeout(() => {
                 playTone(1500, 'sine', 0.3);
-                document.getElementById('fTxt').innerText = "VERIFIED: 9999% BUCIN PARAH! 🥰";
+                document.getElementById('fTxt').innerText = "VERIFIED: 100% TERSAYANG & PALING SPESIAL! 🥰";
             }, 1800);
         }
         function endFinger() {
@@ -504,9 +601,10 @@
             document.getElementById('fBox').classList.remove('scanning');
         }
 
+        // HUJAN BALON & EMOTICON
         setInterval(() => {
             const p = document.createElement('div');
-            p.innerText = ['🎈','🎉','💖','✨'][Math.floor(Math.random()*4)];
+            p.innerText = ['🎈','🎉','💖','✨','🌸'][Math.floor(Math.random()*5)];
             p.style.position = 'fixed';
             p.style.bottom = '-20px';
             p.style.left = Math.random() * 100 + 'vw';
