@@ -1,621 +1,152 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Acum 20th Birthday Special OS</title>
-    <style>
-        :root {
-            --accent: #ff2a5f;
-            --accent-glow: rgba(255, 42, 95, 0.4);
-            --glass-bg: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.3);
-            --card-glass: rgba(255, 255, 255, 0.22);
-            --text-dark: #1e1b18;
-            --text-pink: #d90429;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player - Afgan</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+    body {
+      background-color: #f4f4f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-        body {
-            background: #0d0614;
-            min-height: 100vh;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            position: relative;
-        }
+    .player-card {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      width: 320px;
+      text-align: center;
+    }
 
-        /* BACKGROUND GLOWING BLOBS */
-        .ambient-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.6;
-            animation: float 10s infinite alternate ease-in-out;
-        }
-        .blob-1 { width: 300px; height: 300px; background: #ff4d6d; top: -50px; left: -50px; }
-        .blob-2 { width: 350px; height: 350px; background: #7209b7; bottom: -80px; right: -50px; animation-delay: -5s; }
-        .blob-3 { width: 250px; height: 250px; background: #f72585; top: 40%; left: 30%; animation-duration: 12s; }
+    .cover-art {
+      width: 100%;
+      height: 240px;
+      background: linear-gradient(135deg, #2c3e50, #4ca1af);
+      border-radius: 14px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 48px;
+    }
 
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(40px, 50px) scale(1.1); }
-        }
+    .song-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 4px;
+    }
 
-        /* APP CONTAINER / MOCKUP */
-        .app-container {
-            width: 100%;
-            max-width: 420px;
-            min-height: 100vh;
-            background: rgba(20, 10, 30, 0.45);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-left: 1px solid var(--glass-border);
-            border-right: 1px solid var(--glass-border);
-            position: relative;
-            z-index: 1;
-            padding: 20px 16px 40px 16px;
-            display: flex;
-            flex-direction: column;
-        }
+    .artist-name {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 20px;
+    }
 
-        /* 1. LOCK SCREEN (PASSCODE) */
-        #lockScreen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(13, 6, 20, 0.88);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.6s;
-        }
-        .lock-time { font-size: 3.5rem; font-weight: 200; letter-spacing: -1px; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
-        .lock-date { font-size: 0.95rem; color: #ffb3c1; margin-bottom: 30px; font-weight: 500; }
-        .lock-title { font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase; }
-        
-        .pin-dots { display: flex; gap: 15px; margin-bottom: 35px; }
-        .dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.5); transition: 0.2s; }
-        .dot.active { background: #ff4d6d; border-color: #ff4d6d; box-shadow: 0 0 12px #ff4d6d; }
-        .dot.error { animation: shake 0.4s ease-in-out; border-color: #ff0055; background: #ff0055; }
+    .progress-container {
+      background: #e0e0e0;
+      height: 6px;
+      border-radius: 3px;
+      width: 100%;
+      margin-bottom: 8px;
+      cursor: pointer;
+      position: relative;
+    }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-10px); }
-            40%, 80% { transform: translateX(10px); }
-        }
+    .progress-bar {
+      background: #4ca1af;
+      height: 100%;
+      width: 35%;
+      border-radius: 3px;
+    }
 
-        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; width: 100%; max-width: 280px; }
-        .key {
-            aspect-ratio: 1;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.25);
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 500;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-        }
-        .key:active { background: rgba(255, 77, 109, 0.5); transform: scale(0.92); }
-        .key-hint { font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 25px; text-align: center; }
+    .time-stamps {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 20px;
+    }
 
-        /* HEADER BANNER */
-        .header {
-            text-align: center;
-            background: linear-gradient(135deg, rgba(255, 77, 109, 0.35), rgba(114, 9, 183, 0.35));
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 22px 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        .header h1 { font-size: 1.45rem; font-weight: 800; background: linear-gradient(to right, #ffffff, #ffb3c1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .header p { font-size: 0.8rem; color: rgba(255,255,255,0.8); margin-top: 4px; font-weight: 500; }
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
 
-        /* GRID 20 CARDS */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-        }
-        .card-item {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 18px;
-            aspect-ratio: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            position: relative;
-        }
-        .card-item:active { transform: scale(0.88); background: rgba(255, 77, 109, 0.3); }
-        .card-item .icon { font-size: 1.6rem; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3)); }
-        .card-item .num-badge {
-            position: absolute;
-            top: 6px; right: 6px;
-            background: #ff4d6d;
-            color: white;
-            font-size: 0.6rem;
-            font-weight: 800;
-            padding: 2px 6px;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(255, 77, 109, 0.5);
-        }
+    .btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      color: #444;
+      transition: color 0.2s;
+    }
 
-        /* POPUP MODAL GLASSMORPHISM */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.65);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            z-index: 1000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .modal-box {
-            background: linear-gradient(145deg, rgba(35, 18, 50, 0.95), rgba(20, 10, 30, 0.98));
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            width: 100%;
-            max-width: 370px;
-            border-radius: 28px;
-            padding: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(255,77,109,0.2);
-            text-align: center;
-            animation: modalPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            max-height: 82vh;
-            overflow-y: auto;
-        }
-        @keyframes modalPop {
-            from { transform: scale(0.7) translateY(30px); opacity: 0; }
-            to { transform: scale(1) translateY(0); opacity: 1; }
-        }
+    .btn:hover {
+      color: #4ca1af;
+    }
 
-        .modal-title { font-size: 1.15rem; font-weight: 700; color: #ff758c; margin-bottom: 14px; }
-        .modal-body { font-size: 0.88rem; line-height: 1.65; color: rgba(255,255,255,0.92); text-align: left; }
+    .btn-play {
+      width: 50px;
+      height: 50px;
+      background: #4ca1af;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 4px 12px rgba(76, 161, 175, 0.3);
+    }
 
-        .btn-main {
-            background: linear-gradient(135deg, #ff4d6d, #ff758c);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            margin-top: 15px;
-            cursor: pointer;
-            width: 100%;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
-            transition: transform 0.2s;
-        }
-        .btn-main:active { transform: scale(0.95); }
-        .btn-close {
-            background: rgba(255,255,255,0.15);
-            color: rgba(255,255,255,0.8);
-            border: 1px solid rgba(255,255,255,0.2);
-            margin-top: 12px;
-        }
-
-        /* WIDGETS SPESIFIK */
-        .finger-box { width: 70px; height: 70px; border-radius: 50%; border: 2px dashed #ff4d6d; margin: 15px auto; display: flex; justify-content: center; align-items: center; font-size: 2rem; cursor: pointer; transition: 0.3s; }
-        .finger-box.scanning { border-style: solid; box-shadow: 0 0 25px #ff4d6d; animation: pulse 0.8s infinite alternate; }
-        @keyframes pulse { to { transform: scale(1.1); } }
-
-        #gameCanvas { width: 100%; height: 160px; background: rgba(0,0,0,0.3); border-radius: 14px; position: relative; overflow: hidden; margin-top: 10px; border: 1px solid rgba(255,255,255,0.1); }
-        .falling-item { position: absolute; font-size: 24px; cursor: pointer; animation: fallAnim 1.8s linear forwards; }
-        @keyframes fallAnim { to { transform: translateY(170px); } }
-
-        .music-bar { display: flex; align-items: center; justify-content: center; gap: 4px; height: 30px; margin: 12px 0; }
-        .bar-line { width: 4px; background: #ff4d6d; border-radius: 4px; animation: bounce 0.6s infinite alternate ease-in-out; }
-        .bar-line:nth-child(2) { animation-delay: 0.15s; }
-        .bar-line:nth-child(3) { animation-delay: 0.3s; }
-        .bar-line:nth-child(4) { animation-delay: 0.45s; }
-        @keyframes bounce { from { height: 6px; } to { height: 26px; } }
-
-        /* CAMERA SALTING DENGAN FOTO */
-        .cam-frame { width: 100%; height: 210px; background: #000; border-radius: 16px; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; border: 2px solid #ff4d6d; }
-        .cam-frame img { width: 100%; height: 100%; object-fit: cover; }
-        .cam-scanline { position: absolute; width: 100%; height: 3px; background: #ff4d6d; top: 0; animation: scan 1.5s infinite linear; box-shadow: 0 0 12px #ff4d6d; z-index: 2; }
-        .cam-overlay-text { position: absolute; bottom: 8px; left: 0; width: 100%; background: rgba(0,0,0,0.65); padding: 6px; z-index: 3; text-align: center; }
-        @keyframes scan { to { top: 100%; } }
-    </style>
+    .btn-play:hover {
+      background: #3b8d9b;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- PEMUTAR AUDIO LATAR REVOLUSIONER -->
-    <audio id="bgAudio" loop preload="auto">
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
-    </audio>
-
-    <div class="ambient-bg">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
+  <div class="player-card">
+    <!-- Album Cover / Aesthetic Block -->
+    <div class="cover-art">
+      🎵
     </div>
 
-    <!-- LOCK SCREEN -->
-    <div id="lockScreen">
-        <div class="lock-time" id="lockClock">00:00</div>
-        <div class="lock-date">Spesial Usia 20 Tahun</div>
-        <div class="lock-title">Masukkan PIN Ulang Tahun Acum</div>
-        
-        <div class="pin-dots" id="pinDots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
+    <!-- Song Info -->
+    <div class="song-title">Bukan Cinta Biasa</div>
+    <div class="artist-name">Afgan</div>
 
-        <div class="keypad">
-            <div class="key" onclick="pressKey('1')">1</div>
-            <div class="key" onclick="pressKey('2')">2</div>
-            <div class="key" onclick="pressKey('3')">3</div>
-            <div class="key" onclick="pressKey('4')">4</div>
-            <div class="key" onclick="pressKey('5')">5</div>
-            <div class="key" onclick="pressKey('6')">6</div>
-            <div class="key" onclick="pressKey('7')">7</div>
-            <div class="key" onclick="pressKey('8')">8</div>
-            <div class="key" onclick="pressKey('9')">9</div>
-            <div class="key" style="opacity:0; pointer-events:none;"></div>
-            <div class="key" onclick="pressKey('0')">0</div>
-            <div class="key" onclick="deleteKey()">⌫</div>
-        </div>
-        <div class="key-hint">Clue: PIN Ulang Tahun (1310) / Umur (20)</div>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-bar"></div>
+    </div>
+    <div class="time-stamps">
+      <span>1:24</span>
+      <span>4:06</span>
     </div>
 
-    <!-- MAIN APP CONTAINER -->
-    <div class="app-container">
-        <div class="header">
-            <h1>ACUM'S 20th ULTIMATE OS 👑</h1>
-            <p>Glassmorphic Special Edition • Happy Birthday!</p>
-        </div>
-
-        <div class="grid" id="cardGrid"></div>
+    <!-- Minimal Controls -->
+    <div class="controls">
+      <button class="btn">⏮</button>
+      <button class="btn btn-play">▶</button>
+      <button class="btn">⏭</button>
     </div>
+  </div>
 
-    <!-- POPUP MODAL -->
-    <div class="modal-overlay" id="modal">
-        <div class="modal-box">
-            <div class="modal-title" id="mTitle">Fitur</div>
-            <div class="modal-body" id="mBody">Konten</div>
-            <button class="btn-main btn-close" onclick="closeModal()">Tutup Menu ✖</button>
-        </div>
-    </div>
-
-    <script>
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        function playTone(freq, type = 'sine', duration = 0.15) {
-            try {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = type;
-                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + duration);
-            } catch(e){}
-        }
-
-        function playUnlockSound() {
-            playTone(440, 'triangle', 0.1);
-            setTimeout(() => playTone(880, 'triangle', 0.2), 100);
-            setTimeout(() => playTone(1320, 'sine', 0.3), 200);
-        }
-
-        function updateClock() {
-            const now = new Date();
-            const h = String(now.getHours()).padStart(2, '0');
-            const m = String(now.getMinutes()).padStart(2, '0');
-            document.getElementById('lockClock').innerText = `${h}:${m}`;
-        }
-        setInterval(updateClock, 1000); updateClock();
-
-        let inputPin = "";
-        const validPins = ["1310", "2026", "0020", "20"];
-
-        function pressKey(num) {
-            playTone(600, 'sine', 0.08);
-            if(inputPin.length < 4) {
-                inputPin += num;
-                updateDots();
-                if(inputPin.length === 4 || inputPin === "20") {
-                    setTimeout(checkPin, 150);
-                }
-            }
-        }
-
-        function deleteKey() {
-            playTone(300, 'sine', 0.08);
-            inputPin = inputPin.slice(0, -1);
-            updateDots();
-        }
-
-        function updateDots() {
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach((dot, idx) => {
-                if(idx < inputPin.length) dot.classList.add('active');
-                else dot.classList.remove('active');
-            });
-        }
-
-        function checkPin() {
-            if(validPins.includes(inputPin) || inputPin === "20") {
-                playUnlockSound();
-                startMusic(); // Putar musik otomatis setelah terbukanya lockscreen
-                document.getElementById('lockScreen').style.transform = 'translateY(-100%)';
-                document.getElementById('lockScreen').style.opacity = '0';
-                setTimeout(() => document.getElementById('lockScreen').style.display = 'none', 600);
-            } else {
-                playTone(150, 'sawtooth', 0.3);
-                const dots = document.querySelectorAll('.dot');
-                dots.forEach(d => d.classList.add('error'));
-                setTimeout(() => {
-                    dots.forEach(d => d.classList.remove('error'));
-                    inputPin = "";
-                    updateDots();
-                }, 500);
-            }
-        }
-
-        const bgAudio = document.getElementById('bgAudio');
-        function startMusic() {
-            bgAudio.play().catch(e => console.log("Audio waiting for user click"));
-        }
-        function toggleMusic() {
-            if (bgAudio.paused) {
-                bgAudio.play();
-            } else {
-                bgAudio.pause();
-            }
-        }
-
-        /* FOTO TERHUBUNG */
-        const photoUrl = "https://i.ibb.co.com/vxGVQbjG/IMG-2605.png";
-
-        // KONTEN SWEET & ROMANTIS DENGAN KATA-KATA PANJANG
-        const cards = [
-            { 
-                icon: "💌", 
-                title: "1. Surat Terbuka Usia 20", 
-                body: "Selamat ulang tahun yang ke-20, Acum sayang! 🎂✨<br><br>Memasuki angka kepala dua adalah awal dari babak baru yang luar biasa. Terima kasih sudah bertumbuh jadi pribadi yang sangat luar biasa, sabar, dan selalu hangat.<br><br>Di usia yang makin dewasa ini, semoga langkahmu selalu dipermudah, diberikan kesehatan, ketenangan hati, dan kebahagiaan yang melimpah. Ingat ya, apa pun proses yang kamu jalani, aku bakal selalu ada di sini mendukungmu. You mean so much to me! 💕" 
-            },
-            { 
-                icon: "🔮", 
-                title: "2. Pengacak Doa Manis", 
-                body: "<p id='dBox' style='text-align:center;'>Klik tombol di bawah untuk mengambil doa khusus hari ini!</p><button class='btn-main' onclick='acakDoa()'>Kocok Doa Indah ✨</button>" 
-            },
-            { 
-                icon: "🎟️", 
-                title: "3. Vending Kupon Hadiah", 
-                body: "<p id='kBox' style='text-align:center;'>Klaim tiket spesial yang bisa kamu gunakan kapan saja!</p><button class='btn-main' onclick='ambilKupon()'>Ambil Kupon 🪙</button>" 
-            },
-            { 
-                icon: "❤️", 
-                title: "4. Meteran Kebahagiaan Acum", 
-                body: "<p style='text-align:center;'>Isi ulang pasokan kasih sayang & semangat hari ini:</p><div style='background:rgba(255,255,255,0.1); height:14px; border-radius:7px; margin:15px 0; overflow:hidden;'><div id='mBar' style='width:60%; height:100%; background:linear-gradient(to right, #ff4d6d, #ff758c); transition:0.3s;'></div></div><button class='btn-main' onclick='tambahMood()'>Kirim Pelukan Hangat (+20%) 🤗</button>" 
-            },
-            { 
-                icon: "🎮", 
-                title: "5. Tangkap Kue Ultah", 
-                body: "<p style='text-align:center;'>Kumpulkan 5 kue ulang tahun! Skor: <span id='skor' style='color:#ff758c; font-weight:bold;'>0</span></p><div id='gameCanvas'></div>" 
-            },
-            { 
-                icon: "📸", 
-                title: "6. Kenangan Terindah", 
-                body: "🌌 <strong>Momen Favoritku Bersamamu:</strong><br><br>Setiap momen sederhana yang kita lewati berdua selalu punya tempat spesial. Cara kamu tersenyum, tertawa, dan mendengarkan ceritaku selalu berhasil bikin hariku terasa jauh lebih hangat dan menyenangkan." 
-            },
-            { 
-                icon: "🎵", 
-                title: "7. Pemutar Latar Musik", 
-                body: "<p style='text-align:center;'>Lagu santai & romantis menemani momen ulang tahunmu.</p><div class='music-bar'><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div></div><button class='btn-main' style='background:#ff4d6d;' onclick='toggleMusic()'>⏯ Play / Pause Musik</button>" 
-            },
-            { 
-                icon: "📷", 
-                title: "8. Detektor Salting Face Scan", 
-                body: `<div class="cam-frame"><img src="${photoUrl}" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400';" alt="Acum"><div class="cam-scanline"></div><div class="cam-overlay-text"><p id="camTxt" style="font-size:0.8rem; font-weight:bold; color:#ffb3c1;">Memindai Tingkat Salting...</p></div></div><button class="btn-main" onclick="scanSalting()">Pindai Senyuman Acum ⚡</button>` 
-            },
-            { 
-                icon: "☝️", 
-                title: "9. Pindai Sidik Jari Bucin", 
-                body: "<p style='text-align:center;'>Tahan jarimu di icon bawah untuk verifikasi:</p><div class='finger-box' id='fBox' onmousedown='startFinger()' onmouseup='endFinger()' ontouchstart='startFinger()' ontouchend='endFinger()'>👍</div><p id='fTxt' style='font-size:0.75rem; color:#ffb3c1; text-align:center;'>Tekan & Tahan 2 Detik</p>" 
-            },
-            { 
-                icon: "✍️", 
-                title: "10. Catatan Harapan Usia 20", 
-                body: "<textarea style='width:100%; height:80px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.2); border-radius:12px; color:white; padding:10px; font-size:0.85rem; resize:none;' placeholder='Tulis impian terbesar kamu di umur 20 ini...'></textarea><button class='btn-main' onclick='alert(\"Harapan indahmu berhasil disimpan! ✨\")'>Simpan Ke Kapsul Harapan</button>" 
-            },
-            { 
-                icon: "🍫", 
-                title: "11. Vending Cokelat Manis", 
-                body: "🍫 <strong>Cokelat Spesial Dikirim!</strong><br><br>Satu kotak cokelat digital termanis berhasil mendarat khusus untuk cowok paling baik dan paling ganteng hari ini! Semoga harimu semanis cokelat ini." 
-            },
-            { 
-                icon: "🩹", 
-                title: "12. Penawar Instan Lelah", 
-                body: "💊 <strong>Kapsul Penenang & Penguat:</strong><br><br>Kalau suatu saat kamu merasa lelah, capek, atau jenuh sama rutinitas, buka fitur ini ya. Kamu sudah melakukan yang terbaik, dan aku bangga banget sama kamu!" 
-            },
-            { 
-                icon: "🗺️", 
-                title: "13. Rencana Perjalanan Berdua", 
-                body: "<div style='text-align:left; font-size:0.88rem; line-height:2.2;'><input type='checkbox' checked disabled> Sukses Kuliah & Karir Bersama ✨<br><input type='checkbox' checked disabled> Wisata Kuliner Makanan Favorit 🍲<br><input type='checkbox' checked disabled> Jalan-jalan Santai Tanpa Beban 🚲<br><input type='checkbox' checked disabled> Menua Bersama dengan Bahagia ❤️</div>" 
-            },
-            { 
-                icon: "🔔", 
-                title: "14. Pengingat Sayang", 
-                body: "🥤 <strong>Pesan Perhatian:</strong><br><br>Jangan terlalu memaksakan diri kalau lagi capek ya. Jaga kesehatan, jangan lupa makan tepat waktu dan banyak minum air putih. Kamu itu berharga banget!" 
-            },
-            { 
-                icon: "🥳", 
-                title: "15. Efek Pesta Konfeti", 
-                body: "🎉 <strong>HAPPY BIRTHDAY!</strong><br><br>Selamat merayakan umur 20 tahun dengan penuh suka cita dan senyuman paling cerah! Semoga tahun ini membawa banyak kejutan manis." 
-            },
-            { 
-                icon: "💡", 
-                title: "16. Pesan Motivasi Indah", 
-                body: "\"Kamu jauh lebih kuat dari yang kamu bayangkan, lebih berbakat dari yang kamu sadari, dan sangat dicintai lebih dari yang kamu tahu. Selamat melangkah di usia 20!\" 💪✨" 
-            },
-            { 
-                icon: "🤝", 
-                title: "17. Janji Kebersamaan", 
-                body: "🤍 Dengan membuka kartu ini, kita berjanji untuk saling mendukung, saling mendengarkan, dan saling menjaga satu sama lain di setiap proses kedewasaan kita." 
-            },
-            { 
-                icon: "🔋", 
-                title: "18. Pengisi Energi Jiwa", 
-                body: "🔋 <i>BZZZT...</i> Energi dan semangatmu sedang diisi ulang 100% menggunakan pasokan cinta dan doa tulus tanpa batas!" 
-            },
-            { 
-                icon: "✨", 
-                title: "19. Hujan Kebahagiaan", 
-                body: "🎈 Atmosfer kebahagiaan diciptakan khusus di layar HP kamu hari ini biar hari lahirmu terasa makin meriah dan istimewa!" 
-            },
-            { 
-                icon: "🔒", 
-                title: "20. Pesan Rahasia Kapsul Waktu", 
-                body: "🔒 <strong>Terima Kasih Sudah Membuka Semuanya:</strong><br><br>Acum, terima kasih ya sudah menjadi bagian paling indah dalam hidupku. Di usia 20 tahun ini, aku berharap kamu bisa meraih semua yang kamu cita-citakan tanpa ragu.<br><br>Tetap jadi diri kamu yang hangat, penyabar, dan luar biasa. Aku akan selalu ada untuk mendukung dan menemani setiap langkahmu. Happy 20th Birthday, my favorite person! 🤍✨" 
-            }
-        ];
-
-        const gridEl = document.getElementById('cardGrid');
-        cards.forEach((c, i) => {
-            const card = document.createElement('div');
-            card.className = 'card-item';
-            card.onclick = () => openCard(i);
-            card.innerHTML = `<span class="icon">${c.icon}</span><span class="num-badge">${i+1}</span>`;
-            gridEl.appendChild(card);
-        });
-
-        function openCard(idx) {
-            playTone(800, 'sine', 0.1);
-            document.getElementById('mTitle').innerText = cards[idx].title;
-            document.getElementById('mBody').innerHTML = cards[idx].body;
-            document.getElementById('modal').style.display = 'flex';
-            if(idx === 4) startMiniGame();
-        }
-
-        function closeModal() {
-            playTone(400, 'sine', 0.08);
-            document.getElementById('modal').style.display = 'none';
-        }
-
-        function acakDoa() {
-            playTone(900, 'sine', 0.1);
-            const list = [
-                "✨ Semoga segala urusan dan proses belajar/karirmu dipermudah jalan kelancarannya!",
-                "🌿 Semoga hatimu selalu diberikan ketenangan dan kebahagiaan yang tak pernah putus.",
-                "💫 Semoga fisik dan mentalmu selalu sehat serta dikelilingi orang-orang baik.",
-                "💸 Semoga rezeki dan kebaikan selalu mengalir lancar dalam hidupmu!"
-            ];
-            document.getElementById('dBox').innerHTML = list[Math.floor(Math.random()*list.length)];
-        }
-
-        function ambilKupon() {
-            playTone(1000, 'triangle', 0.15);
-            const listK = [
-                "🎟️ Kupon Bebas Pilih Tempat Makan / Jajan",
-                "🎟️ Kupon Ditraktir Minuman / Makanan Favorit",
-                "🎟️ Kupon Temani Ngobrol / Dengar Cerita Kapan Saja",
-                "🎟️ Kupon Jam Istirahat Bebas Stress 1 Hari"
-            ];
-            document.getElementById('kBox').innerHTML = `<div style='text-align:center;'><strong>Tiket Terpilih:</strong><br><span style='color:#ff758c; font-weight:bold;'>${listK[Math.floor(Math.random()*listK.length)]}</span><br><small>(Simpan/Screenshot tiket ini untuk diklaim!)</small></div>`;
-        }
-
-        let mVal = 60;
-        function tambahMood() {
-            playTone(1100, 'sine', 0.1);
-            mVal = Math.min(100, mVal + 20);
-            document.getElementById('mBar').style.width = mVal + '%';
-        }
-
-        let gScore = 0;
-        function startMiniGame() {
-            gScore = 0;
-            const area = document.getElementById('gameCanvas');
-            area.innerHTML = '';
-            const iv = setInterval(() => {
-                if(document.getElementById('modal').style.display === 'none' || gScore >= 5) { clearInterval(iv); return; }
-                const item = document.createElement('div');
-                item.className = 'falling-item'; item.innerText = '🍰';
-                item.style.left = Math.random() * (area.clientWidth - 30) + 'px'; item.style.top = '0px';
-                item.onclick = () => {
-                    playTone(1200, 'sine', 0.08);
-                    gScore++; document.getElementById('skor').innerText = gScore; item.remove();
-                    if(gScore === 5) alert("Luar Biasa! 5 Kue Ulang Tahun Berhasil Ditangkap! 🏆🥳");
-                };
-                area.appendChild(item);
-                setTimeout(() => item.remove(), 1700);
-            }, 800);
-        }
-
-        function scanSalting() {
-            playTone(700, 'sawtooth', 0.2);
-            document.getElementById('camTxt').innerText = "Memindai Rona Pipi & Senyuman...";
-            setTimeout(() => {
-                playTone(1400, 'sine', 0.3);
-                document.getElementById('camTxt').innerText = "HASIL: 100% SENYUMAN MANIS & BIKIN SALTING! 😳❤️";
-            }, 1500);
-        }
-
-        let fTimer;
-        function startFinger() {
-            playTone(500, 'sine', 0.1);
-            document.getElementById('fBox').classList.add('scanning');
-            document.getElementById('fTxt').innerText = "Memindai...";
-            fTimer = setTimeout(() => {
-                playTone(1500, 'sine', 0.3);
-                document.getElementById('fTxt').innerText = "VERIFIED: 100% TERSAYANG & PALING SPESIAL! 🥰";
-            }, 1800);
-        }
-        function endFinger() {
-            clearTimeout(fTimer);
-            document.getElementById('fBox').classList.remove('scanning');
-        }
-
-        // HUJAN BALON & EMOTICON
-        setInterval(() => {
-            const p = document.createElement('div');
-            p.innerText = ['🎈','🎉','💖','✨','🌸'][Math.floor(Math.random()*5)];
-            p.style.position = 'fixed';
-            p.style.bottom = '-20px';
-            p.style.left = Math.random() * 100 + 'vw';
-            p.style.fontSize = '20px';
-            p.style.pointerEvents = 'none';
-            p.style.zIndex = '0';
-            p.style.transition = 'transform 4s linear, opacity 4s';
-            document.body.appendChild(p);
-            setTimeout(() => { p.style.transform = `translateY(-105vh) rotate(${Math.random()*360}deg)`; p.style.opacity = '0'; }, 50);
-            setTimeout(() => p.remove(), 4000);
-        }, 500);
-    </script>
 </body>
 </html>
