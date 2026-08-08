@@ -3,245 +3,351 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Acum! 🎉</title>
-  <!-- Google Fonts & Canvas Confetti -->
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <title>Acum Day ✦ Special Edition</title>
   
+  <!-- Fonts & Confetti -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <style>
     :root {
-      --bg-color: #FFF5F7;
-      --primary: #FF758F;
-      --secondary: #FFB3C1;
-      --accent: #FFCCD5;
-      --card-bg: rgba(255, 255, 255, 0.85);
-      --text-color: #592E38;
+      --bg: #0f1015;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --accent-pink: #ff5e8e;
+      --accent-purple: #a855f7;
+      --accent-cyan: #06b6d4;
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Nunito', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     body {
-      background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 50%, #ffe5ec 100%);
-      color: var(--text-color);
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(255, 94, 142, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+      color: var(--text-main);
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      padding: 20px;
-      overflow-x: hidden;
+      padding: 24px;
     }
 
-    h1, h2, h3 {
-      font-family: 'Fredoka', sans-serif;
-    }
-
-    .container {
+    /* Bento Grid Container */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 900px;
       width: 100%;
-      max-width: 600px;
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-      margin-top: 20px;
-      z-index: 10;
     }
 
-    /* Card Styling (Glassmorphism) */
+    /* Base Card Style */
     .card {
       background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      border-radius: 24px;
-      padding: 25px;
-      box-shadow: 0 10px 30px rgba(255, 117, 143, 0.2);
-      border: 2px solid rgba(255, 255, 255, 0.6);
-      text-align: center;
-      transition: transform 0.3s ease;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-4px);
     }
 
-    /* Hero Section */
-    .hero h1 {
-      font-size: 2.5rem;
-      color: var(--primary);
-      margin-bottom: 10px;
-      animation: bounce 2s infinite;
+    /* Card 1: Hero (Large) */
+    .hero-card {
+      grid-column: span 3;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: linear-gradient(135deg, rgba(255, 94, 142, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
     }
 
-    .badge {
-      display: inline-block;
-      background: var(--primary);
-      color: white;
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-weight: bold;
-      font-size: 0.9rem;
-      margin-bottom: 15px;
-    }
-
-    /* Photo Frame / Avatar */
-    .avatar-wrapper {
-      position: relative;
-      width: 140px;
-      height: 140px;
-      margin: 0 auto 15px;
-    }
-
-    .avatar {
-      width: 100%;
-      height: 100%;
+    .hero-avatar {
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid var(--primary);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      border: 3px solid var(--accent-pink);
+      box-shadow: 0 0 20px rgba(255, 94, 142, 0.4);
+      flex-shrink: 0;
     }
 
-    /* Interactive Buttons */
-    .btn {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      font-size: 1rem;
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #fff, var(--accent-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .pill-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(255, 94, 142, 0.2);
+      color: var(--accent-pink);
+      font-size: 0.75rem;
       font-weight: 700;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(255, 117, 143, 0.4);
-      transition: all 0.2s ease;
-      margin: 8px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
     }
 
-    .btn:hover {
-      background: #ff4d6d;
-      transform: scale(1.05);
-    }
-
-    .btn:active {
-      transform: scale(0.95);
-    }
-
-    /* Mini Game Section */
-    .game-box {
+    /* Card 2: Blow Candle / Interactive */
+    .candle-card {
+      grid-column: span 1;
       display: flex;
+      flex-direction: column;
       justify-content: center;
-      gap: 15px;
-      margin-top: 15px;
-    }
-
-    .gift-box {
-      font-size: 3rem;
+      align-items: center;
+      text-align: center;
       cursor: pointer;
-      transition: transform 0.3s ease;
-      user-select: none;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.08) 100%);
     }
 
-    .gift-box:hover {
-      transform: scale(1.2) rotate(10deg);
+    .cake-icon {
+      font-size: 3.5rem;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+      transition: transform 0.2s ease;
     }
 
-    /* Wish Section (Pesan Surat) */
-    .letter-box {
-      display: none;
-      background: #FFF;
-      padding: 20px;
+    .candle-card:hover .cake-icon {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    /* Card 3: Spotify Player */
+    .music-card {
+      grid-column: span 2;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .vinyl {
+      width: 60px;
+      height: 60px;
+      background: #111;
+      border-radius: 50%;
+      border: 2px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      animation: spin 6s linear infinite;
+      animation-play-state: paused;
+      flex-shrink: 0;
+    }
+
+    .vinyl::after {
+      content: '';
+      width: 18px;
+      height: 18px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+    }
+
+    .music-info h4 { font-size: 0.95rem; margin-bottom: 2px; }
+    .music-info p { font-size: 0.8rem; color: var(--text-sub); }
+
+    .play-btn {
+      margin-left: auto;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--text-main);
+      color: var(--bg);
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+
+    .play-btn:hover { transform: scale(1.1); }
+
+    /* Card 4: Stats Grid */
+    .stats-card {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat-item {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 12px;
       border-radius: 16px;
-      border: 2px dashed var(--primary);
-      margin-top: 15px;
-      animation: fadeIn 0.5s ease;
-      text-align: left;
-      line-height: 1.6;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    /* Floating Balloons Background */
-    .balloon {
-      position: fixed;
-      bottom: -100px;
-      opacity: 0.7;
-      animation: floatUp 8s linear infinite;
-      z-index: 1;
-      font-size: 2rem;
+    .stat-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      color: var(--accent-cyan);
+      font-weight: 800;
     }
 
-    @keyframes floatUp {
-      0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
-      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    .stat-label { font-size: 0.75rem; color: var(--text-sub); }
+
+    /* Card 5: Interactive Flip Wish Card */
+    .wish-card {
+      grid-column: span 4;
+      perspective: 1000px;
+      height: 160px;
+      cursor: pointer;
+      padding: 0;
+      background: transparent;
+      border: none;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    .wish-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .wish-card.flipped .wish-inner {
+      transform: rotateX(180deg);
+    }
+
+    .wish-front, .wish-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 28px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid var(--card-border);
+    }
+
+    .wish-front {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%);
+    }
+
+    .wish-back {
+      background: rgba(255, 255, 255, 0.08);
+      transform: rotateX(180deg);
+      border-color: var(--accent-pink);
+    }
+
+    /* Keyframes */
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-card {
+        grid-column: span 2;
+        flex-direction: column;
+        text-align: center;
+      }
+      .candle-card, .music-card, .stats-card, .wish-card {
+        grid-column: span 2;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Balloons Background -->
-  <div class="balloon" style="left: 10%; animation-delay: 0s;">🎈</div>
-  <div class="balloon" style="left: 30%; animation-delay: 2s;">✨</div>
-  <div class="balloon" style="left: 50%; animation-delay: 4s;">💖</div>
-  <div class="balloon" style="left: 70%; animation-delay: 1s;">🎈</div>
-  <div class="balloon" style="left: 85%; animation-delay: 3s;">🎂</div>
-
-  <div class="container">
+  <div class="bento-grid">
     
-    <!-- Hero Card -->
-    <div class="card hero">
-      <span class="badge">NATIONAL ACUM DAY 🥳</span>
-      <div class="avatar-wrapper">
-        <!-- Ganti src dengan foto Acum yang paling lucu/lucu-cantik -->
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60" alt="Acum" class="avatar">
-      </div>
-      <h1>Happy Birthday, Acum!</h1>
-      <p>Selamat bertambah umur untuk manusia terlucu, terkeren, dan tersayang! ✨</p>
-      
-      <div style="margin-top: 15px;">
-        <button class="btn" onclick="fireConfetti()">Sebarkan Party! 🎉</button>
+    <!-- 1. HERO CARD -->
+    <div class="card hero-card">
+      <!-- Ganti foto Acum di sini -->
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60" alt="Acum" class="hero-avatar">
+      <div>
+        <span class="pill-tag">✦ Happy Birthday</span>
+        <h1 class="hero-title">Acum Day! ✨</h1>
+        <p style="color: var(--text-sub); font-size: 0.95rem;">Selamat bertambah umur untuk manusia paling seru & favorit semua orang!</p>
       </div>
     </div>
 
-    <!-- Interactive Game Card -->
-    <div class="card">
-      <h3>🎁 Pilih Kado Mulia untuk Acum!</h3>
-      <p style="font-size: 0.85rem; color: #777;">Klik salah satu kotak hadiah di bawah ini untuk melihat kejutan!</p>
-      
-      <div class="game-box">
-        <div class="gift-box" onclick="openGift(1)">🎁</div>
-        <div class="gift-box" onclick="openGift(2)">🎁</div>
-        <div class="gift-box" onclick="openGift(3)">🎁</div>
-      </div>
-      <p id="gift-result" style="margin-top: 15px; font-weight: bold; color: var(--primary); min-height: 24px;"></p>
+    <!-- 2. CANDLE CARD -->
+    <div class="card candle-card" onclick="blowCandle()">
+      <div class="cake-icon" id="cake">🎂</div>
+      <p style="font-weight: 700; font-size: 0.85rem;">Klik Lilinnya!</p>
+      <span style="font-size: 0.7rem; color: var(--text-sub);">Make a wish 💫</span>
     </div>
 
-    <!-- Sweet Letter Card -->
-    <div class="card">
-      <h3>💌 Surat Rahasia Buat Acum</h3>
-      <p style="font-size: 0.9rem;">Ada pesan manis khusus yang cuma boleh dibuka sama Acum.</p>
-      <button class="btn" onclick="toggleLetter()">Buka Surat 📖</button>
+    <!-- 3. SPOTIFY PLAYER CARD -->
+    <div class="card music-card">
+      <div class="vinyl" id="vinyl"></div>
+      <div class="music-info">
+        <span style="font-size: 0.65rem; color: var(--accent-pink); font-weight: bold; letter-spacing: 1px;">NOW PLAYING</span>
+        <h4>Birthday Track 🎵</h4>
+        <p>Special Soundtrack for Acum</p>
+      </div>
+      <button class="play-btn" id="playBtn" onclick="toggleAudio()">▶</button>
+    </div>
 
-      <div id="letter" class="letter-box">
-        <p><b>Dear Acum,</b></p><br>
-        <p>Happy Birthday ya! Semoga di usiamu yang baru ini, segalanya makin dimudahkan, mimpi-mimpinya makin dekat untuk tercapai, dan selalu dikelilingi hal-hal baik.</p><br>
-        <p>Makasih ya udah selalu jadi Acum yang seru, baik, dan bikin hari-hari jadi lebih berwarna. Jangan lupa tetap tersenyum dan bahagia selalu!</p><br>
-        <p><b>Have a super wonderful birthday! 🍰✨</b></p>
+    <!-- 4. STATS CARD -->
+    <div class="card stats-card">
+      <div class="stat-item">
+        <div class="stat-value">100%</div>
+        <div class="stat-label">Tingkat Gemoy</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">∞</div>
+        <div class="stat-label">Stok Rezeki</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">24/7</div>
+        <div class="stat-label">Happy Vibes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">#1</div>
+        <div class="stat-label">Manusia Favorit</div>
       </div>
     </div>
 
-    <!-- Audio Player / Surprise Button -->
-    <div class="card">
-      <h3>🎶 Mood Booster Hari Ini</h3>
-      <p style="font-size: 0.9rem; margin-bottom: 10px;">Tekan tombol di bawah untuk membunyikan terompet pesta!</p>
-      <button class="btn" onclick="playSound()">Pencet Sini! 🎺</button>
+    <!-- 5. WISH CARD (FLIP) -->
+    <div class="card wish-card" onclick="this.classList.toggle('flipped'); fireConfetti();">
+      <div class="wish-inner">
+        <div class="wish-front">
+          <h3 style="font-family: 'Syne'; font-size: 1.2rem; margin-bottom: 6px;">📩 Ada Pesan Rahasia Buat Acum</h3>
+          <p style="font-size: 0.85rem; color: var(--text-sub);">(Klik / Tap kartu ini buat membalik & baca pesannya! ✨)</p>
+        </div>
+        <div class="wish-back">
+          <p style="font-size: 0.95rem; line-height: 1.5; font-weight: 600; color: #fff;">
+            "Happy Birthday ya Acum! Semoga di usia yang baru ini, semua impianmu makin cepat terwujud, selalu sehat, dan makin dikelilingi hal-hal baik. Tetap jadi Acum yang keren ya! 🍰🎉"
+          </p>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -250,61 +356,79 @@
     // Efek Confetti (Kembang Api Kertas)
     function fireConfetti() {
       confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
+        particleCount: 80,
+        spread: 60,
+        origin: { y: 0.7 },
+        colors: ['#ff5e8e', '#a855f7', '#06b6d4']
       });
     }
 
-    // Opsi Game Hadiah
-    function openGift(number) {
-      const resultText = document.getElementById('gift-result');
+    // Tiup Lilin
+    function blowCandle() {
+      const cake = document.getElementById('cake');
+      cake.innerText = '🍰';
       fireConfetti();
-      
-      if(number === 1) {
-        resultText.innerHTML = "🏆 Selamat! Kamu mendapatkan: **Voucher Traktiran Es Krim Sepuasnya!** 🍦";
-      } else if(number === 2) {
-        resultText.innerHTML = "👑 Selamat! Kamu mendapatkan: **Kupon Bebas Bikin Permintaan Hari Ini!** 💖";
-      } else {
-        resultText.innerHTML = "✨ Selamat! Kamu mendapatkan: **Peluk Hangat & Kebahagiaan Melimpah!** 🎂";
-      }
+      setTimeout(() => {
+        alert('✨ Wish kamu sudah terkirim ke semesta! Semoga terwujud ya Acum!');
+      }, 300);
     }
 
-    // Buka/Tutup Surat
-    function toggleLetter() {
-      const letter = document.getElementById('letter');
-      if (letter.style.display === "block") {
-        letter.style.display = "none";
-      } else {
-        letter.style.display = "block";
+    // Web Audio Synthesizer (Lagu Ulang Tahun Sederhana tanpa perlu mp3 external)
+    let audioCtx = null;
+    let isPlaying = false;
+
+    function toggleAudio() {
+      const vinyl = document.getElementById('vinyl');
+      const btn = document.getElementById('playBtn');
+
+      if (!isPlaying) {
+        isPlaying = true;
+        vinyl.style.animationPlayState = 'running';
+        btn.innerText = '❚❚';
         fireConfetti();
+        playMelody();
+      } else {
+        isPlaying = false;
+        vinyl.style.animationPlayState = 'paused';
+        btn.innerText = '▶';
       }
     }
 
-    // Sound effect menggunakan Web Audio API (Tanpa butuh file MP3 luar)
-    function playSound() {
-      fireConfetti();
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
+    function playMelody() {
+      if (!isPlaying) return;
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(440, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.5);
-      
-      gain.gain.setValueAtTime(0.3, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
-      
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      
-      osc.start();
-      osc.stop(ctx.currentTime + 0.5);
+      const notes = [261.63, 261.63, 293.66, 261.63, 349.23, 329.63]; // Happy Birthday tone
+      let i = 0;
+
+      function playNextNote() {
+        if (!isPlaying) return;
+        
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        
+        osc.type = 'sine';
+        osc.frequency.value = notes[i % notes.length];
+        
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+        
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.4);
+        
+        i++;
+        if (isPlaying) setTimeout(playNextNote, 500);
+      }
+
+      playNextNote();
     }
 
-    // Jalankan confetti saat pertama kali dibuka
+    // Auto Confetti saat pertama kali dibuka
     window.onload = () => {
-      setTimeout(fireConfetti, 500);
+      setTimeout(fireConfetti, 400);
     };
   </script>
 </body>
