@@ -1,435 +1,391 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acum Day ✦ Special Edition</title>
-  
-  <!-- Fonts & Confetti -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Acum - Celebrating 20 Years</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f0c1b;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-light: rgba(255, 255, 255, 0.12);
+            --accent: #e879f9;
+            --accent-glow: rgba(232, 121, 249, 0.35);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
 
-  <style>
-    :root {
-      --bg: #0f1015;
-      --card-bg: rgba(255, 255, 255, 0.05);
-      --card-border: rgba(255, 255, 255, 0.1);
-      --accent-pink: #ff5e8e;
-      --accent-purple: #a855f7;
-      --accent-cyan: #06b6d4;
-      --text-main: #f8fafc;
-      --text-sub: #94a3b8;
-    }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-    body {
-      background-color: var(--bg);
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(255, 94, 142, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 24px;
-    }
+        /* BACKGROUND GLOW EFEK */
+        .bg-gradient {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+        }
 
-    /* Bento Grid Container */
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      max-width: 900px;
-      width: 100%;
-    }
+        /* CONTAINER APLIKASI */
+        .app-container {
+            width: 100%; max-width: 430px;
+            min-height: 100vh;
+            background: rgba(15, 12, 27, 0.85);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border-light);
+            border-right: 1px solid var(--border-light);
+            padding: 24px 18px 80px 18px;
+            position: relative; z-index: 1;
+        }
 
-    /* Base Card Style */
-    .card {
-      background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--card-border);
-      border-radius: 28px;
-      padding: 24px;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+        /* PHOTO HERO FRAME */
+        .photo-card {
+            width: 100%;
+            border-radius: 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            padding: 12px;
+            margin-bottom: 22px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            position: relative;
+        }
 
-    .card:hover {
-      border-color: rgba(255, 255, 255, 0.25);
-      transform: translateY(-4px);
-    }
+        .photo-wrapper {
+            width: 100%;
+            height: 380px;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+            background: #18122b;
+        }
 
-    /* Card 1: Hero (Large) */
-    .hero-card {
-      grid-column: span 3;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      background: linear-gradient(135deg, rgba(255, 94, 142, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
-    }
+        .photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            /* Filter tajam agar foto jernih & berestetika */
+            filter: contrast(102%) brightness(102%);
+        }
 
-    .hero-avatar {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--accent-pink);
-      box-shadow: 0 0 20px rgba(255, 94, 142, 0.4);
-      flex-shrink: 0;
-    }
+        .photo-tag {
+            position: absolute;
+            bottom: 12px; left: 12px;
+            background: rgba(15, 12, 27, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 0.78rem;
+            color: #f1f5f9;
+            letter-spacing: 0.5px;
+        }
 
-    .hero-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 2.2rem;
-      line-height: 1.1;
-      margin-bottom: 8px;
-      background: linear-gradient(90deg, #fff, var(--accent-pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+        /* HEADER & UCAPAN UTAMA */
+        .header-title {
+            margin-bottom: 20px;
+        }
 
-    .pill-tag {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 20px;
-      background: rgba(255, 94, 142, 0.2);
-      color: var(--accent-pink);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-    }
+        .header-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ffffff 30%, #e879f9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
 
-    /* Card 2: Blow Candle / Interactive */
-    .candle-card {
-      grid-column: span 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      cursor: pointer;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.08) 100%);
-    }
+        .header-title p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
 
-    .cake-icon {
-      font-size: 3.5rem;
-      margin-bottom: 8px;
-      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
-      transition: transform 0.2s ease;
-    }
+        /* FEATURE CARDS LIST */
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+        }
 
-    .candle-card:hover .cake-icon {
-      transform: scale(1.15) rotate(5deg);
-    }
+        .feature-card:active {
+            transform: scale(0.98);
+            background: rgba(232, 121, 249, 0.1);
+            border-color: rgba(232, 121, 249, 0.4);
+        }
 
-    /* Card 3: Spotify Player */
-    .music-card {
-      grid-column: span 2;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+        .fc-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
 
-    .vinyl {
-      width: 60px;
-      height: 60px;
-      background: #111;
-      border-radius: 50%;
-      border: 2px solid #333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      animation: spin 6s linear infinite;
-      animation-play-state: paused;
-      flex-shrink: 0;
-    }
+        .fc-icon {
+            width: 42px; height: 42px;
+            border-radius: 12px;
+            background: rgba(232, 121, 249, 0.12);
+            border: 1px solid rgba(232, 121, 249, 0.25);
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.3rem;
+        }
 
-    .vinyl::after {
-      content: '';
-      width: 18px;
-      height: 18px;
-      background: var(--accent-cyan);
-      border-radius: 50%;
-    }
+        .fc-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #f8fafc;
+        }
 
-    .music-info h4 { font-size: 0.95rem; margin-bottom: 2px; }
-    .music-info p { font-size: 0.8rem; color: var(--text-sub); }
+        .fc-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
 
-    .play-btn {
-      margin-left: auto;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: var(--text-main);
-      color: var(--bg);
-      border: none;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      transition: transform 0.2s;
-    }
+        /* LILIN HARAPAN WIDGET */
+        .candle-widget {
+            background: linear-gradient(135deg, rgba(30, 20, 50, 0.7), rgba(15, 10, 25, 0.8));
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
 
-    .play-btn:hover { transform: scale(1.1); }
+        .candle-icon {
+            font-size: 2.8rem;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
 
-    /* Card 4: Stats Grid */
-    .stats-card {
-      grid-column: span 2;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+        .candle-icon:active { transform: scale(0.9); }
 
-    .stat-item {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
+        /* MODAL POPUP */
+        .modal-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(5, 3, 10, 0.85);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-    .stat-value {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.4rem;
-      color: var(--accent-cyan);
-      font-weight: 800;
-    }
+        .modal-box {
+            background: rgba(24, 18, 43, 0.95);
+            border: 1px solid var(--border-light);
+            border-radius: 28px;
+            padding: 24px;
+            width: 100%; max-width: 380px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
 
-    .stat-label { font-size: 0.75rem; color: var(--text-sub); }
+        @keyframes modalPop { 
+            from { transform: scale(0.9); opacity: 0; } 
+            to { transform: scale(1); opacity: 1; } 
+        }
 
-    /* Card 5: Interactive Flip Wish Card */
-    .wish-card {
-      grid-column: span 4;
-      perspective: 1000px;
-      height: 160px;
-      cursor: pointer;
-      padding: 0;
-      background: transparent;
-      border: none;
-    }
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin-bottom: 14px;
+            text-align: center;
+        }
 
-    .wish-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      transform-style: preserve-3d;
-    }
+        .modal-text {
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            line-height: 1.7;
+            text-align: left;
+            margin-bottom: 20px;
+            white-space: pre-line;
+        }
 
-    .wish-card.flipped .wish-inner {
-      transform: rotateX(180deg);
-    }
+        .btn-close {
+            width: 100%; padding: 12px;
+            border-radius: 14px; border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: #f8fafc; font-weight: 600;
+            font-size: 0.85rem; cursor: pointer;
+            transition: 0.2s;
+        }
 
-    .wish-front, .wish-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      border-radius: 28px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid var(--card-border);
-    }
-
-    .wish-front {
-      background: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%);
-    }
-
-    .wish-back {
-      background: rgba(255, 255, 255, 0.08);
-      transform: rotateX(180deg);
-      border-color: var(--accent-pink);
-    }
-
-    /* Keyframes */
-    @keyframes spin {
-      100% { transform: rotate(360deg); }
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .bento-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .hero-card {
-        grid-column: span 2;
-        flex-direction: column;
-        text-align: center;
-      }
-      .candle-card, .music-card, .stats-card, .wish-card {
-        grid-column: span 2;
-      }
-    }
-  </style>
+        .btn-close:active { background: rgba(255, 255, 255, 0.2); }
+    </style>
 </head>
 <body>
 
-  <div class="bento-grid">
-    
-    <!-- 1. HERO CARD -->
-    <div class="card hero-card">
-      <!-- Ganti foto Acum di sini -->
-      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60" alt="Acum" class="hero-avatar">
-      <div>
-        <span class="pill-tag">✦ Happy Birthday</span>
-        <h1 class="hero-title">Acum Day! ✨</h1>
-        <p style="color: var(--text-sub); font-size: 0.95rem;">Selamat bertambah umur untuk manusia paling seru & favorit semua orang!</p>
-      </div>
-    </div>
+    <div class="bg-gradient"></div>
 
-    <!-- 2. CANDLE CARD -->
-    <div class="card candle-card" onclick="blowCandle()">
-      <div class="cake-icon" id="cake">🎂</div>
-      <p style="font-weight: 700; font-size: 0.85rem;">Klik Lilinnya!</p>
-      <span style="font-size: 0.7rem; color: var(--text-sub);">Make a wish 💫</span>
-    </div>
-
-    <!-- 3. SPOTIFY PLAYER CARD -->
-    <div class="card music-card">
-      <div class="vinyl" id="vinyl"></div>
-      <div class="music-info">
-        <span style="font-size: 0.65rem; color: var(--accent-pink); font-weight: bold; letter-spacing: 1px;">NOW PLAYING</span>
-        <h4>Birthday Track 🎵</h4>
-        <p>Special Soundtrack for Acum</p>
-      </div>
-      <button class="play-btn" id="playBtn" onclick="toggleAudio()">▶</button>
-    </div>
-
-    <!-- 4. STATS CARD -->
-    <div class="card stats-card">
-      <div class="stat-item">
-        <div class="stat-value">100%</div>
-        <div class="stat-label">Tingkat Gemoy</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value">∞</div>
-        <div class="stat-label">Stok Rezeki</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value">24/7</div>
-        <div class="stat-label">Happy Vibes</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value">#1</div>
-        <div class="stat-label">Manusia Favorit</div>
-      </div>
-    </div>
-
-    <!-- 5. WISH CARD (FLIP) -->
-    <div class="card wish-card" onclick="this.classList.toggle('flipped'); fireConfetti();">
-      <div class="wish-inner">
-        <div class="wish-front">
-          <h3 style="font-family: 'Syne'; font-size: 1.2rem; margin-bottom: 6px;">📩 Ada Pesan Rahasia Buat Acum</h3>
-          <p style="font-size: 0.85rem; color: var(--text-sub);">(Klik / Tap kartu ini buat membalik & baca pesannya! ✨)</p>
+    <div class="app-container">
+        
+        <!-- FOTO TAJAM UTAMA -->
+        <div class="photo-card">
+            <div class="photo-wrapper">
+                <img src="https://i.ibb.co.com/vxGVQbjG/IMG-2605.png" alt="Acum Photo">
+                <div class="photo-tag">✨ Chapter 20 • Acum</div>
+            </div>
         </div>
-        <div class="wish-back">
-          <p style="font-size: 0.95rem; line-height: 1.5; font-weight: 600; color: #fff;">
-            "Happy Birthday ya Acum! Semoga di usia yang baru ini, semua impianmu makin cepat terwujud, selalu sehat, dan makin dikelilingi hal-hal baik. Tetap jadi Acum yang keren ya! 🍰🎉"
-          </p>
+
+        <!-- HEADER UCAPAN -->
+        <div class="header-title">
+            <h1>Happy 20th Birthday, Acum ✨</h1>
+            <p>Selamat memasuki usia kepala dua! Semoga langkah-langkah baru di depan selalu dipenuhi hal-hal baik, ketenangan, dan kebahagiaan.</p>
         </div>
-      </div>
+
+        <!-- LILIN HARAPAN (INTERAKTIF) -->
+        <div class="candle-widget">
+            <div class="candle-icon" id="candleEmoji" onclick="blowCandle()">🕯️</div>
+            <h3 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 4px;">Lilin Harapan Digital</h3>
+            <p id="candleText" style="font-size: 0.78rem; color: var(--text-muted);">Klik lilin di atas untuk meniup & mengaminkan doa di usia 20 tahun ini.</p>
+        </div>
+
+        <!-- LIST FITUR ELEGAN -->
+        
+        <!-- FITUR 1: SURAT PANJANG -->
+        <div class="feature-card" onclick="openModal('📜 Surat Terbuka: Memasuki Usia 20', letterText)">
+            <div class="fc-top">
+                <div class="fc-icon">💌</div>
+                <div class="fc-title">Surat Terbuka Usia 20</div>
+            </div>
+            <div class="fc-desc">Pesan khusus yang cukup panjang tentang perjalanan hidup, pendewasaan, dan apresiasi untuk Acum.</div>
+        </div>
+
+        <!-- FITUR 2: BUKU KECIL HARAPAN -->
+        <div class="feature-card" onclick="openModal('🌷 Catatan & Doa Baik', wishesText)">
+            <div class="fc-top">
+                <div class="fc-icon">✨</div>
+                <div class="fc-title">Doa & Harapan untuk Acum</div>
+            </div>
+            <div class="fc-desc">Rangkaian doa tulus untuk kesehatan, proses belajar, karier, dan ketenangan hati.</div>
+        </div>
+
+        <!-- FITUR 3: KUPON KEBERSAMAAN -->
+        <div class="feature-card" onclick="openKuponModal()">
+            <div class="fc-top">
+                <div class="fc-icon">🎟️</div>
+                <div class="fc-title">Kupon Kenangan Santai</div>
+            </div>
+            <div class="fc-desc">Koleksi tiket kecil yang bisa klaim kapan saja kalau kamu lagi butuh suasana santai.</div>
+        </div>
+
+        <!-- FITUR 4: SPOTIFY CORNER -->
+        <div class="feature-card" onclick="openModal('🎧 Soundtracks Of Life', musicText)">
+            <div class="fc-top">
+                <div class="fc-icon">🎵</div>
+                <div class="fc-title">Lagu & Refleksi Singkat</div>
+            </div>
+            <div class="fc-desc">Sepotong lirik lagu dan alasan kenapa lagu ini cocok menemani hari lahirmu.</div>
+        </div>
+
+        <!-- FITUR 5: KAPSUL WAKTU -->
+        <div class="feature-card" onclick="openModal('⏳ Pesan untuk Masa Depan', timeCapsuleText)">
+            <div class="fc-top">
+                <div class="fc-icon">⏳</div>
+                <div class="fc-title">Kapsul Waktu Masa Depan</div>
+            </div>
+            <div class="fc-desc">Pesan pengingat ramah untuk Acum saat melewati hari-hari lelah nanti.</div>
+        </div>
+
     </div>
 
-  </div>
+    <!-- MODAL POPUP UNIVERSAL -->
+    <div class="modal-bg" id="modal">
+        <div class="modal-box">
+            <div class="modal-title" id="mTitle">Judul</div>
+            <div class="modal-text" id="mBody">Isi teks ucapan...</div>
+            <button class="btn-close" onclick="closeModal()">Tutup Pesan ✕</button>
+        </div>
+    </div>
 
-  <script>
-    // Efek Confetti (Kembang Api Kertas)
-    function fireConfetti() {
-      confetti({
-        particleCount: 80,
-        spread: 60,
-        origin: { y: 0.7 },
-        colors: ['#ff5e8e', '#a855f7', '#06b6d4']
-      });
-    }
+    <script>
+        // TEKS PANJANG (LONG TEXT)
+        const letterText = `Selamat ulang tahun yang ke-20, Acum! 🎉
 
-    // Tiup Lilin
-    function blowCandle() {
-      const cake = document.getElementById('cake');
-      cake.innerText = '🍰';
-      fireConfetti();
-      setTimeout(() => {
-        alert('✨ Wish kamu sudah terkirim ke semesta! Semoga terwujud ya Acum!');
-      }, 300);
-    }
+Memasuki umur 20 tahun itu sering kali terasa seperti langkah yang besar. Ada banyak hal baru, tanggung jawab yang pelan-pelan bertambah, serta proses belajar mengenal diri sendiri yang makin dalam.
 
-    // Web Audio Synthesizer (Lagu Ulang Tahun Sederhana tanpa perlu mp3 external)
-    let audioCtx = null;
-    let isPlaying = false;
+Terima kasih ya sudah terus berjuang dan bertahan sampai sejauh ini. Segala lelah, cerita seru, tantangan, dan pencapaian kecil maupun besar yang sudah kamu lewati adalah bukti betapa hebatnya proses tumbuhmu.
 
-    function toggleAudio() {
-      const vinyl = document.getElementById('vinyl');
-      const btn = document.getElementById('playBtn');
+Di umur kepala dua ini, jangan terlalu menuntut dirimu untuk selalu sempurna. Tidak apa-apa untuk berjalan perlahan, mengambil jeda saat lelah, dan menikmati setiap momen tanpa harus terburu-buru. 
 
-      if (!isPlaying) {
-        isPlaying = true;
-        vinyl.style.animationPlayState = 'running';
-        btn.innerText = '❚❚';
-        fireConfetti();
-        playMelody();
-      } else {
-        isPlaying = false;
-        vinyl.style.animationPlayState = 'paused';
-        btn.innerText = '▶';
-      }
-    }
+Semoga kamu selalu dikelilingi oleh hal-hal hangat, pikiran yang tenang, dan orang-orang yang tulus mendukungmu. Selamat merayakan hari kelahiranmu! ❤️`;
 
-    function playMelody() {
-      if (!isPlaying) return;
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      
-      const notes = [261.63, 261.63, 293.66, 261.63, 349.23, 329.63]; // Happy Birthday tone
-      let i = 0;
+        const wishesText = `Berikut beberapa doa dan harapan terbaik untuk Acum di angka 20 ini:
 
-      function playNextNote() {
-        if (!isPlaying) return;
-        
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        
-        osc.type = 'sine';
-        osc.frequency.value = notes[i % notes.length];
-        
-        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
-        
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.4);
-        
-        i++;
-        if (isPlaying) setTimeout(playNextNote, 500);
-      }
+1. 🌿 Ketenangan Pikiran: Semoga di tengah kesibukan apa pun, kamu selalu punya ruang santai dan ketenangan di dalam hati.
+2. 💫 Kesehatan & Energi: Semoga fisik dan mentalmu selalu diberi kesehatan yang cukup untuk mengejar semua hal yang kamu impikan.
+3. 🎯 Kemudahan Langkah: Semoga tiap rencana, tugas, dan perjalanan akademis maupun pribadi dipermudah jalannya.
+4. ✨ Senyuman yang Tulus: Semoga hari-harimu diisi dengan lebih banyak alasan untuk tersenyum dan bahagia.`;
 
-      playNextNote();
-    }
+        const musicText = `🎵 "Teruslah berjalan, nikmati setiap ritme hidupmu."
 
-    // Auto Confetti saat pertama kali dibuka
-    window.onload = () => {
-      setTimeout(fireConfetti, 400);
-    };
-  </script>
+Lagu ini pengingat sederhana buat Acum:
+Usia 20 bukan tentang seberapa cepat kamu sampai di tujuan, tapi tentang seberapa besar kamu bisa menikmati dan menghargai perjalanan yang sedang kamu jalani.
+
+Tetap jadi diri sendiri yang hangat dan keren ya! ✨`;
+
+        const timeCapsuleText = `⏳ Catatan Pengingat untuk Acum:
+
+Kalau suatu saat kamu merasa lelah, jenuh, atau kebingungan dengan proses yang lagi kamu jalani, coba baca pesan singkat ini:
+
+"Kamu sudah melewati banyak hal berat sebelumnya dan berhasil melaluinya. Hari ini pun kamu pasti bisa melaluinya dengan baik. Istirahat sejenak, lalu melangkah lagi pelan-pelan ya."`;
+
+        // INTERAKSI LILIN
+        let blown = false;
+        function blowCandle() {
+            if(!blown) {
+                document.getElementById('candleEmoji').innerText = '✨';
+                document.getElementById('candleText').innerHTML = '<span style="color:#e879f9; font-weight:600;">Lilin berhasil ditiup! 🥳</span><br>Semoga semua harapan baik Acum di usia 20 tahun dikabulkan satu per satu.';
+                blown = true;
+            }
+        }
+
+        // KUPON HANDLER
+        function openKuponModal() {
+            const listKupon = [
+                "🎟️ Kupon Bebas Pilih Tempat Makan / Jajan",
+                "🎟️ Kupon Temani Ngobrol / Dengar Cerita Kapan Saja",
+                "🎟️ Kupon Jam Istirahat Bebas Stress 1 Hari",
+                "🎟️ Kupon Ditraktir Minuman Favorit"
+            ];
+            const randomKupon = listKupon[Math.floor(Math.random() * listKupon.length)];
+            openModal("🎟️ Kupon Spesial Acum", `Selamat! Kamu mendapatkan kupon berikut:\n\n👉 **${randomKupon}**\n\n(Kupon ini berlaku kapan pun kamu mau klaim tanpa tanggal kadaluarsa!)`);
+        }
+
+        // MODAL HANDLER
+        function openModal(title, text) {
+            document.getElementById('mTitle').innerText = title;
+            document.getElementById('mBody').innerText = text;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
