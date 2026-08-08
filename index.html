@@ -2,842 +2,528 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-select=none">
-    <title>Acum's Sweet 20th Love Journal 🌸</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts - Aesthetic & Soft Romantic -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Acum 20th Birthday Special OS</title>
     <style>
+        :root {
+            --accent: #ff2a5f;
+            --accent-glow: rgba(255, 42, 95, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --card-glass: rgba(255, 255, 255, 0.22);
+            --text-dark: #1e1b18;
+            --text-pink: #d90429;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: linear-gradient(135deg, #ffeef2 0%, #fff3f5 50%, #ffe3e8 100%);
+            background: #0d0614;
+            min-height: 100vh;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
+            position: relative;
         }
 
-        .font-handwritten {
-            font-family: 'Caveat', cursive;
-        }
-
-        /* Glassmorphism Scrapbook Style */
-        .scrapbook-panel {
-            background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 2px solid rgba(255, 182, 193, 0.4);
-            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.6);
-        }
-
-        /* Ambient glowing background blobs */
-        .glowing-blob {
+        /* BACKGROUND GLOWING BLOBS */
+        .ambient-bg {
             position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .blob {
+            position: absolute;
             border-radius: 50%;
             filter: blur(80px);
-            z-index: 1;
-            pointer-events: none;
             opacity: 0.6;
-            animation: floatBlob 12s infinite alternate ease-in-out;
+            animation: float 10s infinite alternate ease-in-out;
+        }
+        .blob-1 { width: 300px; height: 300px; background: #ff4d6d; top: -50px; left: -50px; }
+        .blob-2 { width: 350px; height: 350px; background: #7209b7; bottom: -80px; right: -50px; animation-delay: -5s; }
+        .blob-3 { width: 250px; height: 250px; background: #f72585; top: 40%; left: 30%; animation-duration: 12s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, 50px) scale(1.1); }
         }
 
-        @keyframes floatBlob {
-            0% { transform: translateY(0px) scale(1); }
-            100% { transform: translateY(30px) scale(1.15); }
+        /* APP CONTAINER / MOCKUP */
+        .app-container {
+            width: 100%;
+            max-width: 420px;
+            min-height: 100vh;
+            background: rgba(20, 10, 30, 0.45);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-left: 1px solid var(--glass-border);
+            border-right: 1px solid var(--glass-border);
+            position: relative;
+            z-index: 1;
+            padding: 20px 16px 40px 16px;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Falling Cherry Blossom Petals */
-        .petal {
+        /* 1. LOCK SCREEN (PASSCODE) */
+        #lockScreen {
             position: fixed;
-            top: -20px;
-            pointer-events: none;
-            z-index: 50;
-            animation: fallAndSway linear forwards;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(13, 6, 20, 0.85);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.6s;
+        }
+        .lock-time { font-size: 3.5rem; font-weight: 200; letter-spacing: -1px; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+        .lock-date { font-size: 0.95rem; color: #ffb3c1; margin-bottom: 30px; font-weight: 500; }
+        .lock-title { font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase; }
+        
+        .pin-dots { display: flex; gap: 15px; margin-bottom: 35px; }
+        .dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.5); transition: 0.2s; }
+        .dot.active { background: #ff4d6d; border-color: #ff4d6d; box-shadow: 0 0 12px #ff4d6d; }
+        .dot.error { animation: shake 0.4s ease-in-out; border-color: #ff0055; background: #ff0055; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
         }
 
-        @keyframes fallAndSway {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(105vh) translateX(100px) rotate(360deg); opacity: 0; }
+        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; width: 100%; max-width: 280px; }
+        .key {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .key:active { background: rgba(255, 77, 109, 0.5); transform: scale(0.92); }
+        .key-hint { font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 25px; text-align: center; }
+
+        /* HEADER BANNER */
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 77, 109, 0.35), rgba(114, 9, 183, 0.35));
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 22px 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .header h1 { font-size: 1.45rem; font-weight: 800; background: linear-gradient(to right, #ffffff, #ffb3c1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header p { font-size: 0.8rem; color: rgba(255,255,255,0.8); margin-top: 4px; font-weight: 500; }
+
+        /* GRID 20 CARDS */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .card-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            position: relative;
+        }
+        .card-item:active { transform: scale(0.88); background: rgba(255, 77, 109, 0.3); }
+        .card-item .icon { font-size: 1.6rem; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3)); }
+        .card-item .num-badge {
+            position: absolute;
+            top: 6px; right: 6px;
+            background: #ff4d6d;
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(255, 77, 109, 0.5);
         }
 
-        /* Envelope interactive states */
-        .envelope-button {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* POPUP MODAL GLASSMORPHISM */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
-        .envelope-button:active {
-            transform: scale(0.9) rotate(-3deg);
+        .modal-box {
+            background: linear-gradient(145deg, rgba(35, 18, 50, 0.9), rgba(20, 10, 30, 0.95));
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            width: 100%;
+            max-width: 360px;
+            border-radius: 28px;
+            padding: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(255,77,109,0.2);
+            text-align: center;
+            animation: modalPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
         }
-
-        /* Breathing Flower Simulation */
-        @keyframes flowerBreathe {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255, 117, 140, 0.3)); }
-            50% { transform: scale(1.25); filter: drop-shadow(0 0 25px rgba(255, 117, 140, 0.6)); }
-        }
-        .breathe-flower {
-            animation: flowerBreathe 4s infinite ease-in-out;
-        }
-
-        /* Liquid animation for tumbler hydration */
-        @keyframes waveMove {
-            0% { transform: translateX(0) scaleY(1); }
-            50% { transform: translateX(-25%) scaleY(0.95); }
-            100% { transform: translateX(-50%) scaleY(1); }
-        }
-        .liquid-wave {
-            animation: waveMove 3s infinite linear;
-        }
-
-        /* Pop-up entrance */
-        .popup-animate {
-            animation: journalOpen 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        @keyframes journalOpen {
-            from { transform: scale(0.85) translateY(30px); opacity: 0; }
+        @keyframes modalPop {
+            from { transform: scale(0.7) translateY(30px); opacity: 0; }
             to { transform: scale(1) translateY(0); opacity: 1; }
         }
+
+        .modal-title { font-size: 1.1rem; font-weight: 700; color: #ff758c; margin-bottom: 12px; }
+        .modal-body { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.9); }
+
+        .btn-main {
+            background: linear-gradient(135deg, #ff4d6d, #ff758c);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            transition: transform 0.2s;
+        }
+        .btn-main:active { transform: scale(0.95); }
+        .btn-close {
+            background: rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.7);
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-top: 8px;
+        }
+
+        /* WIDGETS SPESIFIK */
+        /* Fingerprint Scanner */
+        .finger-box { width: 70px; height: 70px; border-radius: 50%; border: 2px dashed #ff4d6d; margin: 15px auto; display: flex; justify-content: center; align-items: center; font-size: 2rem; cursor: pointer; transition: 0.3s; }
+        .finger-box.scanning { border-style: solid; box-shadow: 0 0 25px #ff4d6d; animation: pulse 0.8s infinite alternate; }
+        @keyframes pulse { to { transform: scale(1.1); } }
+
+        /* Game Catch */
+        #gameCanvas { width: 100%; height: 160px; background: rgba(0,0,0,0.3); border-radius: 14px; position: relative; overflow: hidden; margin-top: 10px; border: 1px solid rgba(255,255,255,0.1); }
+        .falling-item { position: absolute; font-size: 24px; cursor: pointer; animation: fallAnim 1.8s linear forwards; }
+        @keyframes fallAnim { to { transform: translateY(170px); } }
+
+        /* Audio Player Bar */
+        .music-bar { display: flex; align-items: center; justify-content: center; gap: 4px; height: 30px; margin: 10px 0; }
+        .bar-line { width: 4px; background: #ff4d6d; border-radius: 4px; animation: bounce 0.6s infinite alternate ease-in-out; }
+        .bar-line:nth-child(2) { animation-delay: 0.15s; }
+        .bar-line:nth-child(3) { animation-delay: 0.3s; }
+        .bar-line:nth-child(4) { animation-delay: 0.45s; }
+        @keyframes bounce { from { height: 6px; } to { height: 26px; } }
+
+        /* CAMERA SALTING */
+        .cam-frame { width: 100%; height: 160px; background: #000; border-radius: 14px; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; border: 2px solid #ff4d6d; }
+        .cam-scanline { position: absolute; width: 100%; height: 2px; background: #ff4d6d; top: 0; animation: scan 1.5s infinite linear; box-shadow: 0 0 10px #ff4d6d; }
+        @keyframes scan { to { top: 100%; } }
     </style>
 </head>
-<body class="flex justify-center items-center min-h-screen relative overflow-y-auto py-8 px-4">
+<body>
 
-    <!-- AMBIENT GLOWING SHAPES -->
-    <div class="glowing-blob w-72 h-72 bg-[#ffd6e0] top-12 left-6"></div>
-    <div class="glowing-blob w-80 h-80 bg-[#fff0f3] bottom-24 right-4" style="animation-delay: -3s;"></div>
+    <!-- BACKGROUND FLOATING BLOBS -->
+    <div class="ambient-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
 
-    <!-- MAIN DIGITAL SCRAPBOOK CARD -->
-    <div class="w-full max-w-md min-h-[840px] rounded-[36px] border-4 border-white scrapbook-panel relative overflow-hidden flex flex-col p-6 z-10 shadow-[0_20px_50px_rgba(255,182,193,0.3)] pb-24">
+    <!-- LOCK SCREEN (PASSCODE REQUIRED) -->
+    <div id="lockScreen">
+        <div class="lock-time" id="lockClock">00:00</div>
+        <div class="lock-date">Selasa, 13 Oktober 2026</div>
+        <div class="lock-title">Masukkan PIN Ulang Tahun Acum</div>
         
-        <!-- HEADER: CUTE DIARY HEADER -->
-        <header class="text-center mb-6 relative pb-4 border-b-2 border-dashed border-[#ffccd5]">
-            <div class="text-xs tracking-widest text-[#ff758c] font-bold uppercase mb-1">Happy 20th Birthday</div>
-            <h1 class="text-4xl font-handwritten text-[#ff4d6d] tracking-wide">Acum's Love Journal 🌸</h1>
-            <p class="text-[10px] text-neutral-400 font-semibold tracking-wider mt-1">Dibuat penuh kehangatan oleh Acim kesayanganmu</p>
-            <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white px-3 py-0.5 rounded-full border border-[#ffccd5] text-[10px] font-bold text-[#ff758c]">
-                13 OKTOBER 2026
-            </div>
-        </header>
-
-        <!-- WELCOME CARD -->
-        <div class="bg-white/70 border border-[#ffccd5] rounded-3xl p-4 text-center mb-6 relative overflow-hidden shadow-sm">
-            <div class="absolute top-0 right-0 w-16 h-16 bg-[#fff0f3] rounded-full blur-xl"></div>
-            <span class="text-3xl">🧸</span>
-            <h2 class="text-md font-bold text-[#ff4d6d] mt-2 mb-1">Hai Sayangnya Acim!</h2>
-            <p class="text-xs text-neutral-600 leading-relaxed text-justify px-1">
-                Selamat memasuki usia kepala dua, sayang! Web jurnal cinta ini sengaja Acim desain super manis, tulus, dan penuh memori perjalanan kita. Bukalah 20 amplop kado manis di bawah ini satu per satu ya! 💖
-            </p>
+        <div class="pin-dots" id="pinDots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
         </div>
 
-        <!-- 20 SCRAPBOOK LOVE ENVELOPES GRID -->
-        <div class="grid grid-cols-4 gap-3 mb-6">
-            <script>
-                // Beautiful romantic emojis representing the 20 sweet features
-                const loveIcons = [
-                    "💌", "🎈", "🎟️", "🐱", "💖", "📸", "📻", "🔮", "🧸", "🥛", 
-                    "☕", "🌸", "🗺️", "🍫", "🎂", "💡", "🤙", "🔋", "💫", "🔒"
-                ];
-                
-                for (let i = 1; i <= 20; i++) {
-                    document.write(`
-                        <button onclick="openLoveEnvelope(${i})" class="bg-white border-2 border-[#ffccd5] rounded-2xl aspect-square flex flex-col justify-center items-center relative transition-all duration-300 hover:scale-105 hover:border-[#ff758c] shadow-sm envelope-button">
-                            <span class="text-xl mb-0.5">${loveIcons[i-1]}</span>
-                            <span class="text-[8px] font-bold text-[#ff758c] bg-[#fff0f3] px-2 py-0.5 rounded-full">Kado ${i}</span>
-                        </button>
-                    `);
-                }
-            </script>
+        <div class="keypad">
+            <div class="key" onclick="pressKey('1')">1</div>
+            <div class="key" onclick="pressKey('2')">2</div>
+            <div class="key" onclick="pressKey('3')">3</div>
+            <div class="key" onclick="pressKey('4')">4</div>
+            <div class="key" onclick="pressKey('5')">5</div>
+            <div class="key" onclick="pressKey('6')">6</div>
+            <div class="key" onclick="pressKey('7')">7</div>
+            <div class="key" onclick="pressKey('8')">8</div>
+            <div class="key" onclick="pressKey('9')">9</div>
+            <div class="key" style="opacity:0; pointer-events:none;"></div>
+            <div class="key" onclick="pressKey('0')">0</div>
+            <div class="key" onclick="deleteKey()">⌫</div>
         </div>
-
-        <!-- LOFI MUSIC PLAYER WIDGET -->
-        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-40 bg-white/90 border border-[#ffccd5] px-4 py-2.5 rounded-full flex items-center gap-3 shadow-md max-w-[90%] w-max backdrop-blur-md">
-            <button onclick="toggleLofiAudio()" class="w-8 h-8 rounded-full bg-[#ff758c] hover:bg-[#ff4d6d] flex items-center justify-center text-white text-xs shadow-md active:scale-95 transition-transform duration-200">
-                <i id="lofiCtrlIcon" class="fa-solid fa-play"></i>
-            </button>
-            <div class="flex flex-col pr-2">
-                <span class="text-[8px] text-neutral-400 font-bold tracking-wider">LAGU UNTUK ACUM</span>
-                <span class="text-[10px] text-[#ff4d6d] font-bold truncate max-w-[120px]">Afgan - Terima Kasih Cinta</span>
-            </div>
-        </div>
-
+        <div class="key-hint">Clue: Tanggal Ultah (1310) / Umur (20)</div>
     </div>
 
-    <!-- MAIN ROMANTIC POPUP JOURNAL MODAL -->
-    <div id="journalModal" class="fixed inset-0 bg-black/40 backdrop-filter backdrop-blur-md z-50 flex justify-center items-center p-4 hidden transition-all duration-300">
-        <div class="bg-white w-full max-w-xs rounded-[32px] overflow-hidden border-4 border-white flex flex-col shadow-[0_15px_40px_rgba(255,182,193,0.4)] relative popup-animate">
-            <div class="absolute -top-10 -left-10 w-28 h-28 bg-[#fff0f3] rounded-full blur-2xl"></div>
-            
-            <div class="px-5 py-4 border-b border-[#ffe3e8] flex justify-between items-center relative z-10 bg-[#fff5f6]">
-                <span id="popTitle" class="text-xs font-bold text-[#ff758c] tracking-widest uppercase flex items-center gap-2">Pesan Cinta</span>
-                <button onclick="closeLoveEnvelope()" class="w-7 h-7 rounded-full bg-white hover:bg-[#ffeef2] flex items-center justify-center text-[#ff758c] hover:text-[#ff4d6d] transition-all border border-[#ffccd5]">
-                    <i class="fa-solid fa-xmark text-xs"></i>
-                </button>
-            </div>
-            
-            <div class="px-5 py-6 text-sm text-neutral-600 leading-relaxed max-h-[420px] overflow-y-auto relative z-10" id="popBody">
-                Memuat pesan cinta...
-            </div>
+    <!-- MAIN APP CONTAINER -->
+    <div class="app-container">
+        <div class="header">
+            <h1>ACUM'S 20th ULTIMATE OS 👑</h1>
+            <p>Glassmorphic Edition • Spesial Hari Ulang Tahun</p>
+        </div>
+
+        <div class="grid" id="cardGrid"></div>
+    </div>
+
+    <!-- POPUP MODAL -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-box">
+            <div class="modal-title" id="mTitle">Fitur</div>
+            <div class="modal-body" id="mBody">Konten</div>
+            <button class="btn-main btn-close" onclick="closeModal()">Tutup Menu ✖</button>
         </div>
     </div>
 
-    <!-- YouTube Player Node Container -->
-    <div id="lofiPlayerNode" class="hidden"></div>
+    <div id="ytPlayerSpace" style="display:none"></div>
 
     <script>
-        let lofiPlayer = null;
-        let isMusicPlaying = false;
-        let currentSlide = 0;
-
-        // TWINKLE MUSIC CHIME SYNTHESIZER (WEB AUDIO API)
+        /* SYNTHESIZER SOUND EFFECTS (NO EXTERNAL AUDIO NEEDED) */
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        
-        function playTwinkleChime() {
+        function playTone(freq, type = 'sine', duration = 0.15) {
             try {
-                const now = audioCtx.currentTime;
-                const osc1 = audioCtx.createOscillator();
-                const osc2 = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                
-                osc1.type = 'sine';
-                osc1.frequency.setValueAtTime(1200, now);
-                osc1.frequency.exponentialRampToValueAtTime(2400, now + 0.3);
-                
-                osc2.type = 'triangle';
-                osc2.frequency.setValueAtTime(600, now);
-                osc2.frequency.exponentialRampToValueAtTime(1200, now + 0.3);
-                
-                gain.gain.setValueAtTime(0.06, now);
-                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
-                
-                osc1.connect(gain);
-                osc2.connect(gain);
-                gain.connect(audioCtx.destination);
-                
-                osc1.start(now);
-                osc2.start(now);
-                osc1.stop(now + 0.35);
-                osc2.stop(now + 0.35);
-            } catch (e) { console.warn(e); }
-        }
-
-        function playSoftPop() {
-            try {
-                const now = audioCtx.currentTime;
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
-                
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(400, now);
-                osc.frequency.exponentialRampToValueAtTime(80, now + 0.12);
-                
-                gain.gain.setValueAtTime(0.1, now);
-                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
-                
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
-                osc.start(now);
-                osc.stop(now + 0.15);
-            } catch (e) { console.warn(e); }
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e){}
         }
 
-        // LOAD YOUTUBE MUSIC
-        const scriptTag = document.createElement('script');
-        scriptTag.src = "https://www.youtube.com/iframe_api";
-        document.getElementsByTagName('script')[0].parentNode.insertBefore(scriptTag, document.getElementsByTagName('script')[0]);
+        function playUnlockSound() {
+            playTone(440, 'triangle', 0.1);
+            setTimeout(() => playTone(880, 'triangle', 0.2), 100);
+            setTimeout(() => playTone(1320, 'sine', 0.3), 200);
+        }
 
-        function onYouTubeIframeAPIReady() {
-            lofiPlayer = new YT.Player('lofiPlayerNode', {
-                height: '0', width: '0', videoId: 'Hr0AAqHLLSg',
-                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'Hr0AAqHLLSg' },
-                events: {
-                    'onReady': (event) => {
-                        event.target.mute();
-                        event.target.setVolume(60);
-                    }
+        /* CLOCK & PASSCODE LOGIC */
+        function updateClock() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('lockClock').innerText = `${h}:${m}`;
+        }
+        setInterval(updateClock, 1000); updateClock();
+
+        let inputPin = "";
+        const validPins = ["1310", "2026", "0020", "20"];
+
+        function pressKey(num) {
+            playTone(600, 'sine', 0.08);
+            if(inputPin.length < 4) {
+                inputPin += num;
+                updateDots();
+                if(inputPin.length === 4 || inputPin === "20") {
+                    setTimeout(checkPin, 150);
                 }
+            }
+        }
+
+        function deleteKey() {
+            playTone(300, 'sine', 0.08);
+            inputPin = inputPin.slice(0, -1);
+            updateDots();
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, idx) => {
+                if(idx < inputPin.length) dot.classList.add('active');
+                else dot.classList.remove('active');
             });
         }
 
-        function toggleLofiAudio() {
-            if (!lofiPlayer || typeof lofiPlayer.playVideo !== 'function') return;
-            const icon = document.getElementById('lofiCtrlIcon');
-            if (isMusicPlaying) {
-                lofiPlayer.pauseVideo();
-                icon.className = 'fa-solid fa-play';
-                isMusicPlaying = false;
-                playSoftPop();
+        function checkPin() {
+            if(validPins.includes(inputPin) || inputPin === "20") {
+                playUnlockSound();
+                document.getElementById('lockScreen').style.transform = 'translateY(-100%)';
+                document.getElementById('lockScreen').style.opacity = '0';
+                setTimeout(() => document.getElementById('lockScreen').style.display = 'none', 600);
             } else {
-                lofiPlayer.unMute();
-                lofiPlayer.playVideo();
-                icon.className = 'fa-solid fa-pause';
-                isMusicPlaying = true;
-                playTwinkleChime();
-            }
-        }
-
-        // 20 DIARY LOVE ENVELOPES DATABASE (BUCIN, MANIS, DENGAN CERITA JOGJA & BANDUNG)
-        const loveJournalDatabase = {
-            1: {
-                title: "💌 1. Surat Cinta Dari Acim",
-                body: `
-                    <div class="text-center font-sans">
-                        <span class="text-4xl">💌</span>
-                        <h4 class="font-bold text-[#ff4d6d] mt-2 mb-2">Selamat Ulang Tahun, Sayang!</h4>
-                        <p class="text-xs text-neutral-600 leading-relaxed text-justify">
-                            Selamat ulang tahun yang ke-20 buat Acum kesayangan aku! 🎂 Di usia yang makin matang ini, Acim berdoa semoga kamu dilancarkan segala urusan kerjaan dan impian besarmu. Makasih banyak ya udah selalu sabar menghadapi sifat manja aku selama ini. Kamu adalah takdir paling indah yang pernah semesta kirim buat aku. I love you so much! 🤍🌸
-                        </p>
-                    </div>
-                `
-            },
-            2: {
-                title: "🎈 2. Balon Doa Tulus",
-                body: `
-                    <div class="text-center">
-                        <p class="text-xs text-neutral-500 mb-3">Ketuk balon indah di bawah untuk meletuskannya dan memunculkan doa tulus Acim khusus untuk mendukung karir & kesehatanmu:</p>
-                        <div class="flex justify-center gap-4 my-4">
-                            <button onclick="popWishBalloon(1)" id="bal1" class="w-12 h-16 bg-[#ffd6e0] rounded-full text-lg shadow-sm transition-transform active:scale-95 flex items-center justify-center">🎈</button>
-                            <button onclick="popWishBalloon(2)" id="bal2" class="w-12 h-16 bg-[#ffe3e8] rounded-full text-lg shadow-sm transition-transform active:scale-95 flex items-center justify-center">🎈</button>
-                            <button onclick="popWishBalloon(3)" id="bal3" class="w-12 h-16 bg-[#fff0f3] rounded-full text-lg shadow-sm transition-transform active:scale-95 flex items-center justify-center">🎈</button>
-                        </div>
-                        <div id="wishOutputText" class="text-xs font-bold text-[#ff758c] min-h-[40px] px-2 leading-relaxed"></div>
-                    </div>
-                `
-            },
-            3: {
-                title: "🎟️ 3. Kupon Manis Kita",
-                body: `
-                    <div class="text-center">
-                        <span class="text-4xl">🎟️</span>
-                        <p class="text-xs text-neutral-500 mt-2">Ambil tiket hadiah fisik gratis dari Acim yang bisa kamu klaim kapan saja:</p>
-                        <div id="voucherOutputBox" class="my-4 p-4 border border-dashed border-[#ff758c] rounded-2xl bg-[#fff5f6] min-h-[70px] flex items-center justify-center font-bold text-[#ff4d6d] text-xs leading-relaxed text-center"></div>
-                        <button onclick="generateLoveVoucher()" class="w-full bg-[#ff758c] hover:bg-[#ff4d6d] text-white py-2.5 rounded-xl font-bold text-xs transition-all active:scale-95">AMBIL TIKET 🪙</button>
-                    </div>
-                `
-            },
-            4: {
-                title: "🐱 4. Kucing Manja Virtual",
-                body: `
-                    <div class="text-center">
-                        <div class="text-6xl my-2 transition-transform duration-300" id="catEmotion">🥺🐾</div>
-                        <p class="text-xs text-neutral-500 mb-3 mt-2">Tingkat manja Acim ke kamu sedang penuh hari ini. Beri asupan cinta biar kucing virtual ini ga rewel:</p>
-                        <div class="bg-[#e2e8f0] h-3 rounded-full overflow-hidden mb-4 border border-neutral-100">
-                            <div id="moodProgressBar" class="bg-gradient-to-r from-[#ff758c] to-[#ff4d6d] h-full transition-all duration-500" style="width: 45%"></div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button onclick="feedCatPet(25, '🥰🌸✨')" class="bg-[#ffccd5] border border-[#ffb3c1] py-2 rounded-xl text-xs font-bold text-[#ff4d6d] active:scale-95 transition-all">🤗 Beri Pelukan</button>
-                            <button onclick="feedCatPet(15, '🍕🍔🍿')" class="bg-[#ffe3e8] border border-[#ffccd5] py-2 rounded-xl text-xs font-bold text-[#ff758c] active:scale-95 transition-all">🍕 Kasih Jajan</button>
-                        </div>
-                    </div>
-                `
-            },
-            5: {
-                title: "💖 5. Detak Jantung Acim",
-                body: `
-                    <div class="text-center flex flex-col items-center">
-                        <p class="text-xs text-neutral-500 mb-4">Ketuk gambar jantung di bawah untuk melihat seberapa kencang cintaku padamu:</p>
-                        <button onclick="pulsateHeartFaster()" class="text-6xl animate-pulse transition-transform active:scale-90" id="pulsingHeart">💖</button>
-                        <div id="heartBeatsText" class="text-xs font-bold text-[#ff4d6d] mt-4 h-6">DETAK JANTUNG NORMAL</div>
-                    </div>
-                `
-            },
-            6: {
-                title: "📸 6. Album Memori Terindah",
-                body: `
-                    <div class="text-center flex flex-col items-center font-sans">
-                        <div class="bg-white p-3 pb-7 rounded-lg border-2 border-[#ffccd5] shadow-[0_5px_15px_rgba(255,182,193,0.3)] max-w-[200px] transform rotate-1">
-                            <div class="w-full h-28 bg-[#fff0f3] rounded-md flex items-center justify-center text-4xl" id="polaroidEmoji">🕌</div>
-                        </div>
-                        <p class="text-xs text-[#ff4d6d] font-bold mt-4 uppercase tracking-wider" id="polaroidLabel">"AWAL MULA DI JOGJA"</p>
-                        <p class="text-[11px] text-neutral-500 mt-2 leading-relaxed" id="polaroidCaption">Yogyakarta selalu punya tempat tersendiri di hati kita, karena di sanalah awal mula kita mulai dekat satu sama lain. ✨</p>
-                        <button onclick="slideNextPolaroid()" class="mt-4 bg-[#ffe3e8] border border-[#ffccd5] px-3 py-1.5 rounded-xl text-[10px] text-[#ff758c] hover:bg-[#ffccd5] font-bold transition-all">BERGESER KE MEMORI LAIN ➡️</button>
-                    </div>
-                `
-            },
-            7: {
-                title: "📻 7. Frekuensi Lofi Acum",
-                body: `
-                    <div class="text-center flex flex-col items-center">
-                        <div id="spinningRecord" class="w-20 h-20 rounded-full border-4 border-[#ffccd5] bg-[#111] flex items-center justify-center animate-spin" style="animation-duration: 6s;">
-                            <div class="w-8 h-8 rounded-full bg-[#ff758c] flex items-center justify-center text-xs text-white font-bold animate-ping">📻</div>
-                        </div>
-                        <p class="text-xs text-neutral-500 my-4">Atur transmisi musik romantis yang sengaja ditaruh untuk menemanimu fokus bekerja di depan layar HP/Laptop:</p>
-                        <button onclick="toggleLofiAudio()" class="w-full bg-[#ff758c] text-white py-2 rounded-xl text-xs font-bold transition-all active:scale-95">MATIKAN / NYALAKAN LAGU 🌸</button>
-                    </div>
-                `
-            },
-            8: {
-                title: "🔮 8. Scan Kesetiaan Acum",
-                body: `
-                    <div class="text-center">
-                        <p class="text-xs text-neutral-500 mb-3">Letakkan sidik jarimu di sini untuk menyelaraskan radar kesetiaanmu ke Acim hari ini:</p>
-                        <button onmousedown="scanBucinPercent()" ontouchstart="scanBucinPercent()" class="w-16 h-16 rounded-2xl border-2 border-[#ffccd5] flex items-center justify-center text-[#ff758c] text-2xl animate-pulse bg-[#fff5f6] mx-auto active:scale-95 transition-all">
-                            <i class="fa-solid fa-fingerprint"></i>
-                        </button>
-                        <div id="scanOutputResult" class="text-xs font-bold text-[#ff4d6d] mt-4 h-6">AWAITING BIOMETRIC SENSOR...</div>
-                    </div>
-                `
-            },
-            9: {
-                title: "🧸 9. Boneka Pelindung Capek",
-                body: `
-                    <div class="text-center">
-                        <span class="text-5xl">🧸</span>
-                        <h4 class="font-bold text-neutral-700 mt-2">Dukungan Semangat Kerja</h4>
-                        <p class="text-xs text-neutral-500 mt-2 leading-relaxed text-justify px-1">
-                            Acim kirim boneka beruang virtual raksasa ini biar setiap kali kamu lelah dan penat pulang dari tempat kerja, kamu selalu merasa hangat dan dipeluk erat sama aku. Lelahnya hilang semua ya sayang! 🤗🌸
-                        </p>
-                    </div>
-                `
-            },
-            10: {
-                title: "🥛 10. Tumbler Pengingat Hidrasi",
-                body: `
-                    <div class="text-center">
-                        <p class="text-xs text-neutral-500 mb-2">Kamu kalau sudah sibuk bekerja sering lupa minum air. Ayo isi tangkimu dulu!</p>
-                        <div class="relative w-16 h-24 mx-auto my-3 border-2 border-[#ffccd5] rounded-b-lg overflow-hidden bg-[#fffdfb]">
-                            <div id="waterPercentFill" class="absolute bottom-0 left-0 w-full bg-[#ffccd5] transition-all duration-500" style="height: 0%;">
-                                <div class="absolute -top-1.5 left-0 w-[200%] h-3 bg-[#ffccd5]/80 liquid-wave"></div>
-                            </div>
-                        </div>
-                        <p class="text-xs text-neutral-500 font-bold mb-3" id="waterTextCount">0 / 8 GELAS HIDRASI</p>
-                        <button onclick="drinkWaterFromTumbler()" class="w-full bg-[#ff758c] text-white py-2 rounded-xl font-bold text-xs active:scale-95 transition-all">MINUM AIR 🥤</button>
-                    </div>
-                `
-            },
-            11: {
-                title: "☕ 11. Kopi Pelindung Fokus",
-                body: `
-                    <div class="text-center">
-                        <span class="text-4xl">☕🍫</span>
-                        <h4 class="font-bold text-neutral-700 mt-2">Energi Kerja Acum</h4>
-                        <p class="text-xs text-neutral-500 mt-2 leading-relaxed text-justify px-1">
-                            Kopi hangat dan cokelat manis penambah stamina dikirim khusus oleh asisten setiamu (Acim) untuk menemani lemburan dan hari-hari kerjamu agar berjalan lancar tanpa hambatan! ☕🌸
-                        </p>
-                    </div>
-                `
-            },
-            12: {
-                title: "🌸 12. Taman Napas Tenang",
-                body: `
-                    <div class="text-center flex flex-col items-center">
-                        <div id="breatheVisualBall" class="w-20 h-20 rounded-full border-2 border-[#ffccd5] flex items-center justify-center text-[#ff758c] text-[9px] font-bold mb-4 transition-all duration-[4000ms] ease-in-out">
-                            TARIK NAPAS...
-                        </div>
-                        <p class="text-xs text-neutral-500 mt-2 leading-relaxed">
-                            Penat dengan urusan pekerjaan? Tarik napas perlahan mengikuti putaran lingkaran di atas selama 30 detik untuk meredakan seluruh stresmu, ganteng. 🤍
-                        </p>
-                    </div>
-                `
-            },
-            13: {
-                title: "🗺️ 13. Peta Rencana Masa Depan Kita",
-                body: `
-                    <div class="text-left bg-[#fff5f6] p-4 rounded-xl border border-[#ffccd5] space-y-3">
-                        <div class="flex items-center gap-3">
-                            <input type="checkbox" checked disabled class="accent-[#ff4d6d] w-4 h-4">
-                            <span class="text-[11px] text-neutral-600 font-semibold">Memasuki usia ke-20 Acum (Berhasil! 🎂)</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <input type="checkbox" class="accent-[#ff4d6d] w-4 h-4" onclick="playSoftPop()">
-                            <span class="text-[11px] text-neutral-600 font-semibold">Saling mengawal gerbang kesuksesan karir & pekerjaan</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <input type="checkbox" class="accent-[#ff4d6d] w-4 h-4" onclick="playSoftPop()">
-                            <span class="text-[11px] text-neutral-600 font-semibold">Membangun rumah hangat kita sendiri di masa depan</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <input type="checkbox" class="accent-[#ff4d6d] w-4 h-4" onclick="playSoftPop()">
-                            <span class="text-[11px] text-neutral-600 font-semibold">Menua bersama dalam lingkaran kasih sayang abadi</span>
-                        </div>
-                    </div>
-                `
-            },
-            14: {
-                title: "🍫 14. Cokelat Penghilang Penat",
-                body: `
-                    <div class="text-center font-sans">
-                        <span class="text-4xl">🍫</span>
-                        <h4 class="font-bold text-neutral-700 mt-2">Sweet Cocoa Booster</h4>
-                        <p class="text-xs text-neutral-500 mt-2 leading-relaxed text-justify px-1">
-                            Cokelat manis dengan taburan kebahagiaan ini dikirim khusus oleh Acim untuk menyeimbangkan suasana hati kamu setelah lelah menghadapi pekerjaan harian. Jangan lupa tersenyum ya, sayang! 🥰
-                        </p>
-                    </div>
-                `
-            },
-            15: {
-                title: "🎂 15. Tiup Lilin Ulang Tahun",
-                body: `
-                    <div class="text-center flex flex-col items-center">
-                        <div class="text-5xl animate-bounce" id="cakeObj">🎂🔥</div>
-                        <p class="text-xs text-neutral-500 mt-3 mb-4">Ketuk lilin di atas kue ulang tahunmu untuk meniupnya secara virtual bersama Acim!</p>
-                        <button onclick="blowCandleFlame()" class="w-full bg-[#ff758c] text-white py-2 rounded-xl font-bold text-xs active:scale-95 transition-all">TIUP LILIN SEKARANG! 💨</button>
-                    </div>
-                `
-            },
-            16: {
-                title: "💡 16. Surat Motivasi Kerja",
-                body: `
-                    <div class="text-center">
-                        <span class="text-4xl">💡</span>
-                        <h4 class="font-bold text-neutral-700 mt-2 mb-2">Sebuah Catatan Pengingat</h4>
-                        <p class="text-xs text-neutral-500 leading-relaxed italic text-justify px-1">
-                            "Karir yang besar dan masa depan yang mapan tidak didapat dalam semalam, melainkan dari kedisiplinan dan kerja kerasmu di setiap hari. Acim selalu ada di belakangmu, mendukung dan bangga atas segala pencapaianmu."
-                        </p>
-                    </div>
-                `
-            },
-            17: {
-                title: "🤙 17. Janji Kelingking Kita",
-                body: `
-                    <div class="text-left bg-[#fff5f6] p-4 rounded-xl border border-[#ffccd5]">
-                        <p class="text-xs text-neutral-500 leading-relaxed mb-3 text-justify">
-                            Tautkan tanda tangan kelingkingmu di kanvas sebagai simbol janji suci untuk selalu menjaga kesehatan di sela-sela waktu kerjamu:
-                        </p>
-                        <div class="mb-3">
-                            <canvas id="promiseSignCanvas" class="w-full h-20 bg-white border border-[#ffccd5] rounded-xl cursor-crosshair"></canvas>
-                        </div>
-                        <div class="flex gap-2">
-                            <button onclick="resetContractSignCanvas()" class="bg-[#fff0f3] text-[#ff758c] py-2 px-3 rounded-xl text-[10px] font-bold border border-[#ffccd5]">Ulangi</button>
-                            <button onclick="submitContractSignCanvas()" class="flex-1 bg-[#ff758c] text-white py-2 rounded-xl text-[10px] font-bold active:scale-95 transition-all">SEAL PROMISE 🤙</button>
-                        </div>
-                    </div>
-                `
-            },
-            18: {
-                title: "🔋 18. Pengisi Energi Cinta",
-                body: `
-                    <div class="text-center">
-                        <span class="text-4xl">🔋🌸</span>
-                        <p class="text-xs text-neutral-500 mt-2">Daya energi tubuhmu terdeteksi sangat rendah setelah seharian sibuk bekerja mencari nafkah:</p>
-                        <div class="bg-[#e2e8f0] h-4 rounded-full overflow-hidden my-3 border border-neutral-100 relative">
-                            <div id="loveBatteryLevelFill" class="bg-[#ff758c] h-full transition-all duration-1000" style="width: 15%"></div>
-                            <span id="loveBatteryLevelText" class="absolute inset-0 flex items-center justify-center text-[8px] font-bold text-white">15% CAUTION STATE</span>
-                        </div>
-                        <button onclick="chargeLoveBatteryPercent()" class="w-full bg-[#ff758c] text-white py-2 rounded-xl text-xs font-bold active:scale-95 transition-all">ISI ULANG ENERGI CINTA ⚡</button>
-                    </div>
-                `
-            },
-            19: {
-                title: "💫 19. Hujan Kelopak Bunga",
-                body: `
-                    <div class="text-center">
-                        <span class="text-4xl">🌸</span>
-                        <p class="text-xs text-neutral-500 mt-2">Aktifkan efek kelopak bunga ceri melayang yang estetik untuk menghiasi layar HP-mu sepanjang hari:</p>
-                        <button onclick="triggerFloralBlossomRain()" class="w-full bg-[#ff758c] text-white py-2.5 rounded-xl font-bold text-xs mt-3 active:scale-95 transition-all">AKTIFKAN SEKARANG 🌸</button>
-                    </div>
-                `
-            },
-            20: {
-                title: "🔒 20. Pesan Rahasia Terkunci",
-                body: `
-                    <div class="text-center">
-                        <span class="text-4xl">🗝️🌸</span>
-                        <p class="text-xs text-neutral-500 mt-2 mb-4">Terima kasih banyak sudah membuka seluruh 20 amplop jurnalku, sayang. Buka kunci arsip terakhir:</p>
-                        <button onclick="decryptSweetCoreLetter()" class="w-full bg-[#ff758c] text-white py-3 rounded-xl text-xs font-bold shadow-md active:scale-95 transition-all">BUKA SURAT RAHASIA ACIM 🔓</button>
-                    </div>
-                `
-            }
-        };
-
-        function openLoveEnvelope(num) {
-            playTwinkleChime();
-            const mod = loveJournalDatabase[num];
-            document.getElementById('popTitle').innerHTML = mod.title;
-            document.getElementById('popBody').innerHTML = mod.body;
-            document.getElementById('journalModal').style.display = 'flex';
-            
-            if(num === 12) setTimeout(runBreatheMetronomeSystem, 150);
-            if(num === 17) setTimeout(initSignatureContractCanvas, 150);
-        }
-
-        function closeLoveEnvelope() {
-            playSoftPop();
-            document.getElementById('journalModal').style.display = 'none';
-        }
-
-        // Feature 2 logic
-        const wishArray = [
-            "Semoga Acum diberikan kesehatan paripurna dan dijauhkan dari segala penyakit! 💪❤️",
-            "Semoga karir kerjaanmu dibuka seluas-luasnya dan rezeki mengalir tiada henti! 💸✨",
-            "Semoga kita selalu diberi kekuatan untuk saling mendukung di segala masa depan! 🤍"
-        ];
-        function popWishBalloon(id) {
-            playSoftPop();
-            document.getElementById('bal' + id).style.visibility = 'hidden';
-            document.getElementById('wishOutputText').innerText = wishArray[Math.floor(Math.random() * wishArray.length)];
-            playTwinkleChime();
-        }
-
-        // Feature 3 logic
-        const couponsDb = [
-            "🎟️ KUPON KELILING BANDUNG NYARI MAKAN (Sampai ketemu yang pas!)",
-            "🎟️ KUPON PIJET RELAKSASI PUNGGUNG SELESAI BEKERJA",
-            "🎟️ KUPON PELUKAN INSTAN PENGUSIR STRES (15 Menit Tanpa Dilepas)",
-            "🎟️ KUPON ACIM TURUTI SEMUA KATA ACUM (24 Jam Penuh!)"
-        ];
-        function generateLoveVoucher() {
-            playSoftPop();
-            const won = couponsDb[Math.floor(Math.random() * couponsDb.length)];
-            document.getElementById('voucherOutputBox').innerHTML = `
-                <div>
-                    \${won}<br>
-                    <span class="text-[8px] text-neutral-400 font-semibold mt-1 block">*Screenshot kupon untuk kamu tunjukkan ke Acim!</span>
-                </div>`;
-            playTwinkleChime();
-        }
-
-        // Feature 4 logic
-        let catMoodVal = 45;
-        function feedCatPet(val, emo) {
-            playSoftPop();
-            catMoodVal = Math.min(100, catMoodVal + val);
-            document.getElementById('moodProgressBar').style.width = catMoodVal + '%';
-            const cat = document.getElementById('catEmotion');
-            cat.innerText = emo;
-            if (catMoodVal >= 90) {
-                cat.innerText = "😽💖😻";
-                playTwinkleChime();
-            }
-        }
-
-        // Feature 5 logic
-        let normalBeatsCount = 0;
-        function pulsateHeartFaster() {
-            playSoftPop();
-            normalBeatsCount++;
-            const hrt = document.getElementById('pulsingHeart');
-            hrt.style.transform = 'scale(1.35)';
-            setTimeout(() => hrt.style.transform = 'scale(1.0)', 150);
-            
-            const beatsText = document.getElementById('heartBeatsText');
-            if (normalBeatsCount > 5) {
-                beatsText.innerText = "DETAK JANTUNG BUCIN: 9999%!";
-                playTwinkleChime();
-            } else {
-                beatsText.innerText = `DETAK CINTA: \${normalBeatsCount * 20} BPM`;
-            }
-        }
-
-        // Feature 6 logic (Bandung, Jogja, Jadian 12 Okt 2024)
-        const polaroidDb = [
-            { emoji: "🕌", label: '"AWAL MULA DI JOGJA"', cap: "Yogyakarta selalu punya tempat istimewa di hati kita, karena di sanalah awal mula kita berdua mulai dekat satu sama lain. ✨" },
-            { emoji: "🏍️", label: '"KELILING BANDUNG"', cap: "Kita sering keliling Bandung naik motor nyari makanan kesana-kemari tapi ujung-ujungnya bingung gak ada yang dipengen (karena kita emang bukan anak kafe!). 🛵💨" },
-            { emoji: "💖", label: '"JADIAN RESMI"', cap: "Momen paling berharga saat kita resmi jadian berkomitmen saling mencintai pada tanggal 12 Oktober 2024. 👩‍❤️‍👨" }
-        ];
-        function slideNextPolaroid() {
-            playSoftPop();
-            currentSlide = (currentSlide + 1) % polaroidDb.length;
-            document.getElementById('polaroidEmoji').innerText = polaroidDb[currentSlide].emoji;
-            document.getElementById('polaroidLabel').innerText = polaroidDb[currentSlide].label;
-            document.getElementById('polaroidCaption').innerText = polaroidDb[currentSlide].cap;
-        }
-
-        // Feature 8 logic
-        function scanBucinPercent() {
-            playSoftPop();
-            const res = document.getElementById('scanOutputResult');
-            res.innerText = "MEMINDAI KESETIAAN...";
-            setTimeout(() => {
-                res.innerHTML = "<span class='text-[#ff4d6d] font-bold'>TERDETEKSI: 10000% BUCIN PARAH KE ACIM & SELALU SALING MENCINTAI!</span>";
-                playTwinkleChime();
-            }, 1200);
-        }
-
-        // Feature 10 logic
-        let waterDrankGelas = 0;
-        function drinkWaterFromTumbler() {
-            playSoftPop();
-            if (waterDrankGelas < 8) {
-                waterDrankGelas++;
-                document.getElementById('waterTextCount').innerText = `\${waterDrankGelas} / 8 GELAS HIDRASI`;
-                const prc = (waterDrankGelas / 8) * 100;
-                document.getElementById('waterPercentFill').style.height = `\${prc}%`;
-                
-                if(waterDrankGelas === 8) {
-                    playTwinkleChime();
-                }
-            }
-        }
-
-        // Feature 12 logic
-        let breatheTimer = null;
-        function runBreatheMetronomeSystem() {
-            const visual = document.getElementById('breatheVisualBall');
-            if(!visual) return;
-            
-            let growState = 0;
-            clearInterval(breatheTimer);
-            
-            function step() {
-                if(!document.getElementById('breatheVisualBall')) {
-                    clearInterval(breatheTimer);
-                    return;
-                }
-                if (growState === 0) {
-                    visual.style.transform = 'scale(1.3)';
-                    visual.innerText = "TARIK NAPAS...";
-                    visual.className = visual.className.replace('border-[#ffccd5]', 'border-[#ff4d6d] shadow-[0_0_15px_rgba(255,117,140,0.5)]');
-                    growState = 1;
-                } else {
-                    visual.style.transform = 'scale(1.0)';
-                    visual.innerText = "HEMBUSKAN...";
-                    visual.className = visual.className.replace('border-[#ff4d6d] shadow-[0_0_15px_rgba(255,117,140,0.5)]', 'border-[#ffccd5]');
-                    growState = 0;
-                }
-            }
-            step();
-            breatheTimer = setInterval(step, 4000);
-        }
-
-        // Feature 15 logic
-        function blowCandleFlame() {
-            playSoftPop();
-            document.getElementById('cakeObj').innerText = "🎂🎂🌸✨";
-            playTwinkleChime();
-        }
-
-        // Feature 17 logic
-        let contractCanvas = null;
-        let contractCtx = null;
-        let isWritingSign = false;
-
-        function initSignatureContractCanvas() {
-            contractCanvas = document.getElementById('promiseSignCanvas');
-            if(!contractCanvas) return;
-            contractCtx = contractCanvas.getContext('2d');
-            
-            const r = contractCanvas.getBoundingClientRect();
-            contractCanvas.width = r.width;
-            contractCanvas.height = r.height;
-            
-            contractCtx.strokeStyle = '#ff758c';
-            contractCtx.lineWidth = 3;
-            contractCtx.lineCap = 'round';
-
-            function getCoord(e) {
-                const box = contractCanvas.getBoundingClientRect();
-                if (e.touches && e.touches.length > 0) {
-                    return {
-                        x: e.touches[0].clientX - box.left,
-                        y: e.touches[0].clientY - box.top
-                    };
-                }
-                return {
-                    x: e.clientX - box.left,
-                    y: e.clientY - box.top
-                };
-            }
-
-            contractCanvas.addEventListener('mousedown', (e) => {
-                isWritingSign = true;
-                const p = getCoord(e);
-                contractCtx.beginPath();
-                contractCtx.moveTo(p.x, p.y);
-            });
-
-            contractCanvas.addEventListener('mousemove', (e) => {
-                if (!isWritingSign) return;
-                e.preventDefault();
-                const p = getCoord(e);
-                contractCtx.lineTo(p.x, p.y);
-                contractCtx.stroke();
-            });
-
-            contractCanvas.addEventListener('mouseup', () => { isWritingSign = false; });
-            
-            contractCanvas.addEventListener('touchstart', (e) => {
-                isWritingSign = true;
-                const p = getCoord(e);
-                contractCtx.beginPath();
-                contractCtx.moveTo(p.x, p.y);
-            });
-
-            contractCanvas.addEventListener('touchmove', (e) => {
-                if (!isWritingSign) return;
-                e.preventDefault();
-                const p = getCoord(e);
-                contractCtx.lineTo(p.x, p.y);
-                contractCtx.stroke();
-            });
-
-            contractCanvas.addEventListener('touchend', () => { isWritingSign = false; });
-        }
-
-        function resetContractSignCanvas() {
-            playSoftPop();
-            if(contractCtx && contractCanvas) {
-                contractCtx.clearRect(0, 0, contractCanvas.width, contractCanvas.height);
-            }
-        }
-
-        function submitContractSignCanvas() {
-            playSoftPop();
-            playTwinkleChime();
-            alert("Janji suci resmi ditautkan ke bintang paling tinggi! 🤙🌸");
-        }
-
-        // Feature 18 logic
-        function chargeLoveBatteryPercent() {
-            playSoftPop();
-            document.getElementById('loveBatteryLevelFill').style.width = '100%';
-            document.getElementById('loveBatteryLevelText').innerText = '100% ENERGY BACK TO HEALTH';
-            playTwinkleChime();
-        }
-
-        // Feature 19 logic
-        function triggerFloralBlossomRain() {
-            playSoftPop();
-            playTwinkleChime();
-            for (let i = 0; i < 20; i++) {
+                playTone(150, 'sawtooth', 0.3);
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach(d => d.classList.add('error'));
                 setTimeout(() => {
-                    const petal = document.createElement('div');
-                    petal.className = 'petal';
-                    petal.innerText = ['🌸', '💖', '✨', '🤍'][Math.floor(Math.random() * 4)];
-                    petal.style.left = Math.random() * 100 + 'vw';
-                    petal.style.fontSize = (Math.random() * 12 + 16) + 'px';
-                    petal.style.animationDuration = (Math.random() * 2 + 3.5) + 's';
-                    document.body.appendChild(petal);
-                    setTimeout(() => petal.remove(), 5500);
-                }, i * 150);
+                    dots.forEach(d => d.classList.remove('error'));
+                    inputPin = "";
+                    updateDots();
+                }, 500);
             }
         }
 
-        // Feature 20 logic
-        function decryptSweetCoreLetter() {
-            playSoftPop();
-            document.getElementById('popBody').innerHTML = `
-                <div class="text-justify leading-relaxed space-y-4 font-sans text-xs">
-                    <p class="text-center text-[#ff4d6d] font-bold text-sm">💖 Kapsul Waktu: Surat Cinta Acim 💖</p>
-                    <p class="text-neutral-600">
-                        Untuk Acum kesayanganku, nahkoda hidupku yang paling sabar dan hebat bekerja keras. Terima kasih banyak ya sayang udah mau nemenin aku sejak awal kita jadian resmi pada 12 Oktober 2024. 😔🤍
-                    </p>
-                    <p class="text-neutral-600">
-                        Inget waktu kita pertama kali deket pas di Yogyakarta? Atau waktu kita boncengan motoran malam-malam keliling Bandung, bolak-balik nyari makanan tapi ujung-ujungnya bingung gak ada yang pas di perut (karena emang kita bukan tim kafe hihi). Semua momen sederhana itu selalu jadi kenangan yang berharga banget buat aku.
-                    </p>
-                    <p class="text-neutral-600">
-                        Aku beneran bersyukur dan bangga punya kamu yang selalu bertanggung jawab dan bekerja keras. Semoga di usiamu yang ke-20 ini, kesehatanmu selalu terjaga, karir kerjamu dilancarkan, dan kita terus saling mencintai selamanya. Selamat ulang tahun, sayangku! 🎂🌸
-                    </p>
-                    <p class="text-right text-[#ff758c] font-bold font-handwritten text-lg">— Pacarmu, Acim 💖</p>
-                </div>
-            `;
-            playTwinkleChime();
+        /* YOUTUBE BACKGROUND MUSIC */
+        let ytPlayer;
+        const tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api";
+        document.getElementsByTagName('script')[0].parentNode.insertBefore(tag, document.getElementsByTagName('script')[0]);
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('ytPlayerSpace', {
+                height: '0', width: '0', videoId: 'Hr0AAqHLLSg',
+                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'Hr0AAqHLLSg' }
+            });
         }
 
-        // POP FLOWER PETAL BACKGROUND ATMOSPHERE ON LOAD
+        /* 20 CARDS DATA */
+        const cards = [
+            { icon: "💌", title: "1. Surat Pembuka Nyaman", body: "Selamat ulang tahun yang ke-20, Acum sayang! 🎂<br><br>Di umur kepala dua ini, semoga makin dewasa, sehat selalu, dan lancar rezekinya. Makasih udah selalu sabar ngadepin aku selama ini. You are my safe place! 💕" },
+            { icon: "🔮", title: "2. Pengacak Doa Manis", body: "<p id='dBox'>Klik tombol di bawah buat kocok doa hari ini!</p><button class='btn-main' onclick='acakDoa()'>Kocok Doa ✨</button>" },
+            { icon: "🎟️", title: "3. Vending Kupon Hadiah", body: "<p id='kBox'>Ambil tiket hadiah nyata khusus dari aku!</p><button class='btn-main' onclick='ambilKupon()'>Klaim Tiket 🪙</button>" },
+            { icon: "❤️", title: "4. Tamagotchi Hati Acim", body: "<p>Rawat mood aku biar ga gampang ngambek hari ini:</p><div style='background:rgba(255,255,255,0.1); height:12px; border-radius:6px; margin:15px 0; overflow:hidden;'><div id='mBar' style='width:50%; height:100%; background:#ff4d6d; transition:0.3s;'></div></div><button class='btn-main' onclick='tambahMood()'>Kirim Pelukan (+20%) 🤗</button>" },
+            { icon: "🎮", title: "5. Game Tangkap Kue Ultah", body: "<p>Tangkap 5 kue jatuh! Skor: <span id='skor' style='color:#ff758c; font-weight:bold;'>0</span></p><div id='gameCanvas'></div>" },
+            { icon: "📸", title: "6. Digital Memory Album", body: "🌌 <strong>Momen Favorit:</strong> Ingat pas kita jalan bareng dan kamu ketawa denger cerita random aku? Momen simpel tapi paling bikin aku bahagia banget!" },
+            { icon: "🎵", title: "7. Pemutar Latar Musik", body: "<p>Lagu romantis sudah terintegrasi otomatis.</p><div class='music-bar'><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div></div><button class='btn-main' style='background:#2ec4b6;' onclick='ytPlayer.playVideo()'>▶ Play</button><button class='btn-main' style='background:#e71d36; margin-top:5px;' onclick='ytPlayer.pauseVideo()'>⏸ Pause</button>" },
+            { icon: "📷", title: "8. Detektor Salting Face Scan", body: "<div class='cam-frame'><div class='cam-scanline'></div><p id='camTxt' style='font-size:0.8rem; font-weight:bold; color:#ffb3c1;'>Menguji Tingkat Salting...</p></div><button class='btn-main' onclick='scanSalting()'>Pindai Wajah Acum ⚡</button>" },
+            { icon: "☝️", title: "9. Pindai Sidik Jari Bucin", body: "<p>Tahan jempol kamu di bawah untuk verifikasi:</p><div class='finger-box' id='fBox' onmousedown='startFinger()' onmouseup='endFinger()' ontouchstart='startFinger()' ontouchend='endFinger()'>👍</div><p id='fTxt' style='font-size:0.75rem; color:#ffb3c1;'>Tekan & Tahan 2 Detik</p>" },
+            { icon: "✍️", title: "10. Catatan Wishlist Acum", body: "<textarea style='width:100%; height:70px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.2); border-radius:10px; color:white; padding:8px; font-size:0.8rem; resize:none;' placeholder='Tulis keinginan kamu di umur 20...'></textarea><button class='btn-main' onclick='alert(\"Catatan tersimpan!\")'>Simpan Ke Sistem</button>" },
+            { icon: "🍫", title: "11. Vending Cokelat Manis", body: "🍫 *KLIK!* Satu batang cokelat digital termanis berhasil dikirim ke layar HP Acum ter-ganteng hari ini!" },
+            { icon: "🩹", title: "12. Penawar Instan Ngambek", body: "Kapsul Penenang Instan! 💊<br>Kalau nanti aku tiba-tiba ngambek atau rewel, kamu berhak nunjukkin fitur nomor 12 ini buat bikin aku jinak lagi. 🤪" },
+            { icon: "🗺️", title: "13. Rencana Target Berdua", body: "<div style='text-align:left; font-size:0.85rem; line-height:2;'><input type='checkbox' checked disabled> Lulus & Sukses Karir<br><input type='checkbox' checked disabled> Culinary Date Berdua<br><input type='checkbox' checked disabled> Menua Bersama Selamanya</div>" },
+            { icon: "🔔", title: "14. Pengingat Sehat Sayang", body: "Jangan terlalu sibuk main game/kerja ya. Inget minum air putih hari ini, aku ga mau kamu sampai sakit! 🥤" },
+            { icon: "🥳", title: "15. Efek Pesta Konfeti", body: "🎉 KABOOM! Selamat Ulang Tahun yang paling meriah untuk cowok kesayangan aku! 🎉" },
+            { icon: "💡", title: "16. Pesan Motivasi Umur 20", body: "\"Kamu jauh lebih hebat dan kuat dari apa yang kamu pikirkan. Selamat memasuki usia 20 tahun dengan percaya diri!\" 💪✨" },
+            { icon: "🤝", title: "17. Kontrak Janji Setia", body: "Dengan membuka fitur ini, Acum berjanji akan selalu sayang sama Acim, bersabar menghadapi segala drama kecil, dan tidak berpaling. ❤️" },
+            { icon: "🔋", title: "18. Pengisi Energi Jiwa", body: "🔋 *BZZZT...* Daya energi jiwa kamu sedang diisi ulang 100% pakai pasokan cinta penuh dari aku!" },
+            { icon: "✨", title: "19. Efek Hujan Balon", body: "🎈 Atmosfer kebahagiaan pesta ulang tahunmu diciptakan khusus biar HP kamu terasa sangat meriah!" },
+            { icon: "🔒", title: "20. Surat Terkunci Kapsul Waktu", body: "🔒 <strong>Pesan Rahasia Terakhir:</strong><br><br>Makasih udah buka semua fiturnya sampai nomor 20! Kamu beneran cowok terbaik yang pernah ada di hidup aku. Jangan pernah bosan sama aku ya. Happy 20th Birthday, Acum sayang! 🤍✨" }
+        ];
+
+        /* GENERATE GRID CARDS */
+        const gridEl = document.getElementById('cardGrid');
+        cards.forEach((c, i) => {
+            const card = document.createElement('div');
+            card.className = 'card-item';
+            card.onclick = () => openCard(i);
+            card.innerHTML = `<span class="icon">${c.icon}</span><span class="num-badge">${i+1}</span>`;
+            gridEl.appendChild(card);
+        });
+
+        function openCard(idx) {
+            playTone(800, 'sine', 0.1);
+            document.getElementById('mTitle').innerText = cards[idx].title;
+            document.getElementById('mBody').innerHTML = cards[idx].body;
+            document.getElementById('modal').style.display = 'flex';
+            if(idx === 4) startMiniGame();
+        }
+
+        function closeModal() {
+            playTone(400, 'sine', 0.08);
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        /* CARD ACTION FUNCTIONS */
+        function acakDoa() {
+            playTone(900, 'sine', 0.1);
+            const list = ["Semoga makin lancar rezekinya! 💸", "Semoga sehat terus badan & jiwanya! 💪", "Semoga makin sayang sama aku! 🥰"];
+            document.getElementById('dBox').innerText = list[Math.floor(Math.random()*list.length)];
+        }
+
+        function ambilKupon() {
+            playTone(1000, 'triangle', 0.15);
+            const listK = ["🎟️ Kupon Traktir Es Krim Jumbo", "🎟️ Kupon Peluk 10 Menit", "🎟️ Kupon Bebas Pilih Tempat Makan"];
+            document.getElementById('kBox').innerHTML = `<strong>Tiket Keluar:</strong><br>${listK[Math.floor(Math.random()*listK.length)]} (Screenshot!)`;
+        }
+
+        let mVal = 50;
+        function tambahMood() {
+            playTone(1100, 'sine', 0.1);
+            mVal = Math.min(100, mVal + 20);
+            document.getElementById('mBar').style.width = mVal + '%';
+        }
+
+        let gScore = 0;
+        function startMiniGame() {
+            gScore = 0;
+            const area = document.getElementById('gameCanvas');
+            area.innerHTML = '';
+            const iv = setInterval(() => {
+                if(document.getElementById('modal').style.display === 'none' || gScore >= 5) { clearInterval(iv); return; }
+                const item = document.createElement('div');
+                item.className = 'falling-item'; item.innerText = '🍰';
+                item.style.left = Math.random() * (area.clientWidth - 30) + 'px'; item.style.top = '0px';
+                item.onclick = () => {
+                    playTone(1200, 'sine', 0.08);
+                    gScore++; document.getElementById('skor').innerText = gScore; item.remove();
+                    if(gScore === 5) alert("Hebat! Target 5 Kue Terkumpul! 🏆");
+                };
+                area.appendChild(item);
+                setTimeout(() => item.remove(), 1700);
+            }, 800);
+        }
+
+        function scanSalting() {
+            playTone(700, 'sawtooth', 0.2);
+            document.getElementById('camTxt').innerText = "Memindai Rona Pipi...";
+            setTimeout(() => {
+                playTone(1400, 'sine', 0.3);
+                document.getElementById('camTxt').innerText = "RESULT: 1000% SALTING MAMPUS! 😳❤️";
+            }, 1500);
+        }
+
+        let fTimer;
+        function startFinger() {
+            playTone(500, 'sine', 0.1);
+            document.getElementById('fBox').classList.add('scanning');
+            document.getElementById('fTxt').innerText = "Memindai...";
+            fTimer = setTimeout(() => {
+                playTone(1500, 'sine', 0.3);
+                document.getElementById('fTxt').innerText = "VERIFIED: 9999% BUCIN PARAH! 🥰";
+            }, 1800);
+        }
+        function endFinger() {
+            clearTimeout(fTimer);
+            document.getElementById('fBox').classList.remove('scanning');
+        }
+
+        /* FLOATING BACKGROUND PARTICLES */
         setInterval(() => {
             const p = document.createElement('div');
-            p.className = 'petal';
-            p.innerText = ['🌸', '💖', '✨'][Math.floor(Math.random() * 3)];
+            p.innerText = ['🎈','🎉','💖','✨'][Math.floor(Math.random()*4)];
+            p.style.position = 'fixed';
+            p.style.bottom = '-20px';
             p.style.left = Math.random() * 100 + 'vw';
-            p.style.fontSize = (Math.random() * 10 + 12) + 'px';
-            p.style.animationDuration = (Math.random() * 2 + 4) + 's';
+            p.style.fontSize = '20px';
+            p.style.pointerEvents = 'none';
+            p.style.zIndex = '0';
+            p.style.transition = 'transform 4s linear, opacity 4s';
             document.body.appendChild(p);
-            setTimeout(() => p.remove(), 5500);
+            setTimeout(() => { p.style.transform = `translateY(-105vh) rotate(${Math.random()*360}deg)`; p.style.opacity = '0'; }, 50);
+            setTimeout(() => p.remove(), 4000);
         }, 500);
     </script>
 </body>
 </html>
-
