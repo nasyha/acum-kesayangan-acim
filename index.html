@@ -3,491 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Acum 20th Birthday Special OS</title>
+    <title>Acum 20th Birthday - Cyber Love Arcade</title>
     <style>
         :root {
-            --accent: #ff2a5f;
-            --glass-bg: rgba(255, 255, 255, 0.12);
-            --glass-border: rgba(255, 255, 255, 0.25);
-            --glass-card: rgba(30, 15, 45, 0.45);
+            --primary: #ff0055;
+            --secondary: #7b2cbf;
+            --accent: #00f5d4;
+            --card-bg: rgba(20, 10, 35, 0.65);
+            --border: rgba(255, 255, 255, 0.18);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
 
         body {
-            background: #0a0410;
-            min-height: 100vh;
-            color: white;
+            background: #08030f;
+            color: #ffffff;
             display: flex;
             justify-content: center;
-            align-items: center;
+            min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* AMBIENT BACKGROUND */
-        .ambient-bg {
+        /* AMBIENT GLOW BACKGROUND */
+        .glow-bg {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 0;
-            pointer-events: none;
+            pointer-events: none; z-index: 0;
         }
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(90px);
-            opacity: 0.5;
-            animation: float 12s infinite alternate ease-in-out;
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.45;
+            animation: orbFloat 10s infinite alternate ease-in-out;
         }
-        .blob-1 { width: 320px; height: 320px; background: #ff2a5f; top: -60px; left: -60px; }
-        .blob-2 { width: 380px; height: 380px; background: #7209b7; bottom: -100px; right: -60px; animation-delay: -6s; }
+        .orb-1 { width: 300px; height: 300px; background: var(--primary); top: -50px; left: -50px; }
+        .orb-2 { width: 350px; height: 350px; background: var(--secondary); bottom: -80px; right: -50px; animation-delay: -5s; }
 
-        @keyframes float {
+        @keyframes orbFloat {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(50px, 60px) scale(1.1); }
+            100% { transform: translate(40px, 50px) scale(1.15); }
         }
 
         /* CONTAINER */
-        .app-container {
-            width: 100%;
-            max-width: 430px;
+        .app {
+            width: 100%; max-width: 440px;
             min-height: 100vh;
-            background: rgba(15, 8, 25, 0.5);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-left: 1px solid var(--glass-border);
-            border-right: 1px solid var(--glass-border);
-            position: relative;
-            z-index: 1;
-            padding: 20px 16px 50px 16px;
+            background: rgba(12, 5, 20, 0.7);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border); border-right: 1px solid var(--border);
+            padding: 20px 16px 60px 16px;
+            position: relative; z-index: 1;
         }
 
         /* LOCK SCREEN */
         #lockScreen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 4, 16, 0.9);
-            backdrop-filter: blur(35px);
-            -webkit-backdrop-filter: blur(35px);
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.6s;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(8, 3, 15, 0.95);
+            backdrop-filter: blur(30px); z-index: 999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: all 0.5s ease-in-out;
         }
-        .lock-time { font-size: 3.5rem; font-weight: 200; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
-        .lock-date { font-size: 0.9rem; color: #ffb3c1; margin-bottom: 25px; }
-        .lock-title { font-size: 0.85rem; color: rgba(255,255,255,0.8); margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase; }
+        .clock { font-size: 3.8rem; font-weight: 200; text-shadow: 0 0 20px var(--primary); }
+        .lock-subtitle { font-size: 0.85rem; color: var(--accent); margin-bottom: 30px; letter-spacing: 2px; text-transform: uppercase; }
+        .pin-container { display: flex; gap: 14px; margin-bottom: 35px; }
+        .pin-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); transition: 0.2s; }
+        .pin-dot.fill { background: var(--primary); border-color: var(--primary); box-shadow: 0 0 12px var(--primary); }
+
+        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 260px; }
+        .btn-key {
+            aspect-ratio: 1; border-radius: 50%; background: rgba(255,255,255,0.08);
+            border: 1px solid var(--border); color: white; font-size: 1.3rem; font-weight: 600;
+            display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.15s;
+        }
+        .btn-key:active { background: var(--primary); transform: scale(0.9); }
+
+        /* HEADER */
+        .profile-card {
+            background: linear-gradient(135deg, rgba(255, 0, 85, 0.2), rgba(123, 44, 191, 0.2));
+            border: 1px solid var(--border); border-radius: 24px; padding: 18px;
+            display: flex; align-items: center; gap: 15px; margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .avatar {
+            width: 60px; height: 60px; border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex; justify-content: center; align-items: center; font-size: 2rem;
+            box-shadow: 0 0 15px rgba(255,0,85,0.4);
+        }
+        .profile-info h1 { font-size: 1.15rem; font-weight: 800; }
+        .profile-info p { font-size: 0.75rem; color: rgba(255,255,255,0.7); margin-top: 3px; }
+
+        /* HERO SECTION (SPESIAL) */
+        .hero-banner {
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 24px;
+            padding: 20px; margin-bottom: 20px; position: relative; overflow: hidden;
+        }
+        .hero-title { font-size: 1rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .cam-box {
+            width: 100%; height: 160px; background: #000; border-radius: 16px; margin: 12px 0;
+            position: relative; overflow: hidden; border: 2px solid var(--primary);
+        }
+        .cam-box img { width: 100%; height: 100%; object-fit: cover; }
+        .scan-bar { position: absolute; width: 100%; height: 4px; background: var(--accent); top: 0; box-shadow: 0 0 10px var(--accent); animation: scan 2s infinite linear; }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* ARCADE GRID */
+        .section-label { font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .arcade-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 25px; }
+
+        .arcade-card {
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px;
+            padding: 15px; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; justify-content: space-between;
+            min-height: 110px; position: relative; overflow: hidden;
+        }
+        .arcade-card:active { transform: scale(0.95); background: rgba(255, 0, 85, 0.2); }
+        .card-icon { font-size: 1.8rem; margin-bottom: 8px; }
+        .card-title { font-size: 0.85rem; font-weight: 700; }
+        .card-desc { font-size: 0.7rem; color: rgba(255,255,255,0.6); margin-top: 2px; }
+        .badge { position: absolute; top: 10px; right: 10px; background: var(--primary); font-size: 0.55rem; padding: 2px 6px; border-radius: 8px; font-weight: 800; }
+
+        /* MODALS */
+        .modal-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.75); backdrop-filter: blur(15px); z-index: 1000;
+            display: none; justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-content {
+            background: linear-gradient(145deg, rgba(25, 12, 38, 0.95), rgba(10, 4, 18, 0.98));
+            border: 1px solid var(--border); border-radius: 26px; padding: 22px; width: 100%; max-width: 350px;
+            text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8); animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes pop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .btn-action {
+            width: 100%; padding: 12px; border-radius: 14px; border: none;
+            background: linear-gradient(135deg, var(--primary), #ff4d6d);
+            color: white; font-weight: 700; font-size: 0.85rem; margin-top: 15px; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255,0,85,0.4); transition: 0.2s;
+        }
+        .btn-action:active { transform: scale(0.95); }
+        .btn-close { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); margin-top: 8px; box-shadow: none; }
+
+        /* CUSTOM GAME / INTERACTIVE UI IN MODAL */
+        .battery-box { width: 100%; height: 30px; border: 2px solid var(--accent); border-radius: 8px; padding: 3px; margin: 15px 0; }
+        .battery-fill { width: 10%; height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.2s; }
         
-        .pin-dots { display: flex; gap: 15px; margin-bottom: 30px; }
-        .dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.4); transition: 0.2s; }
-        .dot.active { background: #ff2a5f; border-color: #ff2a5f; box-shadow: 0 0 12px #ff2a5f; }
-        .dot.error { animation: shake 0.4s ease-in-out; border-color: #ff0055; background: #ff0055; }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-10px); }
-            40%, 80% { transform: translateX(10px); }
-        }
-
-        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; width: 100%; max-width: 270px; }
-        .key {
-            aspect-ratio: 1;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white; font-size: 1.4rem; font-weight: 500;
-            display: flex; justify-content: center; align-items: center;
-            cursor: pointer; transition: background 0.2s, transform 0.1s;
-        }
-        .key:active { background: rgba(255, 42, 95, 0.5); transform: scale(0.92); }
-        .key-hint { font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 20px; text-align: center; }
-
-        /* HEADER BANNER */
-        .header-profile {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: linear-gradient(135deg, rgba(255, 42, 95, 0.25), rgba(114, 9, 183, 0.25));
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 16px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-        .avatar-box {
-            width: 55px; height: 55px;
-            border-radius: 18px;
-            background: linear-gradient(135deg, #ff2a5f, #7209b7);
-            display: flex; justify-content: center; align-items: center;
-            font-size: 1.8rem;
-            box-shadow: 0 4px 12px rgba(255, 42, 95, 0.4);
-        }
-        .header-info h1 { font-size: 1.1rem; font-weight: 800; background: linear-gradient(to right, #ffffff, #ffb3c1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .header-info p { font-size: 0.75rem; color: rgba(255,255,255,0.7); margin-top: 2px; }
-
-        /* MASONRY GRID LAYOUT (BENTUK DUA/TIGA UKURAN) */
-        .masonry-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-        }
-
-        .widget-card {
-            background: var(--glass-card);
-            border: 1px solid var(--glass-border);
-            border-radius: 22px;
-            padding: 16px;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .widget-card:active { transform: scale(0.95); background: rgba(255, 42, 95, 0.25); }
-
-        /* DUA KOLOM LEBAR (WIDE BANNER) */
-        .span-2 { grid-column: span 2; }
-
-        .w-badge {
-            position: absolute;
-            top: 12px; right: 12px;
-            background: rgba(255, 42, 95, 0.8);
-            color: white; font-size: 0.6rem; font-weight: 800;
-            padding: 2px 7px; border-radius: 10px;
-        }
-        .w-icon { font-size: 1.8rem; margin-bottom: 8px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3)); }
-        .w-title { font-size: 0.9rem; font-weight: 700; color: #ffffff; }
-        .w-sub { font-size: 0.72rem; color: rgba(255,255,255,0.65); margin-top: 3px; }
-
-        /* MODAL POPUP */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            z-index: 1000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .modal-box {
-            background: linear-gradient(145deg, rgba(30, 15, 45, 0.95), rgba(15, 8, 25, 0.98));
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            width: 100%;
-            max-width: 360px;
-            border-radius: 28px;
-            padding: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(255,42,95,0.2);
-            text-align: center;
-            animation: modalPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        @keyframes modalPop {
-            from { transform: scale(0.7) translateY(30px); opacity: 0; }
-            to { transform: scale(1) translateY(0); opacity: 1; }
-        }
-
-        .modal-title { font-size: 1.1rem; font-weight: 700; color: #ff758c; margin-bottom: 12px; }
-        .modal-body { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.9); }
-
-        .btn-main {
-            background: linear-gradient(135deg, #ff2a5f, #ff758c);
-            color: white; border: none; padding: 12px 20px; border-radius: 14px;
-            font-weight: 700; font-size: 0.85rem; margin-top: 15px; cursor: pointer; width: 100%;
-            box-shadow: 0 5px 15px rgba(255, 42, 95, 0.4); transition: transform 0.2s;
-        }
-        .btn-main:active { transform: scale(0.95); }
-        .btn-close { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.2); margin-top: 8px; }
-
-        /* SPECIFIC WIDGET ELEMENTS */
-        .finger-box { width: 65px; height: 65px; border-radius: 50%; border: 2px dashed #ff2a5f; margin: 15px auto; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; cursor: pointer; }
-        .finger-box.scanning { border-style: solid; box-shadow: 0 0 25px #ff2a5f; animation: pulse 0.8s infinite alternate; }
-        @keyframes pulse { to { transform: scale(1.1); } }
-
-        #gameCanvas { width: 100%; height: 150px; background: rgba(0,0,0,0.3); border-radius: 14px; position: relative; overflow: hidden; margin-top: 10px; border: 1px solid rgba(255,255,255,0.1); }
-        .falling-item { position: absolute; font-size: 24px; cursor: pointer; animation: fallAnim 1.8s linear forwards; }
-        @keyframes fallAnim { to { transform: translateY(160px); } }
-
-        .music-bar { display: flex; align-items: center; justify-content: center; gap: 4px; height: 26px; margin: 10px 0; }
-        .bar-line { width: 4px; background: #ff2a5f; border-radius: 4px; animation: bounce 0.6s infinite alternate ease-in-out; }
-        .bar-line:nth-child(2) { animation-delay: 0.15s; }
-        .bar-line:nth-child(3) { animation-delay: 0.3s; }
-        .bar-line:nth-child(4) { animation-delay: 0.45s; }
-        @keyframes bounce { from { height: 6px; } to { height: 24px; } }
-
-        /* BANNER CAM CAMERA SALTING */
-        .cam-frame { width: 100%; height: 180px; background: #000; border-radius: 14px; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; border: 2px solid #ff2a5f; }
-        .cam-frame img { width: 100%; height: 100%; object-fit: cover; }
-        .cam-scanline { position: absolute; width: 100%; height: 3px; background: #ff2a5f; top: 0; animation: scan 1.5s infinite linear; box-shadow: 0 0 12px #ff2a5f; z-index: 2; }
-        .cam-overlay-text { position: absolute; bottom: 8px; left: 0; width: 100%; background: rgba(0,0,0,0.65); padding: 5px; z-index: 3; }
-        @keyframes scan { to { top: 100%; } }
+        .claw-area { height: 100px; background: rgba(0,0,0,0.4); border-radius: 12px; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; font-size: 2rem; }
     </style>
 </head>
 <body>
 
-    <div class="ambient-bg">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
+    <div class="glow-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
     </div>
 
     <!-- LOCK SCREEN -->
     <div id="lockScreen">
-        <div class="lock-time" id="lockClock">00:00</div>
-        <div class="lock-date">Selasa, 13 Oktober 2026</div>
-        <div class="lock-title">PIN Ulang Tahun Acum</div>
-        
-        <div class="pin-dots" id="pinDots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+        <div class="clock" id="clock">00:00</div>
+        <div class="lock-subtitle">Cyber Arcade • Acum 20th</div>
+        <div class="pin-container" id="pinDots">
+            <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
         </div>
-
         <div class="keypad">
-            <div class="key" onclick="pressKey('1')">1</div>
-            <div class="key" onclick="pressKey('2')">2</div>
-            <div class="key" onclick="pressKey('3')">3</div>
-            <div class="key" onclick="pressKey('4')">4</div>
-            <div class="key" onclick="pressKey('5')">5</div>
-            <div class="key" onclick="pressKey('6')">6</div>
-            <div class="key" onclick="pressKey('7')">7</div>
-            <div class="key" onclick="pressKey('8')">8</div>
-            <div class="key" onclick="pressKey('9')">9</div>
-            <div class="key" style="opacity:0; pointer-events:none;"></div>
-            <div class="key" onclick="pressKey('0')">0</div>
-            <div class="key" onclick="deleteKey()">⌫</div>
+            <div class="btn-key" onclick="press('1')">1</div><div class="btn-key" onclick="press('2')">2</div><div class="btn-key" onclick="press('3')">3</div>
+            <div class="btn-key" onclick="press('4')">4</div><div class="btn-key" onclick="press('5')">5</div><div class="btn-key" onclick="press('6')">6</div>
+            <div class="btn-key" onclick="press('7')">7</div><div class="btn-key" onclick="press('8')">8</div><div class="btn-key" onclick="press('9')">9</div>
+            <div class="btn-key" style="opacity:0;"></div><div class="btn-key" onclick="press('0')">0</div><div class="btn-key" onclick="del()">⌫</div>
         </div>
-        <div class="key-hint">PIN: 1310 / 20</div>
     </div>
 
-    <!-- MAIN APP CONTAINER -->
-    <div class="app-container">
-        <!-- HEADER PROFILE -->
-        <div class="header-profile">
-            <div class="avatar-box">👑</div>
-            <div class="header-info">
-                <h1>ACUM'S 20th BIRTHDAY</h1>
-                <p>Dashboard Widget Glass Edition ✨</p>
+    <!-- MAIN APP -->
+    <div class="app">
+        <div class="profile-card">
+            <div class="avatar">🎮</div>
+            <div class="profile-info">
+                <h1>ACUM ARCADE 20th</h1>
+                <p>Special Edition Interactive Experience</p>
             </div>
         </div>
 
-        <!-- MASONRY WIDGET GRID -->
-        <div class="masonry-grid" id="widgetGrid"></div>
-    </div>
+        <!-- HERO BANNER (SCAN SALTING) -->
+        <div class="hero-banner">
+            <div class="hero-title">📸 DETEKTOR SALTING FACE SCAN</div>
+            <div class="cam-box">
+                <img src="https://i.ibb.co.com/wNXBwTzX/image.jpg" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400';" alt="Acum">
+                <div class="scan-bar"></div>
+            </div>
+            <p id="scanRes" style="font-size:0.75rem; text-align:center; color:rgba(255,255,255,0.8);">Arahkan kamera ke wajah Acum...</p>
+            <button class="btn-action" onclick="runScan()">Mulai Pindai Wajah ⚡</button>
+        </div>
 
-    <!-- POPUP MODAL -->
-    <div class="modal-overlay" id="modal">
-        <div class="modal-box">
-            <div class="modal-title" id="mTitle">Fitur</div>
-            <div class="modal-body" id="mBody">Konten</div>
-            <button class="btn-main btn-close" onclick="closeModal()">Tutup Menu ✖</button>
+        <!-- ARCADE GRID FITUR -->
+        <div class="section-label">🕹️ Arcade Center (Mini Games & Features)</div>
+        <div class="arcade-grid" id="grid"></div>
+
+        <!-- SECRET VAULT -->
+        <div class="section-label">🔒 Secret Vault</div>
+        <div class="arcade-card" style="width:100%; margin-bottom:15px;" onclick="openModal('Surat Terkunci', 'Terima kasih udah selalu ada buat aku ya sayang. Selamat ulang tahun ke-20, semoga semua impian kamu tercapai tahun ini! ❤️✨')">
+            <div style="display:flex; align-items:center; gap:12px;">
+                <div class="card-icon" style="margin:0;">💌</div>
+                <div>
+                    <div class="card-title">Surat Rahasia Ultah 20</div>
+                    <div class="card-desc">Klik untuk membuka pesan rahasia...</div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="ytPlayerSpace" style="display:none"></div>
+    <!-- MODAL POPUP -->
+    <div class="modal-bg" id="modal">
+        <div class="modal-content">
+            <h3 id="mTitle" style="color:var(--accent); font-size:1.1rem; margin-bottom:10px;">Title</h3>
+            <div id="mBody" style="font-size:0.85rem; line-height:1.5; color:rgba(255,255,255,0.9);">Content</div>
+            <button class="btn-action btn-close" onclick="closeModal()">Tutup ✖</button>
+        </div>
+    </div>
+
+    <div id="ytSpace" style="display:none;"></div>
 
     <script>
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        function playTone(freq, type = 'sine', duration = 0.15) {
+        // SOUND GENERATOR
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        function sound(freq, dur=0.1) {
             try {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = type; osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-                osc.connect(gain); gain.connect(audioCtx.destination);
-                osc.start(); osc.stop(audioCtx.currentTime + duration);
+                const o = ctx.createOscillator(), g = ctx.createGain();
+                o.frequency.value = freq; g.gain.setValueAtTime(0.1, ctx.currentTime);
+                g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
+                o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime + dur);
             } catch(e){}
         }
 
-        function playUnlockSound() {
-            playTone(440, 'triangle', 0.1);
-            setTimeout(() => playTone(880, 'triangle', 0.2), 100);
-            setTimeout(() => playTone(1320, 'sine', 0.3), 200);
-        }
-
+        // LOCK SCREEN & CLOCK
         function updateClock() {
-            const now = new Date();
-            const h = String(now.getHours()).padStart(2, '0');
-            const m = String(now.getMinutes()).padStart(2, '0');
-            document.getElementById('lockClock').innerText = `${h}:${m}`;
+            const d = new Date();
+            document.getElementById('clock').innerText = `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
         }
         setInterval(updateClock, 1000); updateClock();
 
-        let inputPin = "";
-        const validPins = ["1310", "2026", "0020", "20"];
-
-        function pressKey(num) {
-            playTone(600, 'sine', 0.08);
-            if(inputPin.length < 4) {
-                inputPin += num; updateDots();
-                if(inputPin.length === 4 || inputPin === "20") setTimeout(checkPin, 150);
-            }
+        let pin = "";
+        function press(n) {
+            sound(600);
+            if(pin.length < 4) { pin += n; renderDots(); if(pin.length === 4 || pin === "20") checkPin(); }
         }
-
-        function deleteKey() {
-            playTone(300, 'sine', 0.08);
-            inputPin = inputPin.slice(0, -1); updateDots();
+        function del() { sound(300); pin = pin.slice(0, -1); renderDots(); }
+        function renderDots() {
+            const dots = document.querySelectorAll('.pin-dot');
+            dots.forEach((d, i) => d.classList.toggle('fill', i < pin.length));
         }
-
-        function updateDots() {
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach((dot, idx) => {
-                if(idx < inputPin.length) dot.classList.add('active');
-                else dot.classList.remove('active');
-            });
-        }
-
         function checkPin() {
-            if(validPins.includes(inputPin) || inputPin === "20") {
-                playUnlockSound();
-                document.getElementById('lockScreen').style.transform = 'translateY(-100%)';
+            if(["1310", "2026", "20", "0020"].includes(pin)) {
+                sound(900, 0.3);
                 document.getElementById('lockScreen').style.opacity = '0';
-                setTimeout(() => document.getElementById('lockScreen').style.display = 'none', 600);
+                setTimeout(() => document.getElementById('lockScreen').style.display = 'none', 500);
             } else {
-                playTone(150, 'sawtooth', 0.3);
-                const dots = document.querySelectorAll('.dot');
-                dots.forEach(d => d.classList.add('error'));
-                setTimeout(() => {
-                    dots.forEach(d => d.classList.remove('error'));
-                    inputPin = ""; updateDots();
-                }, 500);
+                sound(150, 0.4); pin = ""; renderDots();
             }
         }
 
-        let ytPlayer;
-        const tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api";
-        document.getElementsByTagName('script')[0].parentNode.insertBefore(tag, document.getElementsByTagName('script')[0]);
-        function onYouTubeIframeAPIReady() {
-            ytPlayer = new YT.Player('ytPlayerSpace', {
-                height: '0', width: '0', videoId: 'Hr0AAqHLLSg',
-                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'Hr0AAqHLLSg' }
-            });
-        }
-
-        const photoUrl = "https://i.ibb.co.com/wNXBwTzX/image.jpg";
-
-        /* DENGAN SPAN-2 UNTUK MASONRY LAYOUT DYNAMISM */
-        const widgets = [
-            { span: "span-2", icon: "💌", title: "Surat Pembuka Nyaman", sub: "Pesan spesial ultah kepala dua", body: "Selamat ulang tahun yang ke-20, Acum sayang! 🎂<br><br>Di umur kepala dua ini, semoga makin dewasa, sehat selalu, dan lancar rezekinya. Makasih udah selalu sabar ngadepin aku selama ini. You are my safe place! 💕" },
-            { span: "span-2", icon: "📷", title: "Detektor Salting Face Scan", sub: "Pemindai ekspresi Acum live", body: `<div class="cam-frame"><img src="${photoUrl}" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400';" alt="Acum"><div class="cam-scanline"></div><div class="cam-overlay-text"><p id="camTxt" style="font-size:0.8rem; font-weight:bold; color:#ffb3c1;">Menguji Tingkat Salting...</p></div></div><button class="btn-main" onclick="scanSalting()">Pindai Wajah Acum ⚡</button>` },
-            { span: "", icon: "🔮", title: "Pengacak Doa", sub: "Kocok harapan hari ini", body: "<p id='dBox'>Klik tombol di bawah buat kocok doa hari ini!</p><button class='btn-main' onclick='acakDoa()'>Kocok Doa ✨</button>" },
-            { span: "", icon: "🎟️", title: "Vending Kupon", sub: "Klaim tiket hadiah nyata", body: "<p id='kBox'>Ambil tiket hadiah nyata khusus dari aku!</p><button class='btn-main' onclick='ambilKupon()'>Klaim Tiket 🪙</button>" },
-            { span: "span-2", icon: "🎵", title: "Pemutar Latar Musik", sub: "Backsound romantis otomatis", body: "<p>Lagu romantis sudah terintegrasi otomatis.</p><div class='music-bar'><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div></div><button class='btn-main' style='background:#2ec4b6;' onclick='ytPlayer.playVideo()'>▶ Play</button><button class='btn-main' style='background:#e71d36; margin-top:5px;' onclick='ytPlayer.pauseVideo()'>⏸ Pause</button>" },
-            { span: "", icon: "❤️", title: "Tamagotchi Hati", sub: "Rawat mood Acim", body: "<p>Rawat mood aku biar ga gampang ngambek hari ini:</p><div style='background:rgba(255,255,255,0.1); height:12px; border-radius:6px; margin:15px 0; overflow:hidden;'><div id='mBar' style='width:50%; height:100%; background:#ff2a5f; transition:0.3s;'></div></div><button class='btn-main' onclick='tambahMood()'>Kirim Pelukan (+20%) 🤗</button>" },
-            { span: "", icon: "🎮", title: "Game Tangkap Kue", sub: "Mini game sederhana", body: "<p>Tangkap 5 kue jatuh! Skor: <span id='skor' style='color:#ff758c; font-weight:bold;'>0</span></p><div id='gameCanvas'></div>" },
-            { span: "", icon: "📸", title: "Album Memori", sub: "Momen manis berdua", body: "🌌 <strong>Momen Favorit:</strong> Ingat pas kita jalan bareng dan kamu ketawa denger cerita random aku? Momen simpel tapi paling bikin aku bahagia banget!" },
-            { span: "", icon: "☝️", title: "Sidik Jari Bucin", sub: "Verifikasi kadar cinta", body: "<p>Tahan jempol kamu di bawah untuk verifikasi:</p><div class='finger-box' id='fBox' onmousedown='startFinger()' onmouseup='endFinger()' ontouchstart='startFinger()' ontouchend='endFinger()'>👍</div><p id='fTxt' style='font-size:0.75rem; color:#ffb3c1;'>Tekan & Tahan 2 Detik</p>" },
-            { span: "span-2", icon: "✍️", title: "Catatan Wishlist Umur 20", sub: "Tulis impian kamu disini", body: "<textarea style='width:100%; height:70px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.2); border-radius:10px; color:white; padding:8px; font-size:0.8rem; resize:none;' placeholder='Tulis keinginan kamu di umur 20...'></textarea><button class='btn-main' onclick='alert(\"Catatan tersimpan!\")'>Simpan Ke Sistem</button>" },
-            { span: "", icon: "🍫", title: "Cokelat Manis", sub: "Hadiah manis digital", body: "🍫 *KLIK!* Satu batang cokelat digital termanis berhasil dikirim ke layar HP Acum ter-ganteng hari ini!" },
-            { span: "", icon: "🩹", title: "Penawar Ngambek", sub: "Kapsul penenang instan", body: "Kapsul Penenang Instan! 💊<br>Kalau nanti aku tiba-tiba ngambek atau rewel, kamu berhak nunjukkin fitur ini buat bikin aku jinak lagi. 🤪" },
-            { span: "", icon: "🗺️", title: "Rencana Target", sub: "Checklist masa depan", body: "<div style='text-align:left; font-size:0.85rem; line-height:2;'><input type='checkbox' checked disabled> Lulus & Sukses Karir<br><input type='checkbox' checked disabled> Culinary Date Berdua<br><input type='checkbox' checked disabled> Menua Bersama Selamanya</div>" },
-            { span: "", icon: "🔔", title: "Pengingat Sehat", sub: "Pesan perhatian", body: "Jangan terlalu sibuk main game/kerja ya. Inget minum air putih hari ini, aku ga mau kamu sampai sakit! 🥤" },
-            { span: "", icon: "🥳", title: "Efek Pesta", sub: "Konfeti meriah", body: "🎉 KABOOM! Selamat Ulang Tahun yang paling meriah untuk cowok kesayangan aku! 🎉" },
-            { span: "", icon: "💡", title: "Pesan Motivasi", sub: "Semangat kepala dua", body: "\"Kamu jauh lebih hebat dan kuat dari apa yang kamu pikirkan. Selamat memasuki usia 20 tahun dengan percaya diri!\" 💪✨" },
-            { span: "", icon: "🤝", title: "Janji Setia", sub: "Kontrak rasa sayang", body: "Dengan membuka fitur ini, Acum berjanji akan selalu sayang sama Acim, bersabar menghadapi segala drama kecil, dan tidak berpaling. ❤️" },
-            { icon: "🔋", span: "", title: "Pengisi Energi", sub: "Baterai jiwa 100%", body: "🔋 *BZZZT...* Daya energi jiwa kamu sedang diisi ulang 100% pakai pasokan cinta penuh dari aku!" },
-            { icon: "✨", span: "", title: "Hujan Balon", sub: "Atmosfer pesta", body: "🎈 Atmosfer kebahagiaan pesta ulang tahunmu diciptakan khusus biar HP kamu terasa sangat meriah!" },
-            { span: "span-2", icon: "🔒", title: "Kapsul Waktu Terkunci", sub: "Surat rahasia terakhir", body: "🔒 <strong>Pesan Rahasia Terakhir:</strong><br><br>Makasih udah buka semua fiturnya! Kamu beneran cowok terbaik yang pernah ada di hidup aku. Jangan pernah bosan sama aku ya. Happy 20th Birthday, Acum sayang! 🤍✨" }
+        // ARCADE FEATURES DATA
+        const features = [
+            { icon: "🕹️", title: "Claw Kupon", desc: "Capit tiket hadiah", action: clawGame },
+            { icon: "⚡", title: "Charge Energi", desc: "Tahan buat isi daya", action: chargeGame },
+            { icon: "🎰", title: "Gombalan Slot", desc: "Kocok kata manis", action: slotGame },
+            { icon: "🎵", title: "Musik Player", desc: "Lagu romantis background", action: musicGame },
+            { icon: "🩹", title: "Pill Anti Ngambek", desc: "Pertolongan pertama", action: () => openModal("💊 Kapsul Penenang", "Gunakan fitur ini kalau aku tiba-tiba ngambek tanpa alasan ya! Otomatis dapet jaminan maap 100%.") },
+            { icon: "🔮", title: "Prediksi Masa Depan", desc: "Ramalan hari ini", action: () => openModal("🔮 Hasil Ramalan", "Hari ini Acum bakal dapet kebahagiaan berlipat ganda & makin disayang sama aku! ✨") }
         ];
 
-        const gridEl = document.getElementById('widgetGrid');
-        widgets.forEach((w, i) => {
+        const grid = document.getElementById('grid');
+        features.forEach((f, i) => {
             const card = document.createElement('div');
-            card.className = `widget-card ${w.span}`;
-            card.onclick = () => openWidget(i);
-            card.innerHTML = `
-                <span class="w-badge">#${i+1}</span>
-                <div>
-                    <div class="w-icon">${w.icon}</div>
-                    <div class="w-title">${w.title}</div>
-                    <div class="w-sub">${w.sub}</div>
-                </div>
-            `;
-            gridEl.appendChild(card);
+            card.className = 'arcade-card';
+            card.onclick = f.action;
+            card.innerHTML = `<span class="badge">MINI #0${i+1}</span><div><div class="card-icon">${f.icon}</div><div class="card-title">${f.title}</div><div class="card-desc">${f.desc}</div></div>`;
+            grid.appendChild(card);
         });
 
-        function openWidget(idx) {
-            playTone(800, 'sine', 0.1);
-            document.getElementById('mTitle').innerText = widgets[idx].title;
-            document.getElementById('mBody').innerHTML = widgets[idx].body;
+        // ACTIONS
+        function openModal(t, b) {
+            sound(700);
+            document.getElementById('mTitle').innerText = t;
+            document.getElementById('mBody').innerHTML = b;
             document.getElementById('modal').style.display = 'flex';
-            if(idx === 6) startMiniGame();
         }
+        function closeModal() { sound(400); document.getElementById('modal').style.display = 'none'; }
 
-        function closeModal() {
-            playTone(400, 'sine', 0.08);
-            document.getElementById('modal').style.display = 'none';
-        }
-
-        function acakDoa() {
-            playTone(900, 'sine', 0.1);
-            const list = ["Semoga makin lancar rezekinya! 💸", "Semoga sehat terus badan & jiwanya! 💪", "Semoga makin sayang sama aku! 🥰"];
-            document.getElementById('dBox').innerText = list[Math.floor(Math.random()*list.length)];
-        }
-
-        function ambilKupon() {
-            playTone(1000, 'triangle', 0.15);
-            const listK = ["🎟️ Kupon Traktir Es Krim Jumbo", "🎟️ Kupon Peluk 10 Menit", "🎟️ Kupon Bebas Pilih Tempat Makan"];
-            document.getElementById('kBox').innerHTML = `<strong>Tiket Keluar:</strong><br>${listK[Math.floor(Math.random()*listK.length)]} (Screenshot!)`;
-        }
-
-        let mVal = 50;
-        function tambahMood() {
-            playTone(1100, 'sine', 0.1);
-            mVal = Math.min(100, mVal + 20);
-            document.getElementById('mBar').style.width = mVal + '%';
-        }
-
-        let gScore = 0;
-        function startMiniGame() {
-            gScore = 0;
-            const area = document.getElementById('gameCanvas');
-            area.innerHTML = '';
-            const iv = setInterval(() => {
-                if(document.getElementById('modal').style.display === 'none' || gScore >= 5) { clearInterval(iv); return; }
-                const item = document.createElement('div');
-                item.className = 'falling-item'; item.innerText = '🍰';
-                item.style.left = Math.random() * (area.clientWidth - 30) + 'px'; item.style.top = '0px';
-                item.onclick = () => {
-                    playTone(1200, 'sine', 0.08);
-                    gScore++; document.getElementById('skor').innerText = gScore; item.remove();
-                    if(gScore === 5) alert("Hebat! Target 5 Kue Terkumpul! 🏆");
-                };
-                area.appendChild(item);
-                setTimeout(() => item.remove(), 1700);
-            }, 800);
-        }
-
-        function scanSalting() {
-            playTone(700, 'sawtooth', 0.2);
-            document.getElementById('camTxt').innerText = "Memindai Rona Pipi...";
+        function runScan() {
+            sound(800, 0.2);
+            document.getElementById('scanRes').innerText = "Memindai Sensor Wajah...";
             setTimeout(() => {
-                playTone(1400, 'sine', 0.3);
-                document.getElementById('camTxt').innerText = "RESULT: 1000% SALTING MAMPUS! 😳❤️";
+                sound(1200, 0.3);
+                document.getElementById('scanRes').innerHTML = "<b style='color:var(--primary);'>TERDETEKSI: 1000% SALTING PARAH! 😳💖</b>";
             }, 1500);
         }
 
-        let fTimer;
-        function startFinger() {
-            playTone(500, 'sine', 0.1);
-            document.getElementById('fBox').classList.add('scanning');
-            document.getElementById('fTxt').innerText = "Memindai...";
-            fTimer = setTimeout(() => {
-                playTone(1500, 'sine', 0.3);
-                document.getElementById('fTxt').innerText = "VERIFIED: 9999% BUCIN PARAH! 🥰";
-            }, 1800);
+        function clawGame() {
+            openModal("🕹️ Capit Kupon Hadiah", `<div class="claw-area" id="claw">🎁</div><button class="btn-action" onclick="getClaw()">Jalankan Capit! 🎰</button>`);
         }
-        function endFinger() {
-            clearTimeout(fTimer);
-            document.getElementById('fBox').classList.remove('scanning');
+        function getClaw() {
+            sound(1000, 0.2);
+            const prizes = ["🎟️ Gratis Traktir Es Krim", "🎟️ Bebas Pilih Tempat Jalan", "🎟️ Puk-Puk Kepala 15 Menit"];
+            document.getElementById('claw').innerText = prizes[Math.floor(Math.random()*prizes.length)];
+        }
+
+        let bVal = 10;
+        function chargeGame() {
+            openModal("⚡ Charge Baterai Cinta", `<p>Tekan tombol di bawah untuk mengisi daya energi cinta!</p><div class="battery-box"><div class="battery-fill" id="bFill"></div></div><button class="btn-action" onclick="addCharge()">Charge (+20%) 🔋</button>`);
+        }
+        function addCharge() {
+            sound(900, 0.1);
+            bVal = Math.min(100, bVal + 20);
+            document.getElementById('bFill').style.width = bVal + '%';
+            if(bVal === 100) alert("Baterai Penuh! Acum Siap Menjalani Hari 100% Semangat! 💖");
+        }
+
+        function slotGame() {
+            const quotes = ["Kamu itu lucu banget pas lagi senyum! 😊", "Makasih udah jadi orang tersabar ya! 🤍", "Hari ini kamu ganteng banget! ✨"];
+            openModal("🎰 Gombalan Hari Ini", `<p style="font-size:1rem; font-weight:bold; color:var(--accent);">${quotes[Math.floor(Math.random()*quotes.length)]}</p>`);
+        }
+
+        function musicGame() {
+            openModal("🎵 Music Player", `<p>Lagu latar belakang otomatis diatur untuk suasana romantis!</p><button class="btn-action" onclick="yt.playVideo()">▶ Play Music</button><button class="btn-action btn-close" onclick="yt.pauseVideo()">⏸ Pause Music</button>`);
+        }
+
+        // YOUTUBE INTEGRATION
+        let yt;
+        const tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api";
+        document.body.appendChild(tag);
+        function onYouTubeIframeAPIReady() {
+            yt = new YT.Player('ytSpace', {
+                height: '0', width: '0', videoId: 'Hr0AAqHLLSg',
+                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'Hr0AAqHLLSg' }
+            });
         }
     </script>
 </body>
