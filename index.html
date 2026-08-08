@@ -224,17 +224,14 @@
         }
 
         /* WIDGETS SPESIFIK */
-        /* Fingerprint Scanner */
         .finger-box { width: 70px; height: 70px; border-radius: 50%; border: 2px dashed #ff4d6d; margin: 15px auto; display: flex; justify-content: center; align-items: center; font-size: 2rem; cursor: pointer; transition: 0.3s; }
         .finger-box.scanning { border-style: solid; box-shadow: 0 0 25px #ff4d6d; animation: pulse 0.8s infinite alternate; }
         @keyframes pulse { to { transform: scale(1.1); } }
 
-        /* Game Catch */
         #gameCanvas { width: 100%; height: 160px; background: rgba(0,0,0,0.3); border-radius: 14px; position: relative; overflow: hidden; margin-top: 10px; border: 1px solid rgba(255,255,255,0.1); }
         .falling-item { position: absolute; font-size: 24px; cursor: pointer; animation: fallAnim 1.8s linear forwards; }
         @keyframes fallAnim { to { transform: translateY(170px); } }
 
-        /* Audio Player Bar */
         .music-bar { display: flex; align-items: center; justify-content: center; gap: 4px; height: 30px; margin: 10px 0; }
         .bar-line { width: 4px; background: #ff4d6d; border-radius: 4px; animation: bounce 0.6s infinite alternate ease-in-out; }
         .bar-line:nth-child(2) { animation-delay: 0.15s; }
@@ -242,22 +239,23 @@
         .bar-line:nth-child(4) { animation-delay: 0.45s; }
         @keyframes bounce { from { height: 6px; } to { height: 26px; } }
 
-        /* CAMERA SALTING */
-        .cam-frame { width: 100%; height: 160px; background: #000; border-radius: 14px; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; border: 2px solid #ff4d6d; }
-        .cam-scanline { position: absolute; width: 100%; height: 2px; background: #ff4d6d; top: 0; animation: scan 1.5s infinite linear; box-shadow: 0 0 10px #ff4d6d; }
+        /* CAMERA SALTING DENGAN FOTO */
+        .cam-frame { width: 100%; height: 200px; background: #000; border-radius: 14px; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; border: 2px solid #ff4d6d; }
+        .cam-frame img { width: 100%; height: 100%; object-fit: cover; }
+        .cam-scanline { position: absolute; width: 100%; height: 3px; background: #ff4d6d; top: 0; animation: scan 1.5s infinite linear; box-shadow: 0 0 12px #ff4d6d; z-index: 2; }
+        .cam-overlay-text { position: absolute; bottom: 8px; left: 0; width: 100%; background: rgba(0,0,0,0.65); padding: 5px; z-index: 3; }
         @keyframes scan { to { top: 100%; } }
     </style>
 </head>
 <body>
 
-    <!-- BACKGROUND FLOATING BLOBS -->
     <div class="ambient-bg">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
     </div>
 
-    <!-- LOCK SCREEN (PASSCODE REQUIRED) -->
+    <!-- LOCK SCREEN -->
     <div id="lockScreen">
         <div class="lock-time" id="lockClock">00:00</div>
         <div class="lock-date">Selasa, 13 Oktober 2026</div>
@@ -309,7 +307,6 @@
     <div id="ytPlayerSpace" style="display:none"></div>
 
     <script>
-        /* SYNTHESIZER SOUND EFFECTS (NO EXTERNAL AUDIO NEEDED) */
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playTone(freq, type = 'sine', duration = 0.15) {
             try {
@@ -332,7 +329,6 @@
             setTimeout(() => playTone(1320, 'sine', 0.3), 200);
         }
 
-        /* CLOCK & PASSCODE LOGIC */
         function updateClock() {
             const now = new Date();
             const h = String(now.getHours()).padStart(2, '0');
@@ -387,7 +383,6 @@
             }
         }
 
-        /* YOUTUBE BACKGROUND MUSIC */
         let ytPlayer;
         const tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api";
         document.getElementsByTagName('script')[0].parentNode.insertBefore(tag, document.getElementsByTagName('script')[0]);
@@ -398,7 +393,9 @@
             });
         }
 
-        /* 20 CARDS DATA */
+        /* DIRECT IMAGE LINK FROM IMGBB PAGE */
+        const photoUrl = "https://i.ibb.co.com/wNXBwTzX/image.jpg";
+
         const cards = [
             { icon: "💌", title: "1. Surat Pembuka Nyaman", body: "Selamat ulang tahun yang ke-20, Acum sayang! 🎂<br><br>Di umur kepala dua ini, semoga makin dewasa, sehat selalu, dan lancar rezekinya. Makasih udah selalu sabar ngadepin aku selama ini. You are my safe place! 💕" },
             { icon: "🔮", title: "2. Pengacak Doa Manis", body: "<p id='dBox'>Klik tombol di bawah buat kocok doa hari ini!</p><button class='btn-main' onclick='acakDoa()'>Kocok Doa ✨</button>" },
@@ -407,7 +404,7 @@
             { icon: "🎮", title: "5. Game Tangkap Kue Ultah", body: "<p>Tangkap 5 kue jatuh! Skor: <span id='skor' style='color:#ff758c; font-weight:bold;'>0</span></p><div id='gameCanvas'></div>" },
             { icon: "📸", title: "6. Digital Memory Album", body: "🌌 <strong>Momen Favorit:</strong> Ingat pas kita jalan bareng dan kamu ketawa denger cerita random aku? Momen simpel tapi paling bikin aku bahagia banget!" },
             { icon: "🎵", title: "7. Pemutar Latar Musik", body: "<p>Lagu romantis sudah terintegrasi otomatis.</p><div class='music-bar'><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div></div><button class='btn-main' style='background:#2ec4b6;' onclick='ytPlayer.playVideo()'>▶ Play</button><button class='btn-main' style='background:#e71d36; margin-top:5px;' onclick='ytPlayer.pauseVideo()'>⏸ Pause</button>" },
-            { icon: "📷", title: "8. Detektor Salting Face Scan", body: "<div class='cam-frame'><div class='cam-scanline'></div><p id='camTxt' style='font-size:0.8rem; font-weight:bold; color:#ffb3c1;'>Menguji Tingkat Salting...</p></div><button class='btn-main' onclick='scanSalting()'>Pindai Wajah Acum ⚡</button>" },
+            { icon: "📷", title: "8. Detektor Salting Face Scan", body: `<div class="cam-frame"><img src="${photoUrl}" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400';" alt="Acum"><div class="cam-scanline"></div><div class="cam-overlay-text"><p id="camTxt" style="font-size:0.8rem; font-weight:bold; color:#ffb3c1;">Menguji Tingkat Salting...</p></div></div><button class="btn-main" onclick="scanSalting()">Pindai Wajah Acum ⚡</button>` },
             { icon: "☝️", title: "9. Pindai Sidik Jari Bucin", body: "<p>Tahan jempol kamu di bawah untuk verifikasi:</p><div class='finger-box' id='fBox' onmousedown='startFinger()' onmouseup='endFinger()' ontouchstart='startFinger()' ontouchend='endFinger()'>👍</div><p id='fTxt' style='font-size:0.75rem; color:#ffb3c1;'>Tekan & Tahan 2 Detik</p>" },
             { icon: "✍️", title: "10. Catatan Wishlist Acum", body: "<textarea style='width:100%; height:70px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.2); border-radius:10px; color:white; padding:8px; font-size:0.8rem; resize:none;' placeholder='Tulis keinginan kamu di umur 20...'></textarea><button class='btn-main' onclick='alert(\"Catatan tersimpan!\")'>Simpan Ke Sistem</button>" },
             { icon: "🍫", title: "11. Vending Cokelat Manis", body: "🍫 *KLIK!* Satu batang cokelat digital termanis berhasil dikirim ke layar HP Acum ter-ganteng hari ini!" },
@@ -422,7 +419,6 @@
             { icon: "🔒", title: "20. Surat Terkunci Kapsul Waktu", body: "🔒 <strong>Pesan Rahasia Terakhir:</strong><br><br>Makasih udah buka semua fiturnya sampai nomor 20! Kamu beneran cowok terbaik yang pernah ada di hidup aku. Jangan pernah bosan sama aku ya. Happy 20th Birthday, Acum sayang! 🤍✨" }
         ];
 
-        /* GENERATE GRID CARDS */
         const gridEl = document.getElementById('cardGrid');
         cards.forEach((c, i) => {
             const card = document.createElement('div');
@@ -445,7 +441,6 @@
             document.getElementById('modal').style.display = 'none';
         }
 
-        /* CARD ACTION FUNCTIONS */
         function acakDoa() {
             playTone(900, 'sine', 0.1);
             const list = ["Semoga makin lancar rezekinya! 💸", "Semoga sehat terus badan & jiwanya! 💪", "Semoga makin sayang sama aku! 🥰"];
@@ -509,7 +504,6 @@
             document.getElementById('fBox').classList.remove('scanning');
         }
 
-        /* FLOATING BACKGROUND PARTICLES */
         setInterval(() => {
             const p = document.createElement('div');
             p.innerText = ['🎈','🎉','💖','✨'][Math.floor(Math.random()*4)];
