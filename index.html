@@ -61,7 +61,7 @@
         }
 
         /* ==========================================================================
-           2. BACKGROUND ANIMATIONS (FLOATING BUBBLES & PARTICLES)
+           2. BACKGROUND ANIMATIONS
            ========================================================================== */
         .ambient-bg {
             position: fixed;
@@ -130,7 +130,7 @@
         }
 
         /* ==========================================================================
-           4. HERO PHOTO FRAME (FRAME PINK BORDEN AWAL + FOTO BERDUA)
+           4. HERO PHOTO FRAME (FRAME BORDER PINK + FOTO BERDUA)
            ========================================================================== */
         .hero-photo-card {
             width: 100%;
@@ -661,7 +661,7 @@
         document.addEventListener('click', function(e) {
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle-particle';
-            sparkle.innerText = ['✨', '💖', '🌸', '💫'][Math.floor(Math.random() * 4)];
+            sparkle.innerText = ['✨', '💖', '💼', '💫'][Math.floor(Math.random() * 4)];
             sparkle.style.left = (e.clientX - 10) + 'px';
             sparkle.style.top = (e.clientY - 10) + 'px';
             document.body.appendChild(sparkle);
@@ -852,7 +852,7 @@
         }
 
         /* ----------------------------------------------------------------------
-           10.6 18 FEATURE DATA & EXTENDED MODAL CONTENT
+           10.6 18 FEATURE DATA (DIUBAH KE DUNIA KERJA & KARIR)
            ---------------------------------------------------------------------- */
         const cards = [
             { 
@@ -860,9 +860,10 @@
                 title: "Surat Refleksi Usia 20", 
                 body: `
                 <strong>Selamat memasuki usia 20 tahun, Acum sayang! 🥂✨</strong><br><br>
-                Gak terasa ya kamu sekarang udah resmi menginjak usia kepala dua. Memasuki usia 20 bukan tentang tuntutan untuk harus serba tahu atau terburu-buru meraih segalanya. Usia 20 adalah tentang belajar menikmati proses, menghargai setiap usaha kecilmu, dan berani melangkah dengan tenang.<br><br>
-                Terima kasih ya sudah terus berjuang dan tumbuh jadi pribadi yang penuh tanggung jawab, sabar, dan selalu hangat. Kamu adalah rumah paling nyaman buat aku. Ingat, kapan pun kamu merasa lelah atau kewalahan, kamu selalu punya tempat untuk pulang dan berbagi cerita denganku.<br><br>
-                Semoga di umur 20 ini semua hal baik, rezeki, dan impian kamu dikabulkan. Aku bakal selalu ada buat dukung kamu dalam kondisi apa pun. Happy 20th Birthday, cowok favorit aku! I love you! 💕
+                Gak terasa ya kamu sekarang udah resmi menginjak usia kepala dua. Di usiamu yang baru ini, kamu sudah melangkah begitu jauh, bekerja keras, dan berjuang membangun karir profesionalmu dengan luar biasa.<br><br>
+                Memasuki usia 20 bukan tentang tuntutan untuk harus serba sempurna atau terburu-buru meraih segalanya. Ini tentang belajar menikmati proses, menghargai setiap pencapaian kerjamu, dan berani melangkah dengan tenang.<br><br>
+                Terima kasih ya sudah terus berjuang, bekerja keras, dan tumbuh jadi pribadi yang penuh tanggung jawab, sabar, dan selalu hangat. Kamu adalah rumah paling nyaman buat aku. Ingat, kapan pun kamu merasa lelah dengan kesibukan kerja, kamu selalu punya tempat untuk pulang dan berbagi cerita denganku.<br><br>
+                Semoga di umur 20 ini semua hal baik, rezeki, dan karirmu makin bersinar. Aku bakal selalu ada buat dukung kamu dalam kondisi apa pun. Happy 20th Birthday, cowok paling hebat favorit aku! I love you! 💕
                 ` 
             },
             { 
@@ -874,7 +875,7 @@
                 \"Telah lama kucari dirimu... Dipelukku tempatmu... Kau yang kutunggu...\" 🎶
                 </p>
                 <p style='font-size:0.82rem; color:var(--text-sub); text-align:center; margin-bottom:12px;'>
-                Lagu ini pengingat betapa bersyukurnya aku bisa nemuin sosok sehebat kamu dalam hidupku. Terima kasih ya sudah hadir dan jadi bagian paling indah di hidupku.
+                Lagu ini pengingat betapa bersyukurnya aku bisa nemuin sosok sehebat kamu di tengah riuhnya dunia dewasa & pekerjaan. Terima kasih ya sudah hadir dan jadi bagian paling indah di hidupku.
                 </p>
                 <div class='music-bar'>
                     <div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div>
@@ -887,7 +888,7 @@
                 icon: "🎟️", 
                 title: "Voucher Momen Quality Time", 
                 body: `
-                <p id='kBox' style='text-align:center;'>Ambil voucher momen kebersamaan yang bisa kamu klaim kapan saja kamu butuh jeda dan waktu santai:</p>
+                <p id='kBox' style='text-align:center;'>Ambil voucher momen kebersamaan yang bisa kamu klaim kapan saja kamu butuh jeda dari kesibukan kerja:</p>
                 <button class='btn-main' onclick='ambilKupon()'>Ambil Voucher Momen 🪙</button>
                 ` 
             },
@@ -895,7 +896,7 @@
                 icon: "🕯️", 
                 title: "Refleksi & Harapan Baik", 
                 body: `
-                <p id='dBox' style='text-align:center;'>Kocok pesan penguat & harapan baik untuk perjalanan usiamu yang baru:</p>
+                <p id='dBox' style='text-align:center;'>Kocok pesan penguat & harapan baik untuk karir serta perjalanan usiamu yang baru:</p>
                 <button class='btn-main' onclick='acakDoa()'>Ambil Pesan Doa ✨</button>
                 ` 
             },
@@ -903,20 +904,20 @@
                 icon: "🔋", 
                 title: "Ruang Isi Ulang Semangat", 
                 body: `
-                <p style='text-align:center;'>Kamu sudah bekerja keras dan berusaha sangat baik sejauh ini. Ketika hal-hal tidak berjalan sesuai rencana, ingatlah untuk memberi dirimu ruang bernapas.</p>
+                <p style='text-align:center;'>Kamu sudah bekerja keras, profesional, dan berusaha sangat baik di tempat kerja. Ketika pekerjaan terasa melelahkan, ingatlah untuk memberi dirimu ruang bernapas.</p>
                 <div style='background:var(--pink-light); border:2px solid var(--pink-soft); height:18px; border-radius:10px; margin:15px 0; overflow:hidden;'>
                     <div id='mBar' style='width:60%; height:100%; background:linear-gradient(to right, #ff4d6d, #ff758c); transition:0.3s;'></div>
                 </div>
-                <button class='btn-main' onclick='tambahMood()'>Kirim Energi Semangat & Pelukan 🤗</button>
+                <button class='btn-main' onclick='tambahMood()'>Kirim Energi Semangat Kerja & Pelukan 🤗</button>
                 ` 
             },
             { 
                 icon: "☕", 
                 title: "Pemeriksa Suasana Hati", 
                 body: `
-                <p style="text-align:center; font-size:0.88rem; margin-bottom:12px;">Pindai tingkat kenyamanan & rona kebahagiaan Acum hari ini:</p>
+                <p style="text-align:center; font-size:0.88rem; margin-bottom:12px;">Pindai tingkat kenyamanan & energi Acum sebelum atau sesudah kerja hari ini:</p>
                 <div style="background:var(--pink-light); border:2px solid var(--pink-soft); border-radius:16px; padding:15px; text-align:center;">
-                    <p id="camTxt" style="font-size:0.88rem; font-weight:bold; color:var(--pink-deep);">Tingkat Kenyamanan: 100% Siap Menghadapi Hari! 🌿✨</p>
+                    <p id="camTxt" style="font-size:0.88rem; font-weight:bold; color:var(--pink-deep);">Tingkat Kenyamanan: 100% Siap Menghadapi Hari & Bekerja Hebat! 🌿✨</p>
                 </div>
                 <button class="btn-main" onclick="scanSalting()">Periksa Kondisi Mood ⚡</button>
                 ` 
@@ -926,9 +927,9 @@
                 title: "Arah & Target Bersama", 
                 body: `
                 <div style='text-align:left; font-size:0.88rem; line-height:2.2;'>
-                    <input type='checkbox' checked disabled> Bertumbuh Dewasa secara Finansial & Karir 🎯<br>
-                    <input type='checkbox' checked disabled> Menjaga Kesehatan Mental & Fisik Tetap Seimbang 🌿<br>
-                    <input type='checkbox' checked disabled> Luangkan Waktu Jalan-Jalan & QTime Tanpa Beban ☕<br>
+                    <input type='checkbox' checked disabled> Bertumbuh Dewasa secara Finansial & Karir 💼🎯<br>
+                    <input type='checkbox' checked disabled> Menjaga Kesehatan Mental & Fisik di Tengah Kerja 🌿<br>
+                    <input type='checkbox' checked disabled> Luangkan Waktu Weekend & Healing Tanpa Beban Kerja ☕<br>
                     <input type='checkbox' checked disabled> Saling Mendukung di Setiap Momen Suka & Duka 🤝❤️
                 </div>
                 ` 
@@ -937,8 +938,8 @@
                 icon: "💡", 
                 title: "Pengingat Bebas Khawatir", 
                 body: `
-                🌿 <strong>Jangan Terlalu Cemas tentang Masa Depan:</strong><br><br>
-                Satu per satu hal bakal ketemu jalannya kok. Kamu gak perlu memikul semuanya sendirian. Ambil napas dalam-dalam, jalani hari ini dengan baik, dan percayalah kalau kamu sudah ada di jalur yang tepat! ✨
+                🌿 <strong>Jangan Terlalu Cemas tentang Masa Depan & Karir:</strong><br><br>
+                Satu per satu hal di dunia kerja bakal ketemu jalannya kok. Kamu gak perlu memikul semua tanggung jawab sendirian. Ambil napas dalam-dalam saat kerjaan menumpuk, jalani hari ini dengan baik, dan percayalah kalau kamu sudah ada di jalur karir yang tepat! ✨
                 ` 
             },
             { 
@@ -946,7 +947,7 @@
                 title: "Galeri Kenangan Kecil", 
                 body: `
                 📸 <strong>Momen Terbaik Kita:</strong><br><br>
-                Setiap perjalanan, tawa sederhana, dan percakapan kecil kita adalah hal-hal yang selalu bikin aku bersyukur. Terima kasih ya sudah jadi teman perjalanan hidup yang paling menyenangkan! 💕
+                Di tengah padatnya jadwal & kesibukan kerja, setiap perjalanan, tawa sederhana, dan percakapan kecil kita adalah hal-hal yang selalu bikin aku bersyukur. Terima kasih ya sudah jadi teman perjalanan hidup yang paling menyenangkan! 💕
                 ` 
             },
             { 
@@ -954,7 +955,7 @@
                 title: "Komitmen Saling Jaga", 
                 body: `
                 🤝 <strong>Janji Kecil Buat Kita:</strong><br><br>
-                Selalu terbuka dalam komunikasi, saling mendengar tanpa menghakimi, dan selalu jadi tempat perlindungan paling aman saat dunia luar terasa terlalu bising.
+                Selalu terbuka dalam komunikasi, saling mendengar tanpa menghakimi saat cape kerja, dan selalu jadi tempat perlindungan paling aman saat dunia luar terasa terlalu bising.
                 ` 
             },
             { 
@@ -962,7 +963,7 @@
                 title: "Catatan Apresiasi Diri", 
                 body: `
                 🌟 <strong>Apresiasi Buat Acum:</strong><br><br>
-                Terima kasih sudah jadi sosok yang sabar, pekerja keras, tidak gampang menyerah, dan selalu memperlakukan orang di sekitarmu dengan penuh kebaikan. I'm so proud of you!
+                Terima kasih sudah jadi sosok pekerja keras, sabar, tidak gampang menyerah menghadapi tantangan kerja, dan selalu memperlakukan orang di sekitarmu dengan penuh kebaikan. I'm so proud of your dedication!
                 ` 
             },
             { 
@@ -978,10 +979,10 @@
                 title: "Alasan Sayang Acum", 
                 body: `
                 💌 <strong>Kenapa Acum Begitu Spesial:</strong><br><br>
-                1. Karena Acum selalu sabar dengerin cerita Acim.<br>
-                2. Caramu berusaha selalu bikin bersyukur.<br>
+                1. Karena Acum selalu sabar dengerin cerita Acim habis kerja.<br>
+                2. Kerja keras & dedikasimu selalu bikin bersyukur.<br>
                 3. Kebiasaan kecilmu yang selalu merawat & peduli.<br>
-                4. Karena bersamamu, semuanya terasa jauh lebih tenang. 💕
+                4. Karena bersamamu, dunia dewasa terasa jauh lebih tenang. 💕
                 ` 
             },
             { 
@@ -989,8 +990,8 @@
                 title: "Resep Bebas Stress", 
                 body: `
                 ☕ <strong>Resep Hari Bebas Stress Khusus Acum:</strong><br><br>
-                - 1 cangkir minuman favorit.<br>
-                - 0% memikirkan tugas / beban kerjaan.<br>
+                - 1 cangkir kopi / minuman favorit pas istirahat.<br>
+                - 0% memikirkan email & pesan kerjaan di hari ulang tahun.<br>
                 - 100% obrolan santai tanpa terburu-buru.<br>
                 - Dosis makanan enak secukupnya! 🍲
                 ` 
@@ -1012,7 +1013,7 @@
                     <h3 style='color:var(--pink-deep); font-size:1rem; margin-bottom:6px;'>🏆 SERTIFIKAT RESMI 🏆</h3>
                     <p style='font-size:0.85rem;'>Diberikan kepada:</p>
                     <p style='font-weight:bold; font-size:1.05rem; color:var(--pink-deep); margin:6px 0;'>ACUM</p>
-                    <p style='font-size:0.78rem;'>Sebagai Cowok Paling Sabar, Hebat & Paling Disayang Acim! ❤️</p>
+                    <p style='font-size:0.78rem;'>Sebagai Pekerja Paling Sabar, Dedicated & Paling Disayang Acim! ❤️</p>
                 </div>
                 ` 
             },
@@ -1029,8 +1030,8 @@
                 title: "Kapsul Waktu Kedewasaan", 
                 body: `
                 🔒 <strong>Pesan Kapsul Waktu Usia 20:</strong><br><br>
-                Acum, terima kasih sudah memilih untuk terus berjuang dengan jujur dan baik. Di perjalanan pendewasaan ini, tidak ada yang menuntutmu untuk sempurna.<br><br>
-                Jalani setiap hari dengan percaya diri. Aku akan selalu bangga dan mendukungmu di setiap langkah. Selamat ulang tahun yang ke-20, favoritku! 🤍✨
+                Acum, terima kasih sudah memilih untuk terus berjuang dengan jujur, hebat, dan baik di dunia karirmu. Di perjalanan pendewasaan ini, tidak ada yang menuntutmu untuk selalu sempurna.<br><br>
+                Jalani setiap hari kerja dengan percaya diri. Aku akan selalu bangga dan mendukungmu di setiap langkah pencapaianmu. Selamat ulang tahun yang ke-20, favoritku! 🤍✨
                 ` 
             }
         ];
@@ -1063,11 +1064,11 @@
             playTone(1000, 'triangle', 0.15);
             triggerConfetti();
             const listK = [
-                "🎟️ Voucher Coffee Date & Deep Talk Santai",
-                "🎟️ Voucher Unwind Day (Hari Bebas Gangguan & Bebas Stress)",
-                "🎟️ Voucher Traktir Makanan Favorit Bebas Pilih",
+                "🎟️ Voucher Coffee Date & Deep Talk Sepulang Kerja",
+                "🎟️ Voucher Unwind Day (Hari Bebas Stress & Bebas Pekerjaan)",
+                "🎟️ Voucher Traktir Makanan Enak Bebas Pilih",
                 "🎟️ Voucher Temani Ngobrol & Dengar Cerita Kapan Saja",
-                "🎟️ Voucher Jalan-Jalan Cari Udara Segar Seharian"
+                "🎟️ Voucher Weekend Gateway Cari Udara Segar"
             ];
             document.getElementById('kBox').innerHTML = `
                 <div style='text-align:center;'>
@@ -1094,10 +1095,10 @@
             playTone(900, 'sine', 0.1);
             triggerConfetti();
             const list = [
-                "✨ Semoga segala urusan kuliah, karir, dan langkah bisnismu dipermudah jalan kelancarannya.",
-                "🌿 Semoga hatimu selalu diberikan ketenangan, kepikiran yang jernih, dan jauh dari rasa cemas.",
-                "💫 Semoga fisik dan mentalmu selalu sehat, serta dikelilingi oleh lingkungan yang mendukungmu.",
-                "🕊️ Semoga setiap keputusan yang kamu ambil di usia 20 ini membawa kebaikan dan keberkahan."
+                "✨ Semoga segala urusan karir, pekerjaan, dan langkah bisnismu dipermudah jalan kelancarannya.",
+                "🌿 Semoga hatimu selalu diberikan ketenangan, kepikiran yang jernih, dan jauh dari rasa cemas saat kerja.",
+                "💫 Semoga fisik dan mentalmu selalu sehat, serta dikelilingi oleh lingkungan kerja yang mendukungmu.",
+                "🕊️ Semoga setiap keputusan karir yang kamu ambil di usia 20 ini membawa kebaikan dan keberkahan."
             ];
             document.getElementById('dBox').innerHTML = list[Math.floor(Math.random()*list.length)];
         }
@@ -1106,9 +1107,9 @@
             playTone(950, 'sine', 0.12);
             triggerConfetti();
             const listR = [
-                "🔮 Energy Today: 100% Keberuntungan & Ketenangan Pikiran!",
-                "🔮 Energy Today: Hari yang pas buat santai & makan makanan enak!",
-                "🔮 Energy Today: Segala hal berat bakal terasa lebih ringan hari ini."
+                "🔮 Energy Today: 100% Keberuntungan, Karir Kelancarannya & Ketenangan Pikiran!",
+                "🔮 Energy Today: Hari yang pas buat santai & makan makanan enak sehabis kerja!",
+                "🔮 Energy Today: Segala hal berat di tempat kerja bakal terasa lebih ringan hari ini."
             ];
             document.getElementById('rBox').innerHTML = `<span style='color:var(--pink-deep); font-weight:bold;'>${listR[Math.floor(Math.random()*listR.length)]}</span>`;
         }
@@ -1116,14 +1117,14 @@
         function tiupLilin() {
             playTone(1200, 'triangle', 0.2);
             triggerConfetti();
-            document.getElementById('lilinTxt').innerHTML = "<span style='color:var(--pink-deep); font-weight:bold; font-size:1rem;'>🎉 YAY! Semoga semua impian Acum terkabul! ✨</span>";
+            document.getElementById('lilinTxt').innerHTML = "<span style='color:var(--pink-deep); font-weight:bold; font-size:1rem;'>🎉 YAY! Semoga semua impian & karir Acum makin sukses! ✨</span>";
         }
 
         function mainKuis() {
             playTone(850, 'sine', 0.1);
             const listQ = [
-                "🎯 Siapa cowok yang paling sabar & ganteng hari ini? (Jawaban: Acum! ❤️)",
-                "🎯 Siapa yang selalu siap nemenin Acum? (Jawaban: Acim! 💕)"
+                "🎯 Siapa pekerja paling sabar & ganteng hari ini? (Jawaban: Acum! ❤️)",
+                "🎯 Siapa yang selalu siap nemenin & dukung Acum? (Jawaban: Acim! 💕)"
             ];
             document.getElementById('qBox').innerHTML = `<span style='color:var(--pink-deep); font-weight:bold;'>${listQ[Math.floor(Math.random()*listQ.length)]}</span>`;
         }
