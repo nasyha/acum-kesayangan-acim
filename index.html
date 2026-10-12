@@ -3,21 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy 20th Birthday Acum 💕</title>
+    <title>Happy 20th Birthday Acum 💕 | Special OS Edition</title>
     <style>
+        /* ==========================================================================
+           1. ROOT VARIABLES & GLOBAL STYLES
+           ========================================================================== */
         :root {
             --pink-main: #ff6584;
             --pink-soft: #ffb3c1;
+            --pink-light: #ffe5ec;
             --pink-bg: #fff0f3;
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(255, 182, 193, 0.6);
+            --pink-deep: #d90429;
+            --glass-bg: rgba(255, 255, 255, 0.88);
+            --glass-border: rgba(255, 182, 193, 0.65);
             --text-dark: #4a2e35;
+            --text-sub: #6b3e4a;
+            --shadow-soft: 0 10px 30px rgba(255, 101, 132, 0.18);
+            --shadow-glow: 0 0 25px rgba(255, 101, 132, 0.35);
+            --radius-large: 28px;
+            --radius-medium: 20px;
+            --radius-small: 14px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
 
         body {
-            background: linear-gradient(135deg, #ffccd5, #ffe5ec, #ff8fab);
+            background: linear-gradient(135deg, #ffccd5 0%, #ffe5ec 50%, #ff8fab 100%);
             min-height: 100vh;
             color: var(--text-dark);
             display: flex;
@@ -27,55 +45,131 @@
             position: relative;
         }
 
-        /* BACKGROUND FLOATING BUBBLES */
+        /* Custom Scrollbar for Inner Containers */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 229, 236, 0.5);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--pink-soft);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--pink-main);
+        }
+
+        /* ==========================================================================
+           2. BACKGROUND ANIMATIONS (BUBBLES & FLOATING PARTICLES)
+           ========================================================================== */
         .ambient-bg {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             z-index: 0;
             overflow: hidden;
             pointer-events: none;
         }
+
         .bubble {
             position: absolute;
-            background: rgba(255, 255, 255, 0.45);
+            background: rgba(255, 255, 255, 0.55);
             border-radius: 50%;
-            animation: floatUp 8s infinite linear;
-        }
-        @keyframes floatUp {
-            0% { transform: translateY(105vh) scale(0.5); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.8), 0 4px 15px rgba(255, 179, 193, 0.3);
+            animation: floatUp 9s infinite linear;
         }
 
-        /* CONTAINER UTAMA */
+        @keyframes floatUp {
+            0% {
+                transform: translateY(105vh) scale(0.4) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.85;
+            }
+            80% {
+                opacity: 0.85;
+            }
+            100% {
+                transform: translateY(-15vh) scale(1.1) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .sparkle-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 16px;
+            animation: fadeOutSparkle 1s forwards ease-out;
+        }
+
+        @keyframes fadeOutSparkle {
+            0% {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.2) translateY(-30px);
+                opacity: 0;
+            }
+        }
+
+        /* ==========================================================================
+           3. CONTAINER MOCKUP LAYOUT
+           ========================================================================== */
         .app-container {
             width: 100%;
-            max-width: 410px;
+            max-width: 420px;
             min-height: 100vh;
             background: var(--glass-bg);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            border-left: 1px solid var(--glass-border);
-            border-right: 1px solid var(--glass-border);
+            border-left: 1.5px solid var(--glass-border);
+            border-right: 1.5px solid var(--glass-border);
             position: relative;
             z-index: 1;
-            padding: 0 0 40px 0;
+            padding: 22px 18px 50px 18px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 40px rgba(255, 101, 132, 0.25);
+            box-shadow: 0 0 50px rgba(255, 101, 132, 0.3);
             overflow: hidden;
         }
 
-        /* HERO FULL-WIDTH PHOTO */
+        /* ==========================================================================
+           4. HERO PHOTO FRAME (GAYA BINGKAI PINK AWAL)
+           ========================================================================== */
         .hero-photo-card {
             width: 100%;
-            height: 380px;
+            background: #ffffff;
+            border: 3.5px solid var(--pink-soft);
+            border-radius: 28px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-soft);
             position: relative;
-            background: #ffe5ec;
-            margin-bottom: 18px;
-            box-shadow: 0 8px 25px rgba(255, 101, 132, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .hero-photo-card img {
+
+        .hero-photo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .hero-photo-wrapper {
+            width: 100%;
+            height: 360px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            background: var(--pink-light);
+        }
+
+        .hero-photo-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -83,34 +177,165 @@
             image-rendering: -webkit-optimize-contrast;
             filter: contrast(102%) brightness(102%);
             display: block;
+            transition: transform 0.5s ease;
         }
+
+        .hero-photo-card:hover .hero-photo-wrapper img {
+            transform: scale(1.03);
+        }
+
         .hero-badge {
             position: absolute;
-            bottom: 14px; left: 14px;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(10px);
-            border: 1.5px solid #ffb3c1;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.78rem;
+            bottom: 14px;
+            left: 14px;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1.5px solid var(--pink-soft);
+            padding: 7px 16px;
+            border-radius: 22px;
+            font-size: 0.8rem;
             font-weight: 800;
-            color: #d90429;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            color: var(--pink-deep);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .content-padding {
-            padding: 0 18px;
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--pink-main);
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulseDot 1.5s infinite;
+        }
+
+        @keyframes pulseDot {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+        }
+
+        /* ==========================================================================
+           5. HEADER & TYPOGRAPHY
+           ========================================================================== */
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #ffe5ec 100%);
+            border: 2px solid var(--pink-soft);
+            border-radius: var(--radius-medium);
+            padding: 18px 14px;
+            box-shadow: 0 6px 20px rgba(255, 101, 132, 0.12);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .header h1 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--pink-deep);
+            letter-spacing: -0.3px;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            font-weight: 600;
+        }
+
+        /* ==========================================================================
+           6. GRID & CARD ITEMS
+           ========================================================================== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .card-item {
+            background: #ffffff;
+            border: 2px solid var(--pink-soft);
+            border-radius: var(--radius-medium);
+            padding: 20px 12px;
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 18px rgba(255, 101, 132, 0.12);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* LOCK SCREEN */
+        .card-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4), transparent);
+            pointer-events: none;
+        }
+
+        .card-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--pink-main);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .card-item:active {
+            transform: scale(0.93);
+            background: var(--pink-light);
+        }
+
+        .card-item .icon {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));
+            transition: transform 0.3s ease;
+        }
+
+        .card-item:hover .icon {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .card-item .card-title {
+            font-size: 0.83rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.35;
+        }
+
+        /* ==========================================================================
+           7. LOCK SCREEN STYLES
+           ========================================================================== */
         #lockScreen {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 224, 230, 0.96);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 224, 230, 0.97);
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
             z-index: 999;
             display: flex;
             flex-direction: column;
@@ -119,14 +344,63 @@
             padding: 20px;
             transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.5s;
         }
-        .lock-time { font-size: 3.8rem; font-weight: 300; color: #d90429; text-shadow: 0 4px 15px rgba(217, 4, 41, 0.15); }
-        .lock-date { font-size: 0.95rem; color: #ff4d6d; margin-bottom: 25px; font-weight: 600; }
-        .lock-title { font-size: 0.85rem; color: #6b3e4a; margin-bottom: 18px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; text-align: center; }
-        
-        .pin-dots { display: flex; gap: 15px; margin-bottom: 35px; }
-        .dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid #ff4d6d; transition: 0.2s; }
-        .dot.active { background: #ff4d6d; box-shadow: 0 0 10px #ff4d6d; }
-        .dot.error { animation: shake 0.4s ease-in-out; border-color: #d90429; background: #d90429; }
+
+        .lock-time {
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--pink-deep);
+            text-shadow: 0 4px 20px rgba(217, 4, 41, 0.18);
+            letter-spacing: -1px;
+            margin-bottom: 2px;
+        }
+
+        .lock-date {
+            font-size: 0.95rem;
+            color: var(--pink-main);
+            margin-bottom: 28px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 4px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--pink-soft);
+        }
+
+        .lock-title {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-bottom: 20px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .pin-dots {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 35px;
+        }
+
+        .dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: 2px solid var(--pink-main);
+            transition: all 0.2s ease;
+            background: transparent;
+        }
+
+        .dot.active {
+            background: var(--pink-main);
+            box-shadow: 0 0 12px var(--pink-main);
+            transform: scale(1.1);
+        }
+
+        .dot.error {
+            animation: shake 0.4s ease-in-out;
+            border-color: var(--pink-deep);
+            background: var(--pink-deep);
+        }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
@@ -134,134 +408,215 @@
             40%, 80% { transform: translateX(8px); }
         }
 
-        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; width: 100%; max-width: 270px; }
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            width: 100%;
+            max-width: 280px;
+        }
+
         .key {
             aspect-ratio: 1;
             border-radius: 50%;
-            background: white;
-            border: 2px solid #ffb3c1;
-            color: #d90429;
-            font-size: 1.4rem;
+            background: #ffffff;
+            border: 2px solid var(--pink-soft);
+            color: var(--pink-deep);
+            font-size: 1.45rem;
             font-weight: 700;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(255, 101, 132, 0.15);
-            transition: 0.15s;
+            box-shadow: 0 4px 12px rgba(255, 101, 132, 0.15);
+            transition: all 0.15s ease;
         }
-        .key:active { background: #ff4d6d; color: white; transform: scale(0.92); }
-        .key-hint { font-size: 0.75rem; color: #8c5563; margin-top: 25px; text-align: center; font-weight: 600; }
 
-        /* HEADER */
-        .header {
+        .key:active {
+            background: var(--pink-main);
+            color: #ffffff;
+            transform: scale(0.9);
+        }
+
+        .key-hint {
+            font-size: 0.78rem;
+            color: var(--text-sub);
+            margin-top: 25px;
             text-align: center;
-            background: linear-gradient(135deg, #ffffff, #ffe5ec);
-            border: 2px solid #ffb3c1;
-            border-radius: 22px;
-            padding: 16px;
-            box-shadow: 0 6px 20px rgba(255, 101, 132, 0.12);
-            margin-bottom: 18px;
-        }
-        .header h1 { font-size: 1.25rem; font-weight: 800; color: #d90429; }
-        .header p { font-size: 0.78rem; color: #8c5563; margin-top: 4px; font-weight: 600; }
-
-        /* GRID 8 FITUR */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-        .card-item {
-            background: white;
-            border: 2px solid #ffb3c1;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 6px 16px;
             border-radius: 20px;
-            padding: 18px 12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 6px 18px rgba(255, 101, 132, 0.12);
+            border: 1px solid var(--pink-soft);
         }
-        .card-item:active { transform: scale(0.93); background: #ffe5ec; }
-        .card-item .icon { font-size: 2rem; margin-bottom: 6px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1)); }
-        .card-item .card-title { font-size: 0.82rem; font-weight: 700; color: #4a2e35; line-height: 1.3; }
 
-        /* POPUP MODAL */
+        /* ==========================================================================
+           8. POPUP MODAL STYLES
+           ========================================================================== */
         .modal-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(107, 62, 74, 0.5);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(74, 46, 53, 0.55);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             z-index: 1000;
             display: none;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
+
         .modal-box {
             background: #ffffff;
-            border: 3px solid #ffb3c1;
+            border: 3.5px solid var(--pink-soft);
             width: 100%;
-            max-width: 360px;
-            border-radius: 28px;
-            padding: 24px;
-            box-shadow: 0 20px 40px rgba(255, 101, 132, 0.25);
+            max-width: 370px;
+            border-radius: var(--radius-large);
+            padding: 26px 22px;
+            box-shadow: 0 25px 50px rgba(255, 101, 132, 0.3);
             text-align: center;
-            animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-height: 84vh;
+            animation: modalPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 85vh;
             overflow-y: auto;
+            position: relative;
         }
+
         @keyframes modalPop {
-            from { transform: scale(0.8) translateY(20px); opacity: 0; }
+            from { transform: scale(0.8) translateY(25px); opacity: 0; }
             to { transform: scale(1) translateY(0); opacity: 1; }
         }
 
-        .modal-title { font-size: 1.15rem; font-weight: 800; color: #d90429; margin-bottom: 14px; }
-        .modal-body { font-size: 0.88rem; line-height: 1.65; color: #4a2e35; text-align: left; }
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--pink-deep);
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed var(--pink-soft);
+        }
+
+        .modal-body {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+            text-align: left;
+        }
 
         .btn-main {
-            background: linear-gradient(135deg, #ff4d6d, #ff758c);
-            color: white;
+            background: linear-gradient(135deg, #ff4d6d 0%, #ff758c 100%);
+            color: #ffffff;
             border: none;
-            padding: 12px 18px;
-            border-radius: 16px;
+            padding: 13px 20px;
+            border-radius: var(--radius-small);
             font-weight: 700;
-            font-size: 0.85rem;
-            margin-top: 15px;
+            font-size: 0.88rem;
+            margin-top: 18px;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
-            transition: transform 0.15s;
-        }
-        .btn-main:active { transform: scale(0.95); }
-        .btn-close {
-            background: #ffe5ec;
-            color: #d90429;
-            border: 2px solid #ffb3c1;
-            margin-top: 10px;
+            box-shadow: 0 6px 18px rgba(255, 77, 109, 0.32);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
         }
 
-        .music-bar { display: flex; align-items: center; justify-content: center; gap: 5px; height: 32px; margin: 12px 0; }
-        .bar-line { width: 4px; background: #ff4d6d; border-radius: 4px; animation: bounce 0.6s infinite alternate ease-in-out; }
+        .btn-main:active {
+            transform: scale(0.96);
+        }
+
+        .btn-close {
+            background: var(--pink-light);
+            color: var(--pink-deep);
+            border: 2px solid var(--pink-soft);
+            margin-top: 10px;
+            box-shadow: none;
+        }
+
+        /* ==========================================================================
+           9. UI COMPONENTS (MUSIC BARS, PROGRESS BARS, ETC.)
+           ========================================================================== */
+        .music-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            height: 36px;
+            margin: 15px 0;
+        }
+
+        .bar-line {
+            width: 5px;
+            background: var(--pink-main);
+            border-radius: 4px;
+            animation: bounce 0.6s infinite alternate ease-in-out;
+        }
+
+        .bar-line:nth-child(1) { animation-delay: 0.0s; }
         .bar-line:nth-child(2) { animation-delay: 0.15s; }
         .bar-line:nth-child(3) { animation-delay: 0.3s; }
         .bar-line:nth-child(4) { animation-delay: 0.45s; }
-        @keyframes bounce { from { height: 6px; } to { height: 28px; } }
+        .bar-line:nth-child(5) { animation-delay: 0.6s; }
+
+        @keyframes bounce {
+            from { height: 8px; }
+            to { height: 32px; }
+        }
+
+        .floating-music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #ffffff;
+            border: 2.5px solid var(--pink-soft);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 20px rgba(255, 101, 132, 0.3);
+            z-index: 900;
+            cursor: pointer;
+            font-size: 1.4rem;
+            transition: transform 0.2s ease;
+        }
+
+        .floating-music-btn:active {
+            transform: scale(0.9);
+        }
+
+        .canvas-confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 2000;
+        }
     </style>
 </head>
 <body>
 
+    <!-- CANVAS FOR CONFETTI EFFECT -->
+    <canvas id="confettiCanvas" class="canvas-confetti"></canvas>
+
+    <!-- FLOATING BACKGROUND ANIMATION -->
     <div class="ambient-bg" id="ambientBg"></div>
 
-    <!-- LOCK SCREEN CUTE -->
+    <!-- FLOATING QUICK MUSIC PLAYER BUTTON -->
+    <div class="floating-music-btn" id="quickMusicBtn" onclick="toggleQuickMusic()" title="Putar/Jeda Lagu">
+        🎵
+    </div>
+
+    <!-- LOCK SCREEN INTERFACE -->
     <div id="lockScreen">
         <div class="lock-time" id="lockClock">00:00</div>
-        <div class="lock-date">Special 20th Birthday</div>
+        <div class="lock-date">✨ Special 20th Birthday OS</div>
         <div class="lock-title">Masukkan PIN Ulang Tahun Kamu, Acum</div>
         
         <div class="pin-dots" id="pinDots">
@@ -288,54 +643,78 @@
         <div class="key-hint">PIN: 1310 atau 20</div>
     </div>
 
-    <!-- MAIN APP CONTAINER -->
+    <!-- MAIN APP OS CONTAINER -->
     <div class="app-container">
 
-        <!-- FOTO FULL LEBAR DI ATAS -->
+        <!-- HERO PHOTO CARD (BINGKAI PINK AWAL) -->
         <div class="hero-photo-card">
-            <img src="https://i.ibb.co.com/vxGVQbjG/IMG-2605.png" alt="Acum & Nasyha">
-            <div class="hero-badge">✨ Special Birthday Boy • 20th</div>
+            <div class="hero-photo-wrapper">
+                <img src="https://i.ibb.co.com/vxGVQbjG/IMG-2605.png" alt="Acum & Nasyha">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    ✨ Special Birthday Boy • 20th
+                </div>
+            </div>
         </div>
         
-        <div class="content-padding">
-            <!-- HEADER TITLE -->
-            <div class="header">
-                <h1>ACUM'S 20th BIRTHDAY 💖</h1>
-                <p>Dibuat khusus untuk kamu yang paling spesial!</p>
-            </div>
-
-            <!-- GRID 8 FITUR -->
-            <div class="grid" id="cardGrid"></div>
+        <!-- HEADER TITLE SECTION -->
+        <div class="header">
+            <h1>ACUM'S 20th BIRTHDAY 💖</h1>
+            <p>Dibuat khusus & tulus untuk kamu yang paling spesial!</p>
         </div>
+
+        <!-- GRID 12 FITUR UTAMA -->
+        <div class="grid" id="cardGrid"></div>
     </div>
 
-    <!-- POPUP MODAL -->
+    <!-- POPUP MODAL DIALOG -->
     <div class="modal-overlay" id="modal">
         <div class="modal-box">
             <div class="modal-title" id="mTitle">Menu</div>
             <div class="modal-body" id="mBody">Konten</div>
-            <button class="btn-main btn-close" onclick="closeModal()">Tutup ✖</button>
+            <button class="btn-main btn-close" onclick="closeModal()">Tutup Menu ✖</button>
         </div>
     </div>
 
+    <!-- HIDDEN YOUTUBE PLAYER SPACE -->
     <div id="ytPlayerSpace" style="display:none"></div>
 
+    <!-- ==========================================================================
+       10. JAVASCRIPT LOGIC & INTERACTION ENGINE
+       ========================================================================== -->
     <script>
-        // BUBBLE GENERATOR
+        /* ----------------------------------------------------------------------
+           10.1 BUBBLE GENERATOR & AMBIENT EFFECTS
+           ---------------------------------------------------------------------- */
         const bg = document.getElementById('ambientBg');
-        for(let i=0; i<15; i++) {
+        for(let i = 0; i < 18; i++) {
             const b = document.createElement('div');
             b.className = 'bubble';
-            const size = Math.random() * 25 + 10;
+            const size = Math.random() * 24 + 10;
             b.style.width = size + 'px';
             b.style.height = size + 'px';
             b.style.left = Math.random() * 100 + 'vw';
-            b.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            b.style.animationDuration = (Math.random() * 6 + 6) + 's';
             b.style.animationDelay = (Math.random() * 5) + 's';
             bg.appendChild(b);
         }
 
+        // Sparkle effect on click anywhere
+        document.addEventListener('click', function(e) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle-particle';
+            sparkle.innerText = ['✨', '💖', '🌸', '💫'][Math.floor(Math.random() * 4)];
+            sparkle.style.left = (e.clientX - 10) + 'px';
+            sparkle.style.top = (e.clientY - 10) + 'px';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1000);
+        });
+
+        /* ----------------------------------------------------------------------
+           10.2 AUDIO SYNTHESIZER (WEB AUDIO API)
+           ---------------------------------------------------------------------- */
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
         function playTone(freq, type = 'sine', duration = 0.15) {
             try {
                 const osc = audioCtx.createOscillator();
@@ -355,15 +734,20 @@
             playTone(523.25, 'sine', 0.1);
             setTimeout(() => playTone(659.25, 'sine', 0.15), 100);
             setTimeout(() => playTone(783.99, 'sine', 0.25), 200);
+            setTimeout(() => triggerConfetti(), 300);
         }
 
+        /* ----------------------------------------------------------------------
+           10.3 LOCK SCREEN & PIN SYSTEM
+           ---------------------------------------------------------------------- */
         function updateClock() {
             const now = new Date();
             const h = String(now.getHours()).padStart(2, '0');
             const m = String(now.getMinutes()).padStart(2, '0');
             document.getElementById('lockClock').innerText = `${h}:${m}`;
         }
-        setInterval(updateClock, 1000); updateClock();
+        setInterval(updateClock, 1000); 
+        updateClock();
 
         let inputPin = "";
         const validPins = ["1310", "2026", "0020", "20"];
@@ -412,51 +796,169 @@
             }
         }
 
-        // YOUTUBE AFGAN FT ROSSA
+        /* ----------------------------------------------------------------------
+           10.4 YOUTUBE PLAYER INTEGRATION
+           ---------------------------------------------------------------------- */
         let ytPlayer;
-        const tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api";
+        let isPlaying = false;
+        const tag = document.createElement('script'); 
+        tag.src = "https://www.youtube.com/iframe_api";
         document.body.appendChild(tag);
+
         function onYouTubeIframeAPIReady() {
             ytPlayer = new YT.Player('ytPlayerSpace', {
-                height: '0', width: '0', videoId: 'eI24fJkG4zY',
-                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'eI24fJkG4zY' }
+                height: '0', 
+                width: '0', 
+                videoId: 'eI24fJkG4zY',
+                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'eI24fJkG4zY' },
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
             });
         }
 
-        // KONTEN 8 FITUR DEWASA, BERISI & MANIS
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                document.getElementById('quickMusicBtn').innerText = '⏸️';
+            } else {
+                isPlaying = false;
+                document.getElementById('quickMusicBtn').innerText = '🎵';
+            }
+        }
+
+        function toggleQuickMusic() {
+            if(!ytPlayer) return;
+            if(isPlaying) {
+                ytPlayer.pauseVideo();
+            } else {
+                ytPlayer.playVideo();
+            }
+        }
+
+        /* ----------------------------------------------------------------------
+           10.5 CONFETTI CANVA ENGINE
+           ---------------------------------------------------------------------- */
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d');
+        let confettiParticles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function triggerConfetti() {
+            confettiParticles = [];
+            const colors = ['#ff4d6d', '#ff758c', '#ffb3c1', '#ffffff', '#ffd166'];
+            for(let i = 0; i < 70; i++) {
+                confettiParticles.push({
+                    x: canvas.width / 2,
+                    y: canvas.height / 2,
+                    vx: (Math.random() - 0.5) * 12,
+                    vy: (Math.random() - 0.7) * 14,
+                    size: Math.random() * 8 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    alpha: 1,
+                    rotation: Math.random() * 360,
+                    vRot: (Math.random() - 0.5) * 10
+                });
+            }
+            animateConfetti();
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let active = false;
+            confettiParticles.forEach(p => {
+                if(p.alpha > 0) {
+                    active = true;
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.25; // gravity
+                    p.alpha -= 0.015;
+                    p.rotation += p.vRot;
+
+                    ctx.save();
+                    ctx.globalAlpha = Math.max(0, p.alpha);
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rotation * Math.PI / 180);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+                    ctx.restore();
+                }
+            });
+            if(active) requestAnimationFrame(animateConfetti);
+        }
+
+        /* ----------------------------------------------------------------------
+           10.6 12 FEATURE DATA & MODAL CONTENT
+           ---------------------------------------------------------------------- */
         const cards = [
             { 
                 icon: "📜", 
                 title: "Surat Refleksi Usia 20", 
-                body: "Selamat memasuki usia 20 tahun, Acum! 🥂✨<br><br>Angka kepala dua bukan tentang tuntutan untuk harus serba tahu atau terburu-buru meraih segalanya. Usia 20 adalah tentang belajar menikmati proses, menghargai setiap usaha kecilmu, dan berani melangkah dengan tenang.<br><br>Terima kasih ya sudah terus berjuang dan tumbuh jadi pribadi yang penuh tanggung jawab serta hangat. Ingat, kapan pun kamu merasa lelah, kamu selalu punya tempat untuk pulang dan berbagi cerita denganku. Happy 20th Birthday! 💕" 
+                body: `
+                <strong>Selamat memasuki usia 20 tahun, Acum! 🥂✨</strong><br><br>
+                Angka kepala dua bukan tentang tuntutan untuk harus serba tahu atau terburu-buru meraih segalanya. Usia 20 adalah tentang belajar menikmati proses, menghargai setiap usaha kecilmu, dan berani melangkah dengan tenang.<br><br>
+                Terima kasih ya sudah terus berjuang dan tumbuh jadi pribadi yang penuh tanggung jawab serta hangat. Ingat, kapan pun kamu merasa lelah, kamu selalu punya tempat untuk pulang dan berbagi cerita denganku.<br><br>
+                Happy 20th Birthday, cowok favorit aku! 💕
+                ` 
             },
             { 
                 icon: "🎵", 
                 title: "Sudut Musik & Harmoni", 
-                body: "<p style='text-align:center;'><strong>Kamu Yang Kutunggu — Afgan ft. Rossa</strong></p><p style='text-align:center; font-style:italic; color:#d90429; font-size:0.82rem; margin:10px 0;'>\"Telah lama kucari dirimu... Dipelukku tempatmu... Kau yang kutunggu...\" 🎶</p><p style='font-size:0.82rem; color:#6b3e4a; text-align:center; margin-bottom:10px;'>Lagu ini pengingat betapa bersyukurnya aku bisa nemuin sosok sehebat kamu dalam hidupku.</p><div class='music-bar'><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div></div><button class='btn-main' onclick='ytPlayer.playVideo()'>▶ Putar Musik</button><button class='btn-main btn-close' onclick='ytPlayer.pauseVideo()'>⏸ Jeda Musik</button>" 
+                body: `
+                <p style='text-align:center;'><strong>Kamu Yang Kutunggu — Afgan ft. Rossa</strong></p>
+                <p style='text-align:center; font-style:italic; color:var(--pink-deep); font-size:0.83rem; margin:10px 0;'>
+                \"Telah lama kucari dirimu... Dipelukku tempatmu... Kau yang kutunggu...\" 🎶
+                </p>
+                <p style='font-size:0.82rem; color:var(--text-sub); text-align:center; margin-bottom:12px;'>
+                Lagu ini pengingat betapa bersyukurnya aku bisa nemuin sosok sehebat kamu dalam hidupku.
+                </p>
+                <div class='music-bar'>
+                    <div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div>
+                </div>
+                <button class='btn-main' onclick='ytPlayer.playVideo(); triggerConfetti();'>▶ Putar Musik</button>
+                <button class='btn-main btn-close' onclick='ytPlayer.pauseVideo()'>⏸ Jeda Musik</button>
+                ` 
             },
             { 
                 icon: "🎟️", 
-                title: "Kupon Momen Quality Time", 
-                body: "<p id='kBox' style='text-align:center;'>Ambil voucher momen kebersamaan yang bisa kamu klaim kapan saja kamu butuh jeda:</p><button class='btn-main' onclick='ambilKupon()'>Ambil Voucher Momen 🪙</button>" 
+                title: "Voucher Momen Quality Time", 
+                body: `
+                <p id='kBox' style='text-align:center;'>Ambil voucher momen kebersamaan yang bisa kamu klaim kapan saja kamu butuh jeda:</p>
+                <button class='btn-main' onclick='ambilKupon()'>Ambil Voucher Momen 🪙</button>
+                ` 
             },
             { 
                 icon: "🕯️", 
-                title: "Refleksi & Doa Baik", 
-                body: "<p id='dBox' style='text-align:center;'>Kocok pesan penguat & harapan baik untuk perjalanan usiamu yang baru:</p><button class='btn-main' onclick='acakDoa()'>Ambil Pesan Doa ✨</button>" 
+                title: "Refleksi & Harapan Baik", 
+                body: `
+                <p id='dBox' style='text-align:center;'>Kocok pesan penguat & harapan baik untuk perjalanan usiamu yang baru:</p>
+                <button class='btn-main' onclick='acakDoa()'>Ambil Pesan Doa ✨</button>
+                ` 
             },
             { 
                 icon: "🔋", 
-                title: "Apresiasi & Ruang Jeda", 
-                body: "<p style='text-align:center;'>Kamu sudah bekerja keras dan berusaha sangat baik sejauh ini. Ketika hal-hal tidak berjalan sesuai rencana, ingatlah untuk memberi dirimu ruang bernapas.</p><div style='background:#ffe5ec; border:2px solid #ffb3c1; height:16px; border-radius:8px; margin:15px 0; overflow:hidden;'><div id='mBar' style='width:60%; height:100%; background:linear-gradient(to right, #ff4d6d, #ff758c); transition:0.3s;'></div></div><button class='btn-main' onclick='tambahMood()'>Kirim Energi Semangat & Pelukan 🤗</button>" 
+                title: "Ruang Isi Ulang Semangat", 
+                body: `
+                <p style='text-align:center;'>Kamu sudah bekerja keras dan berusaha sangat baik sejauh ini. Ketika hal-hal tidak berjalan sesuai rencana, ingatlah untuk memberi dirimu ruang bernapas.</p>
+                <div style='background:var(--pink-light); border:2px solid var(--pink-soft); height:18px; border-radius:10px; margin:15px 0; overflow:hidden;'>
+                    <div id='mBar' style='width:60%; height:100%; background:linear-gradient(to right, #ff4d6d, #ff758c); transition:0.3s;'></div>
+                </div>
+                <button class='btn-main' onclick='tambahMood()'>Kirim Energi Semangat & Pelukan 🤗</button>
+                ` 
             },
             { 
                 icon: "☕", 
-                title: "Pemeriksa Kenyamanan", 
+                title: "Pemeriksa Suasana Hati", 
                 body: `
                 <p style="text-align:center; font-size:0.88rem; margin-bottom:12px;">Pindai tingkat kenyamanan & rona kebahagiaan Acum hari ini:</p>
-                <div style="background:#ffe5ec; border:2px solid #ffb3c1; border-radius:16px; padding:15px; text-align:center;">
-                    <p id="camTxt" style="font-size:0.88rem; font-weight:bold; color:#d90429;">Tingkat Kenyamanan: 100% Siap Menghadapi Hari! 🌿✨</p>
+                <div style="background:var(--pink-light); border:2px solid var(--pink-soft); border-radius:16px; padding:15px; text-align:center;">
+                    <p id="camTxt" style="font-size:0.88rem; font-weight:bold; color:var(--pink-deep);">Tingkat Kenyamanan: 100% Siap Menghadapi Hari! 🌿✨</p>
                 </div>
                 <button class="btn-main" onclick="scanSalting()">Periksa Kondisi Mood ⚡</button>
                 ` 
@@ -464,15 +966,61 @@
             { 
                 icon: "🗺️", 
                 title: "Arah & Target Bersama", 
-                body: "<div style='text-align:left; font-size:0.88rem; line-height:2.2;'><input type='checkbox' checked disabled> Bertumbuh Dewasa secara Finansial & Karir 🎯<br><input type='checkbox' checked disabled> Menjaga Kesehatan Mental & Fisik Tetap Seimbang 🌿<br><input type='checkbox' checked disabled> Luangkan Waktu Jalan-Jalan & QTime Tanpa Beban ☕<br><input type='checkbox' checked disabled> Saling Mendukung di Setiap Momen Suka & Duka 🤝❤️</div>" 
+                body: `
+                <div style='text-align:left; font-size:0.88rem; line-height:2.2;'>
+                    <input type='checkbox' checked disabled> Bertumbuh Dewasa secara Finansial & Karir 🎯<br>
+                    <input type='checkbox' checked disabled> Menjaga Kesehatan Mental & Fisik Tetap Seimbang 🌿<br>
+                    <input type='checkbox' checked disabled> Luangkan Waktu Jalan-Jalan & QTime Tanpa Beban ☕<br>
+                    <input type='checkbox' checked disabled> Saling Mendukung di Setiap Momen Suka & Duka 🤝❤️
+                </div>
+                ` 
+            },
+            { 
+                icon: "💡", 
+                title: "Pengingat Bebas Khawatir", 
+                body: `
+                🌿 <strong>Jangan Terlalu Cemas tentang Masa Depan:</strong><br><br>
+                Satu per satu hal bakal ketemu jalannya kok. Kamu gak perlu memikul semuanya sendirian. Ambil napas dalam-dalam, jalani hari ini dengan baik, dan percayalah kalau kamu sudah ada di jalur yang tepat! ✨
+                ` 
+            },
+            { 
+                icon: "📸", 
+                title: "Galeri Kenangan Kecil", 
+                body: `
+                📸 <strong>Momen Terbaik Kita:</strong><br><br>
+                Setiap perjalanan, tawa sederhana, dan percakapan kecil kita adalah hal-hal yang selalu bikin aku bersyukur. Terima kasih ya sudah jadi teman perjalanan hidup yang paling menyenangkan! 💕
+                ` 
+            },
+            { 
+                icon: "🤝", 
+                title: "Komitmen Saling Jaga", 
+                body: `
+                🤝 <strong>Janji Kecil Buat Kita:</strong><br><br>
+                Selalu terbuka dalam komunikasi, saling mendengar tanpa menghakimi, dan selalu jadi tempat perlindungan paling aman saat dunia luar terasa terlalu bising.
+                ` 
+            },
+            { 
+                icon: "🌟", 
+                title: "Catatan Apresiasi Diri", 
+                body: `
+                🌟 <strong>Apresiasi Buat Acum:</strong><br><br>
+                Terima kasih sudah jadi sosok yang sabar, pekerja keras, tidak gampang menyerah, dan selalu memperlakukan orang di sekitarmu dengan penuh kebaikan. I'm so proud of you!
+                ` 
             },
             { 
                 icon: "🔒", 
                 title: "Kapsul Waktu Kedewasaan", 
-                body: "🔒 <strong>Pesan Kapsul Waktu Usia 20:</strong><br><br>Acum, terima kasih sudah memilih untuk terus berjuang dengan jujur dan baik. Di perjalanan pendewasaan ini, tidak ada yang menuntutmu untuk sempurna.<br><br>Jalani setiap hari dengan percaya diri. Aku akan selalu bangga dan mendukungmu di setiap langkah. Selamat ulang tahun yang ke-20, favoritku! 🤍✨" 
+                body: `
+                🔒 <strong>Pesan Kapsul Waktu Usia 20:</strong><br><br>
+                Acum, terima kasih sudah memilih untuk terus berjuang dengan jujur dan baik. Di perjalanan pendewasaan ini, tidak ada yang menuntutmu untuk sempurna.<br><br>
+                Jalani setiap hari dengan percaya diri. Aku akan selalu bangga dan mendukungmu di setiap langkah. Selamat ulang tahun yang ke-20, favoritku! 🤍✨
+                ` 
             }
         ];
 
+        /* ----------------------------------------------------------------------
+           10.7 RENDER CARDS & DYNAMIC INTERACTION
+           ---------------------------------------------------------------------- */
         const gridEl = document.getElementById('cardGrid');
         cards.forEach((c, i) => {
             const card = document.createElement('div');
@@ -496,13 +1044,22 @@
 
         function ambilKupon() {
             playTone(1000, 'triangle', 0.15);
+            triggerConfetti();
             const listK = [
                 "🎟️ Voucher Coffee Date & Deep Talk Santai",
                 "🎟️ Voucher Unwind Day (Hari Bebas Gangguan & Bebas Stress)",
                 "🎟️ Voucher Traktir Makanan Favorit Bebas Pilih",
                 "🎟️ Voucher Temani Ngobrol & Dengar Cerita Kapan Saja"
             ];
-            document.getElementById('kBox').innerHTML = `<div style='text-align:center;'><strong>Voucher Terpilih:</strong><br><span style='color:#d90429; font-weight:bold; font-size:0.95rem;'>${listK[Math.floor(Math.random()*listK.length)]}</span><br><small style='color:#6b3e4a;'>(Simpan / screenshot voucher ini untuk diklaim ke Acim ya!)</small></div>`;
+            document.getElementById('kBox').innerHTML = `
+                <div style='text-align:center;'>
+                    <strong>Voucher Terpilih:</strong><br>
+                    <span style='color:var(--pink-deep); font-weight:bold; font-size:0.95rem;'>
+                        ${listK[Math.floor(Math.random()*listK.length)]}
+                    </span><br>
+                    <small style='color:var(--text-sub);'>(Simpan / screenshot voucher ini untuk diklaim ke Acim ya!)</small>
+                </div>
+            `;
         }
 
         function scanSalting() {
@@ -510,12 +1067,14 @@
             document.getElementById('camTxt').innerText = "Memindai suasana hati...";
             setTimeout(() => {
                 playTone(1400, 'sine', 0.3);
+                triggerConfetti();
                 document.getElementById('camTxt').innerText = "HASIL: 100% PENUH ENERGI POSITIF & DICINTAI ACIM! ☕❤️";
             }, 1400);
         }
 
         function acakDoa() {
             playTone(900, 'sine', 0.1);
+            triggerConfetti();
             const list = [
                 "✨ Semoga segala urusan kuliah, karir, dan langkah bisnismu dipermudah jalan kelancarannya.",
                 "🌿 Semoga hatimu selalu diberikan ketenangan, kepikiran yang jernih, dan jauh dari rasa cemas.",
@@ -530,6 +1089,7 @@
             playTone(1100, 'sine', 0.1);
             mVal = Math.min(100, mVal + 20);
             document.getElementById('mBar').style.width = mVal + '%';
+            if(mVal >= 100) triggerConfetti();
         }
     </script>
 </body>
