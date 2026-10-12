@@ -47,7 +47,7 @@
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        /* CONTAINER UTAMA (HP MOCKUP) */
+        /* CONTAINER UTAMA */
         .app-container {
             width: 100%;
             max-width: 410px;
@@ -59,7 +59,7 @@
             border-right: 1px solid var(--glass-border);
             position: relative;
             z-index: 1;
-            padding: 0 0 40px 0; /* Padding atas 0 agar foto full mentok ke atas */
+            padding: 0 0 40px 0;
             display: flex;
             flex-direction: column;
             box-shadow: 0 0 40px rgba(255, 101, 132, 0.25);
@@ -98,14 +98,13 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        /* PADDING UNTUK KONTROL DI DALAM CONTAINER */
         .content-padding {
             padding: 0 18px;
             display: flex;
             flex-direction: column;
         }
 
-        /* LOCK SCREEN CUTE PINK */
+        /* LOCK SCREEN */
         #lockScreen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -154,7 +153,7 @@
         .key:active { background: #ff4d6d; color: white; transform: scale(0.92); }
         .key-hint { font-size: 0.75rem; color: #8c5563; margin-top: 25px; text-align: center; font-weight: 600; }
 
-        /* HEADER CUTE */
+        /* HEADER */
         .header {
             text-align: center;
             background: linear-gradient(135deg, #ffffff, #ffe5ec);
@@ -191,7 +190,7 @@
         .card-item .icon { font-size: 2rem; margin-bottom: 6px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1)); }
         .card-item .card-title { font-size: 0.82rem; font-weight: 700; color: #4a2e35; line-height: 1.3; }
 
-        /* POPUP MODAL CUTE */
+        /* POPUP MODAL */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -289,7 +288,7 @@
         <div class="key-hint">PIN: 1310 atau 20</div>
     </div>
 
-    <!-- MAIN APP CUTE PINK -->
+    <!-- MAIN APP CONTAINER -->
     <div class="app-container">
 
         <!-- FOTO FULL LEBAR DI ATAS -->
@@ -424,53 +423,53 @@
             });
         }
 
-        // 8 FITUR UTAMA DENGAN BAHASA "AKU-KAMU" MANIS
+        // KONTEN 8 FITUR DEWASA, BERISI & MANIS
         const cards = [
             { 
-                icon: "💌", 
-                title: "Surat Spesial Untukmu", 
-                body: "Happy 20th Birthday, Acum sayang! 🎂✨<br><br>Gak terasa ya kamu sekarang udah resmi menginjak usia kepala dua. Makasih banyak ya udah selalu sabar, baik, dan nemenin aku selama ini. Kamu adalah rumah paling nyaman buat aku.<br><br>Semoga di umur 20 ini semua hal baik, rezeki, dan impian kamu dikabulkan. Aku bakal selalu ada buat dukung kamu dalam kondisi apa pun. I love you! 💕" 
+                icon: "📜", 
+                title: "Surat Refleksi Usia 20", 
+                body: "Selamat memasuki usia 20 tahun, Acum! 🥂✨<br><br>Angka kepala dua bukan tentang tuntutan untuk harus serba tahu atau terburu-buru meraih segalanya. Usia 20 adalah tentang belajar menikmati proses, menghargai setiap usaha kecilmu, dan berani melangkah dengan tenang.<br><br>Terima kasih ya sudah terus berjuang dan tumbuh jadi pribadi yang penuh tanggung jawab serta hangat. Ingat, kapan pun kamu merasa lelah, kamu selalu punya tempat untuk pulang dan berbagi cerita denganku. Happy 20th Birthday! 💕" 
             },
             { 
                 icon: "🎵", 
-                title: "Lagu Kita Berdua", 
-                body: "<p style='text-align:center;'><strong>Kamu Yang Kutunggu - Afgan & Rossa</strong></p><p style='text-align:center; font-style:italic; color:#d90429; font-size:0.82rem; margin:10px 0;'>\"Telah lama kucari dirimu... Dipelukku tempatmu... Kau yang kutunggu...\" 🎶</p><div class='music-bar'><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div></div><button class='btn-main' onclick='ytPlayer.playVideo()'>▶ Putar Lagu</button><button class='btn-main btn-close' onclick='ytPlayer.pauseVideo()'>⏸ Jeda Lagu</button>" 
+                title: "Sudut Musik & Harmoni", 
+                body: "<p style='text-align:center;'><strong>Kamu Yang Kutunggu — Afgan ft. Rossa</strong></p><p style='text-align:center; font-style:italic; color:#d90429; font-size:0.82rem; margin:10px 0;'>\"Telah lama kucari dirimu... Dipelukku tempatmu... Kau yang kutunggu...\" 🎶</p><p style='font-size:0.82rem; color:#6b3e4a; text-align:center; margin-bottom:10px;'>Lagu ini pengingat betapa bersyukurnya aku bisa nemuin sosok sehebat kamu dalam hidupku.</p><div class='music-bar'><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div></div><button class='btn-main' onclick='ytPlayer.playVideo()'>▶ Putar Musik</button><button class='btn-main btn-close' onclick='ytPlayer.pauseVideo()'>⏸ Jeda Musik</button>" 
             },
             { 
                 icon: "🎟️", 
-                title: "Kupon Hadiah Spesial", 
-                body: "<p id='kBox' style='text-align:center;'>Ambil satu kupon spesial dari aku khusus hari ulang tahunmu!</p><button class='btn-main' onclick='ambilKupon()'>Ambil Kupon 🪙</button>" 
+                title: "Kupon Momen Quality Time", 
+                body: "<p id='kBox' style='text-align:center;'>Ambil voucher momen kebersamaan yang bisa kamu klaim kapan saja kamu butuh jeda:</p><button class='btn-main' onclick='ambilKupon()'>Ambil Voucher Momen 🪙</button>" 
             },
             { 
-                icon: "📸", 
-                title: "Detektor Salting Acum", 
+                icon: "🕯️", 
+                title: "Refleksi & Doa Baik", 
+                body: "<p id='dBox' style='text-align:center;'>Kocok pesan penguat & harapan baik untuk perjalanan usiamu yang baru:</p><button class='btn-main' onclick='acakDoa()'>Ambil Pesan Doa ✨</button>" 
+            },
+            { 
+                icon: "🔋", 
+                title: "Apresiasi & Ruang Jeda", 
+                body: "<p style='text-align:center;'>Kamu sudah bekerja keras dan berusaha sangat baik sejauh ini. Ketika hal-hal tidak berjalan sesuai rencana, ingatlah untuk memberi dirimu ruang bernapas.</p><div style='background:#ffe5ec; border:2px solid #ffb3c1; height:16px; border-radius:8px; margin:15px 0; overflow:hidden;'><div id='mBar' style='width:60%; height:100%; background:linear-gradient(to right, #ff4d6d, #ff758c); transition:0.3s;'></div></div><button class='btn-main' onclick='tambahMood()'>Kirim Energi Semangat & Pelukan 🤗</button>" 
+            },
+            { 
+                icon: "☕", 
+                title: "Pemeriksa Kenyamanan", 
                 body: `
-                <p style="text-align:center; font-size:0.9rem; margin-bottom:12px;">Uji rona pipi & ketampanan Acum hari ini:</p>
+                <p style="text-align:center; font-size:0.88rem; margin-bottom:12px;">Pindai tingkat kenyamanan & rona kebahagiaan Acum hari ini:</p>
                 <div style="background:#ffe5ec; border:2px solid #ffb3c1; border-radius:16px; padding:15px; text-align:center;">
-                    <p id="camTxt" style="font-size:0.9rem; font-weight:bold; color:#d90429;">Ketampanan Acum Level 100%! 😍</p>
+                    <p id="camTxt" style="font-size:0.88rem; font-weight:bold; color:#d90429;">Tingkat Kenyamanan: 100% Siap Menghadapi Hari! 🌿✨</p>
                 </div>
-                <button class="btn-main" onclick="scanSalting()">Cek Tingkat Salting ⚡</button>
+                <button class="btn-main" onclick="scanSalting()">Periksa Kondisi Mood ⚡</button>
                 ` 
             },
             { 
-                icon: "🔮", 
-                title: "Pengacak Doa Manis", 
-                body: "<p id='dBox' style='text-align:center;'>Ambil doa indah khusus untuk hari ini:</p><button class='btn-main' onclick='acakDoa()'>Kocok Doa Indah ✨</button>" 
-            },
-            { 
-                icon: "❤️", 
-                title: "Meteran Kebahagiaan", 
-                body: "<p style='text-align:center;'>Isi ulang pasokan kasih sayang buat kamu hari ini:</p><div style='background:#ffe5ec; border:2px solid #ffb3c1; height:16px; border-radius:8px; margin:15px 0; overflow:hidden;'><div id='mBar' style='width:60%; height:100%; background:linear-gradient(to right, #ff4d6d, #ff758c); transition:0.3s;'></div></div><button class='btn-main' onclick='tambahMood()'>Kirim Pelukan Hangat (+20%) 🤗</button>" 
-            },
-            { 
                 icon: "🗺️", 
-                title: "Target Impian Berdua", 
-                body: "<div style='text-align:left; font-size:0.88rem; line-height:2.2;'><input type='checkbox' checked disabled> Lulus & Sukses Kuliah/Karir ✨<br><input type='checkbox' checked disabled> Kulineran Makanan Enak Berdua 🍲<br><input type='checkbox' checked disabled> Jalan-Jalan Santai Buat Healing 🚲<br><input type='checkbox' checked disabled> Selalu Bahagia Sama-Sama ❤️</div>" 
+                title: "Arah & Target Bersama", 
+                body: "<div style='text-align:left; font-size:0.88rem; line-height:2.2;'><input type='checkbox' checked disabled> Bertumbuh Dewasa secara Finansial & Karir 🎯<br><input type='checkbox' checked disabled> Menjaga Kesehatan Mental & Fisik Tetap Seimbang 🌿<br><input type='checkbox' checked disabled> Luangkan Waktu Jalan-Jalan & QTime Tanpa Beban ☕<br><input type='checkbox' checked disabled> Saling Mendukung di Setiap Momen Suka & Duka 🤝❤️</div>" 
             },
             { 
                 icon: "🔒", 
-                title: "Pesan Kapsul Waktu", 
-                body: "🔒 <strong>Pesan Khusus Untuk Masa Depan:</strong><br><br>Acum, terima kasih ya sudah tumbuh jadi orang yang hebat sampai hari ini. Jangan pernah ragu sama kemampuan kamu sendiri.<br><br>Kamu hebat, kamu berharga, dan kamu selalu dicintai. Happy 20th Birthday, cowok favorit aku! 🤍✨" 
+                title: "Kapsul Waktu Kedewasaan", 
+                body: "🔒 <strong>Pesan Kapsul Waktu Usia 20:</strong><br><br>Acum, terima kasih sudah memilih untuk terus berjuang dengan jujur dan baik. Di perjalanan pendewasaan ini, tidak ada yang menuntutmu untuk sempurna.<br><br>Jalani setiap hari dengan percaya diri. Aku akan selalu bangga dan mendukungmu di setiap langkah. Selamat ulang tahun yang ke-20, favoritku! 🤍✨" 
             }
         ];
 
@@ -498,30 +497,30 @@
         function ambilKupon() {
             playTone(1000, 'triangle', 0.15);
             const listK = [
-                "🎟️ Kupon Ditraktir Makanan Favorit Kamu",
-                "🎟️ Kupon Bebas Pilih Tempat Jalan-Jalan",
-                "🎟️ Kupon Temani Ngobrol / Dengerin Cerita Kamu Seharian",
-                "🎟️ Kupon Pelukan Hangat Tanpa Batas Waktu"
+                "🎟️ Voucher Coffee Date & Deep Talk Santai",
+                "🎟️ Voucher Unwind Day (Hari Bebas Gangguan & Bebas Stress)",
+                "🎟️ Voucher Traktir Makanan Favorit Bebas Pilih",
+                "🎟️ Voucher Temani Ngobrol & Dengar Cerita Kapan Saja"
             ];
-            document.getElementById('kBox').innerHTML = `<div style='text-align:center;'><strong>Hadiah Kupon Kamu:</strong><br><span style='color:#d90429; font-weight:bold; font-size:1rem;'>${listK[Math.floor(Math.random()*listK.length)]}</span><br><small style='color:#6b3e4a;'>(Screenshot kupon ini buat ditagih ke aku ya!)</small></div>`;
+            document.getElementById('kBox').innerHTML = `<div style='text-align:center;'><strong>Voucher Terpilih:</strong><br><span style='color:#d90429; font-weight:bold; font-size:0.95rem;'>${listK[Math.floor(Math.random()*listK.length)]}</span><br><small style='color:#6b3e4a;'>(Simpan / screenshot voucher ini untuk diklaim ke Acim ya!)</small></div>`;
         }
 
         function scanSalting() {
             playTone(700, 'sawtooth', 0.2);
-            document.getElementById('camTxt').innerText = "Memindai senyuman...";
+            document.getElementById('camTxt').innerText = "Memindai suasana hati...";
             setTimeout(() => {
                 playTone(1400, 'sine', 0.3);
-                document.getElementById('camTxt').innerText = "HASIL: 1000% GANTENG & BIKIN ACIM MAKIN SAYANG! 😳❤️";
+                document.getElementById('camTxt').innerText = "HASIL: 100% PENUH ENERGI POSITIF & DICINTAI ACIM! ☕❤️";
             }, 1400);
         }
 
         function acakDoa() {
             playTone(900, 'sine', 0.1);
             const list = [
-                "✨ Semoga segala urusan kerja & karir kamu selalu dipermudah!",
-                "🌿 Semoga hati kamu selalu tenang dan dipenuhi kebahagiaan.",
-                "💫 Semoga selalu sehat, berkah, dan dikelilingi orang-orang baik.",
-                "💸 Semoga rezeki serta kebaikan selalu mengalir lancar buat kamu!"
+                "✨ Semoga segala urusan kuliah, karir, dan langkah bisnismu dipermudah jalan kelancarannya.",
+                "🌿 Semoga hatimu selalu diberikan ketenangan, kepikiran yang jernih, dan jauh dari rasa cemas.",
+                "💫 Semoga fisik dan mentalmu selalu sehat, serta dikelilingi oleh lingkungan yang mendukungmu.",
+                "🕊️ Semoga setiap keputusan yang kamu ambil di usia 20 ini membawa kebaikan dan keberkahan."
             ];
             document.getElementById('dBox').innerHTML = list[Math.floor(Math.random()*list.length)];
         }
