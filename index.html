@@ -141,7 +141,7 @@
         }
 
         /* ==========================================================================
-           4. HERO PHOTO FRAME (GAYA BINGKAI PINK AWAL)
+           4. HERO PHOTO FRAME (GAYA BINGKAI PINK AWAL + FOTO BERDUA)
            ========================================================================== */
         .hero-photo-card {
             width: 100%;
@@ -233,17 +233,6 @@
             overflow: hidden;
         }
 
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 60%);
-            pointer-events: none;
-        }
-
         .header h1 {
             font-size: 1.3rem;
             font-weight: 800;
@@ -259,7 +248,7 @@
         }
 
         /* ==========================================================================
-           6. GRID & CARD ITEMS
+           6. GRID & CARD ITEMS (12 FITUR)
            ========================================================================== */
         .grid {
             display: grid;
@@ -282,17 +271,6 @@
             box-shadow: 0 6px 18px rgba(255, 101, 132, 0.12);
             position: relative;
             overflow: hidden;
-        }
-
-        .card-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.4), transparent);
-            pointer-events: none;
         }
 
         .card-item:hover {
@@ -646,7 +624,7 @@
     <!-- MAIN APP OS CONTAINER -->
     <div class="app-container">
 
-        <!-- HERO PHOTO CARD (BINGKAI PINK AWAL) -->
+        <!-- HERO PHOTO CARD (BINGKAI FOTO BERDUA DENGAN BORDER PINK) -->
         <div class="hero-photo-card">
             <div class="hero-photo-wrapper">
                 <img src="https://i.ibb.co.com/vxGVQbjG/IMG-2605.png" alt="Acum & Nasyha">
