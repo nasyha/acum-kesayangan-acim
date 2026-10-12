@@ -3,389 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Acum - Celebrating 20 Years</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <title>Happy 20th Birthday Acum 💕</title>
     <style>
         :root {
-            --bg-dark: #0f0c1b;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --border-light: rgba(255, 255, 255, 0.12);
-            --accent: #e879f9;
-            --accent-glow: rgba(232, 121, 249, 0.35);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --pink-main: #ff6584;
+            --pink-soft: #ffb3c1;
+            --pink-bg: #fff0f3;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 182, 193, 0.5);
+            --text-dark: #4a2e35;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
 
         body {
-            background: var(--bg-dark);
-            color: var(--text-main);
+            background: linear-gradient(135deg, #ffccd5, #ffe5ec, #ff8fab);
+            min-height: 100vh;
+            color: var(--text-dark);
             display: flex;
             justify-content: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* BACKGROUND GLOW EFEK */
-        .bg-gradient {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 0;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.18) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
-        }
-
-        /* CONTAINER APLIKASI */
-        .app-container {
-            width: 100%; max-width: 430px;
-            min-height: 100vh;
-            background: rgba(15, 12, 27, 0.85);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-left: 1px solid var(--border-light);
-            border-right: 1px solid var(--border-light);
-            padding: 24px 18px 80px 18px;
-            position: relative; z-index: 1;
-        }
-
-        /* PHOTO HERO FRAME */
-        .photo-card {
-            width: 100%;
-            border-radius: 24px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-light);
-            padding: 12px;
-            margin-bottom: 22px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            position: relative;
-        }
-
-        .photo-wrapper {
-            width: 100%;
-            height: 380px;
-            border-radius: 18px;
-            overflow: hidden;
-            position: relative;
-            background: #18122b;
-        }
-
-        .photo-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-            /* Filter tajam agar foto jernih & berestetika */
-            filter: contrast(102%) brightness(102%);
-        }
-
-        .photo-tag {
-            position: absolute;
-            bottom: 12px; left: 12px;
-            background: rgba(15, 12, 27, 0.75);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 8px 14px;
-            border-radius: 30px;
-            font-size: 0.78rem;
-            color: #f1f5f9;
-            letter-spacing: 0.5px;
-        }
-
-        /* HEADER & UCAPAN UTAMA */
-        .header-title {
-            margin-bottom: 20px;
-        }
-
-        .header-title h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, #ffffff 30%, #e879f9 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 6px;
-        }
-
-        .header-title p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* FEATURE CARDS LIST */
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-light);
-            border-radius: 20px;
-            padding: 18px;
-            margin-bottom: 14px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            position: relative;
-        }
-
-        .feature-card:active {
-            transform: scale(0.98);
-            background: rgba(232, 121, 249, 0.1);
-            border-color: rgba(232, 121, 249, 0.4);
-        }
-
-        .fc-top {
-            display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 8px;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        .fc-icon {
-            width: 42px; height: 42px;
-            border-radius: 12px;
-            background: rgba(232, 121, 249, 0.12);
-            border: 1px solid rgba(232, 121, 249, 0.25);
-            display: flex; justify-content: center; align-items: center;
-            font-size: 1.3rem;
+        /* BACKGROUND FLOATING HEARTS & SPARKLES */
+        .ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            animation: floatUp 8s infinite linear;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(105vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        .fc-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #f8fafc;
+        /* CONTAINER UTAMA (HP MOCKUP) */
+        .app-container {
+            width: 100%;
+            max-width: 410px;
+            min-height: 100vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-left: 1px solid var(--glass-border);
+            border-right: 1px solid var(--glass-border);
+            position: relative;
+            z-index: 1;
+            padding: 24px 18px 40px 18px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 40px rgba(255, 101, 132, 0.25);
         }
 
-        .fc-desc {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            line-height: 1.45;
-        }
-
-        /* LILIN HARAPAN WIDGET */
-        .candle-widget {
-            background: linear-gradient(135deg, rgba(30, 20, 50, 0.7), rgba(15, 10, 25, 0.8));
-            border: 1px solid var(--border-light);
-            border-radius: 20px;
+        /* LOCK SCREEN CUTE PINK */
+        #lockScreen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 224, 230, 0.95);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
-            text-align: center;
-            margin-bottom: 16px;
+            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.5s;
+        }
+        .lock-time { font-size: 3.8rem; font-weight: 300; color: #d90429; text-shadow: 0 4px 15px rgba(217, 4, 41, 0.15); }
+        .lock-date { font-size: 0.95rem; color: #ff4d6d; margin-bottom: 25px; font-weight: 600; }
+        .lock-title { font-size: 0.85rem; color: #6b3e4a; margin-bottom: 18px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; }
+        
+        .pin-dots { display: flex; gap: 15px; margin-bottom: 35px; }
+        .dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid #ff4d6d; transition: 0.2s; }
+        .dot.active { background: #ff4d6d; box-shadow: 0 0 10px #ff4d6d; }
+        .dot.error { animation: shake 0.4s ease-in-out; border-color: #d90429; background: #d90429; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
         }
 
-        .candle-icon {
-            font-size: 2.8rem;
-            margin-bottom: 8px;
+        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; width: 100%; max-width: 270px; }
+        .key {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #ffb3c1;
+            color: #d90429;
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
-            transition: transform 0.2s;
-            display: inline-block;
+            box-shadow: 0 4px 10px rgba(255, 101, 132, 0.15);
+            transition: 0.15s;
         }
+        .key:active { background: #ff4d6d; color: white; transform: scale(0.92); }
+        .key-hint { font-size: 0.75rem; color: #8c5563; margin-top: 25px; text-align: center; font-weight: 600; }
 
-        .candle-icon:active { transform: scale(0.9); }
+        /* HEADER CUTE */
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff, #ffe5ec);
+            border: 2px solid #ffb3c1;
+            border-radius: 24px;
+            padding: 22px 16px;
+            box-shadow: 0 8px 25px rgba(255, 101, 132, 0.15);
+            margin-bottom: 22px;
+        }
+        .header h1 { font-size: 1.35rem; font-weight: 800; color: #d90429; }
+        .header p { font-size: 0.8rem; color: #8c5563; margin-top: 5px; font-weight: 600; }
 
-        /* MODAL POPUP */
-        .modal-bg {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(5, 3, 10, 0.85);
-            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        /* GRID 4 FITUR UTAMA */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .card-item {
+            background: white;
+            border: 2px solid #ffb3c1;
+            border-radius: 22px;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 18px rgba(255, 101, 132, 0.12);
+        }
+        .card-item:active { transform: scale(0.93); background: #ffe5ec; }
+        .card-item .icon { font-size: 2.5rem; margin-bottom: 10px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1)); }
+        .card-item .card-title { font-size: 0.9rem; font-weight: 700; color: #4a2e35; line-height: 1.3; }
+
+        /* POPUP MODAL CUTE */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(107, 62, 74, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
             display: none;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
-
         .modal-box {
-            background: rgba(24, 18, 43, 0.95);
-            border: 1px solid var(--border-light);
+            background: #ffffff;
+            border: 3px solid #ffb3c1;
+            width: 100%;
+            max-width: 360px;
             border-radius: 28px;
             padding: 24px;
-            width: 100%; max-width: 380px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-
-        @keyframes modalPop { 
-            from { transform: scale(0.9); opacity: 0; } 
-            to { transform: scale(1); opacity: 1; } 
-        }
-
-        .modal-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.35rem;
-            color: var(--accent);
-            margin-bottom: 14px;
-            text-align: center;
-        }
-
-        .modal-text {
-            font-size: 0.88rem;
-            color: #cbd5e1;
-            line-height: 1.7;
-            text-align: left;
-            margin-bottom: 20px;
-            white-space: pre-line;
-        }
-
-        .btn-close {
-            width: 100%; padding: 12px;
-            border-radius: 14px; border: none;
-            background: rgba(255, 255, 255, 0.1);
-            color: #f8fafc; font-weight: 600;
-            font-size: 0.85rem; cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-close:active { background: rgba(255, 255, 255, 0.2); }
-    </style>
-</head>
-<body>
-
-    <div class="bg-gradient"></div>
-
-    <div class="app-container">
-        
-        <!-- FOTO TAJAM UTAMA -->
-        <div class="photo-card">
-            <div class="photo-wrapper">
-                <img src="https://i.ibb.co.com/vxGVQbjG/IMG-2605.png" alt="Acum Photo">
-                <div class="photo-tag">✨ Chapter 20 • Acum</div>
-            </div>
-        </div>
-
-        <!-- HEADER UCAPAN -->
-        <div class="header-title">
-            <h1>Happy 20th Birthday, Acum ✨</h1>
-            <p>Selamat memasuki usia kepala dua! Semoga langkah-langkah baru di depan selalu dipenuhi hal-hal baik, ketenangan, dan kebahagiaan.</p>
-        </div>
-
-        <!-- LILIN HARAPAN (INTERAKTIF) -->
-        <div class="candle-widget">
-            <div class="candle-icon" id="candleEmoji" onclick="blowCandle()">🕯️</div>
-            <h3 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 4px;">Lilin Harapan Digital</h3>
-            <p id="candleText" style="font-size: 0.78rem; color: var(--text-muted);">Klik lilin di atas untuk meniup & mengaminkan doa di usia 20 tahun ini.</p>
-        </div>
-
-        <!-- LIST FITUR ELEGAN -->
-        
-        <!-- FITUR 1: SURAT PANJANG -->
-        <div class="feature-card" onclick="openModal('📜 Surat Terbuka: Memasuki Usia 20', letterText)">
-            <div class="fc-top">
-                <div class="fc-icon">💌</div>
-                <div class="fc-title">Surat Terbuka Usia 20</div>
-            </div>
-            <div class="fc-desc">Pesan khusus yang cukup panjang tentang perjalanan hidup, pendewasaan, dan apresiasi untuk Acum.</div>
-        </div>
-
-        <!-- FITUR 2: BUKU KECIL HARAPAN -->
-        <div class="feature-card" onclick="openModal('🌷 Catatan & Doa Baik', wishesText)">
-            <div class="fc-top">
-                <div class="fc-icon">✨</div>
-                <div class="fc-title">Doa & Harapan untuk Acum</div>
-            </div>
-            <div class="fc-desc">Rangkaian doa tulus untuk kesehatan, proses belajar, karier, dan ketenangan hati.</div>
-        </div>
-
-        <!-- FITUR 3: KUPON KEBERSAMAAN -->
-        <div class="feature-card" onclick="openKuponModal()">
-            <div class="fc-top">
-                <div class="fc-icon">🎟️</div>
-                <div class="fc-title">Kupon Kenangan Santai</div>
-            </div>
-            <div class="fc-desc">Koleksi tiket kecil yang bisa klaim kapan saja kalau kamu lagi butuh suasana santai.</div>
-        </div>
-
-        <!-- FITUR 4: SPOTIFY CORNER -->
-        <div class="feature-card" onclick="openModal('🎧 Soundtracks Of Life', musicText)">
-            <div class="fc-top">
-                <div class="fc-icon">🎵</div>
-                <div class="fc-title">Lagu & Refleksi Singkat</div>
-            </div>
-            <div class="fc-desc">Sepotong lirik lagu dan alasan kenapa lagu ini cocok menemani hari lahirmu.</div>
-        </div>
-
-        <!-- FITUR 5: KAPSUL WAKTU -->
-        <div class="feature-card" onclick="openModal('⏳ Pesan untuk Masa Depan', timeCapsuleText)">
-            <div class="fc-top">
-                <div class="fc-icon">⏳</div>
-                <div class="fc-title">Kapsul Waktu Masa Depan</div>
-            </div>
-            <div class="fc-desc">Pesan pengingat ramah untuk Acum saat melewati hari-hari lelah nanti.</div>
-        </div>
-
-    </div>
-
-    <!-- MODAL POPUP UNIVERSAL -->
-    <div class="modal-bg" id="modal">
-        <div class="modal-box">
-            <div class="modal-title" id="mTitle">Judul</div>
-            <div class="modal-text" id="mBody">Isi teks ucapan...</div>
-            <button class="btn-close" onclick="closeModal()">Tutup Pesan ✕</button>
-        </div>
-    </div>
-
-    <script>
-        // TEKS PANJANG (LONG TEXT)
-        const letterText = `Selamat ulang tahun yang ke-20, Acum! 🎉
-
-Memasuki umur 20 tahun itu sering kali terasa seperti langkah yang besar. Ada banyak hal baru, tanggung jawab yang pelan-pelan bertambah, serta proses belajar mengenal diri sendiri yang makin dalam.
-
-Terima kasih ya sudah terus berjuang dan bertahan sampai sejauh ini. Segala lelah, cerita seru, tantangan, dan pencapaian kecil maupun besar yang sudah kamu lewati adalah bukti betapa hebatnya proses tumbuhmu.
-
-Di umur kepala dua ini, jangan terlalu menuntut dirimu untuk selalu sempurna. Tidak apa-apa untuk berjalan perlahan, mengambil jeda saat lelah, dan menikmati setiap momen tanpa harus terburu-buru. 
-
-Semoga kamu selalu dikelilingi oleh hal-hal hangat, pikiran yang tenang, dan orang-orang yang tulus mendukungmu. Selamat merayakan hari kelahiranmu! ❤️`;
-
-        const wishesText = `Berikut beberapa doa dan harapan terbaik untuk Acum di angka 20 ini:
-
-1. 🌿 Ketenangan Pikiran: Semoga di tengah kesibukan apa pun, kamu selalu punya ruang santai dan ketenangan di dalam hati.
-2. 💫 Kesehatan & Energi: Semoga fisik dan mentalmu selalu diberi kesehatan yang cukup untuk mengejar semua hal yang kamu impikan.
-3. 🎯 Kemudahan Langkah: Semoga tiap rencana, tugas, dan perjalanan akademis maupun pribadi dipermudah jalannya.
-4. ✨ Senyuman yang Tulus: Semoga hari-harimu diisi dengan lebih banyak alasan untuk tersenyum dan bahagia.`;
-
-        const musicText = `🎵 "Teruslah berjalan, nikmati setiap ritme hidupmu."
-
-Lagu ini pengingat sederhana buat Acum:
-Usia 20 bukan tentang seberapa cepat kamu sampai di tujuan, tapi tentang seberapa besar kamu bisa menikmati dan menghargai perjalanan yang sedang kamu jalani.
-
-Tetap jadi diri sendiri yang hangat dan keren ya! ✨`;
-
-        const timeCapsuleText = `⏳ Catatan Pengingat untuk Acum:
-
-Kalau suatu saat kamu merasa lelah, jenuh, atau kebingungan dengan proses yang lagi kamu jalani, coba baca pesan singkat ini:
-
-"Kamu sudah melewati banyak hal berat sebelumnya dan berhasil melaluinya. Hari ini pun kamu pasti bisa melaluinya dengan baik. Istirahat sejenak, lalu melangkah lagi pelan-pelan ya."`;
-
-        // INTERAKSI LILIN
-        let blown = false;
-        function blowCandle() {
-            if(!blown) {
-                document.getElementById('candleEmoji').innerText = '✨';
-                document.getElementById('candleText').innerHTML = '<span style="color:#e879f9; font-weight:600;">Lilin berhasil ditiup! 🥳</span><br>Semoga semua harapan baik Acum di usia 20 tahun dikabulkan satu per satu.';
-                blown = true;
-            }
-        }
-
-        // KUPON HANDLER
-        function openKuponModal() {
-            const listKupon = [
-                "🎟️ Kupon Bebas Pilih Tempat Makan / Jajan",
-                "🎟️ Kupon Temani Ngobrol / Dengar Cerita Kapan Saja",
-                "🎟️ Kupon Jam Istirahat Bebas Stress 1 Hari",
-                "🎟️ Kupon Ditraktir Minuman Favorit"
-            ];
-            const randomKupon = listKupon[Math.floor(Math.random() * listKupon.length)];
-            openModal("🎟️ Kupon Spesial Acum", `Selamat! Kamu mendapatkan kupon berikut:\n\n👉 **${randomKupon}**\n\n(Kupon ini berlaku kapan pun kamu mau klaim tanpa tanggal kadaluarsa!)`);
-        }
-
-        // MODAL HANDLER
-        function openModal(title, text) {
-            document.getElementById('mTitle').innerText = title;
-            document.getElementById('mBody').innerText = text;
-            document.getElementById('modal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-        }
-    </script>
-</body>
-</html>
+            box-shadow: 0 20px 40px rgba(
