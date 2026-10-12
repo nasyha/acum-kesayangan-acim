@@ -9,7 +9,7 @@
             --pink-main: #ff6584;
             --pink-soft: #ffb3c1;
             --pink-bg: #fff0f3;
-            --glass-bg: rgba(255, 255, 255, 0.82);
+            --glass-bg: rgba(255, 255, 255, 0.85);
             --glass-border: rgba(255, 182, 193, 0.6);
             --text-dark: #4a2e35;
         }
@@ -59,32 +59,23 @@
             border-right: 1px solid var(--glass-border);
             position: relative;
             z-index: 1;
-            padding: 20px 18px 40px 18px;
+            padding: 0 0 40px 0; /* Padding atas 0 agar foto full mentok ke atas */
             display: flex;
             flex-direction: column;
             box-shadow: 0 0 40px rgba(255, 101, 132, 0.25);
+            overflow: hidden;
         }
 
-        /* HERO BIG PHOTO FRAME */
+        /* HERO FULL-WIDTH PHOTO */
         .hero-photo-card {
             width: 100%;
-            background: white;
-            border: 3px solid #ffb3c1;
-            border-radius: 26px;
-            padding: 10px;
-            margin-bottom: 18px;
-            box-shadow: 0 10px 25px rgba(255, 101, 132, 0.2);
-            position: relative;
-        }
-        .hero-photo-wrapper {
-            width: 100%;
-            height: 360px;
-            border-radius: 20px;
-            overflow: hidden;
+            height: 380px;
             position: relative;
             background: #ffe5ec;
+            margin-bottom: 18px;
+            box-shadow: 0 8px 25px rgba(255, 101, 132, 0.2);
         }
-        .hero-photo-wrapper img {
+        .hero-photo-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -95,7 +86,7 @@
         }
         .hero-badge {
             position: absolute;
-            bottom: 12px; left: 12px;
+            bottom: 14px; left: 14px;
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(10px);
             border: 1.5px solid #ffb3c1;
@@ -104,7 +95,14 @@
             font-size: 0.78rem;
             font-weight: 800;
             color: #d90429;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* PADDING UNTUK KONTROL DI DALAM CONTAINER */
+        .content-padding {
+            padding: 0 18px;
+            display: flex;
+            flex-direction: column;
         }
 
         /* LOCK SCREEN CUTE PINK */
@@ -294,22 +292,22 @@
     <!-- MAIN APP CUTE PINK -->
     <div class="app-container">
 
-        <!-- FOTO BESAR BERDUA DI PALING ATAS -->
+        <!-- FOTO FULL LEBAR DI ATAS -->
         <div class="hero-photo-card">
-            <div class="hero-photo-wrapper">
-                <img src="https://i.ibb.co.com/vxGVQbjG/IMG-2605.png" alt="Acum & Nasyha">
-                <div class="hero-badge">✨ Special Birthday Boy • 20th</div>
-            </div>
+            <img src="https://i.ibb.co.com/vxGVQbjG/IMG-2605.png" alt="Acum & Nasyha">
+            <div class="hero-badge">✨ Special Birthday Boy • 20th</div>
         </div>
         
-        <!-- HEADER TITLE -->
-        <div class="header">
-            <h1>ACUM'S 20th BIRTHDAY 💖</h1>
-            <p>Dibuat khusus untuk kamu yang paling spesial!</p>
-        </div>
+        <div class="content-padding">
+            <!-- HEADER TITLE -->
+            <div class="header">
+                <h1>ACUM'S 20th BIRTHDAY 💖</h1>
+                <p>Dibuat khusus untuk kamu yang paling spesial!</p>
+            </div>
 
-        <!-- GRID 8 FITUR -->
-        <div class="grid" id="cardGrid"></div>
+            <!-- GRID 8 FITUR -->
+            <div class="grid" id="cardGrid"></div>
+        </div>
     </div>
 
     <!-- POPUP MODAL -->
