@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy 20th Birthday Acum 💕 | Special OS Edition</title>
+    <title>Happy 20th Birthday Acum 💕 | Special OS Ultimate Edition</title>
     <style>
         /* ==========================================================================
            1. ROOT VARIABLES & GLOBAL STYLES
@@ -45,7 +45,6 @@
             position: relative;
         }
 
-        /* Custom Scrollbar for Inner Containers */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -62,7 +61,7 @@
         }
 
         /* ==========================================================================
-           2. BACKGROUND ANIMATIONS (BUBBLES & FLOATING PARTICLES)
+           2. BACKGROUND ANIMATIONS (FLOATING BUBBLES & PARTICLES)
            ========================================================================== */
         .ambient-bg {
             position: fixed;
@@ -88,12 +87,8 @@
                 transform: translateY(105vh) scale(0.4) rotate(0deg);
                 opacity: 0;
             }
-            20% {
-                opacity: 0.85;
-            }
-            80% {
-                opacity: 0.85;
-            }
+            20% { opacity: 0.85; }
+            80% { opacity: 0.85; }
             100% {
                 transform: translateY(-15vh) scale(1.1) rotate(360deg);
                 opacity: 0;
@@ -109,14 +104,8 @@
         }
 
         @keyframes fadeOutSparkle {
-            0% {
-                transform: scale(1) translateY(0);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(0.2) translateY(-30px);
-                opacity: 0;
-            }
+            0% { transform: scale(1) translateY(0); opacity: 1; }
+            100% { transform: scale(0.2) translateY(-30px); opacity: 0; }
         }
 
         /* ==========================================================================
@@ -141,7 +130,7 @@
         }
 
         /* ==========================================================================
-           4. HERO PHOTO FRAME (GAYA BINGKAI PINK AWAL + FOTO BERDUA)
+           4. HERO PHOTO FRAME (FRAME PINK BORDEN AWAL + FOTO BERDUA)
            ========================================================================== */
         .hero-photo-card {
             width: 100%;
@@ -248,7 +237,7 @@
         }
 
         /* ==========================================================================
-           6. GRID & CARD ITEMS (12 FITUR)
+           6. GRID & CARD ITEMS (18 FITUR UTAMA)
            ========================================================================== */
         .grid {
             display: grid;
@@ -515,7 +504,7 @@
         }
 
         /* ==========================================================================
-           9. UI COMPONENTS (MUSIC BARS, PROGRESS BARS, ETC.)
+           9. UI COMPONENTS
            ========================================================================== */
         .music-bar {
             display: flex;
@@ -580,13 +569,9 @@
 </head>
 <body>
 
-    <!-- CANVAS FOR CONFETTI EFFECT -->
     <canvas id="confettiCanvas" class="canvas-confetti"></canvas>
-
-    <!-- FLOATING BACKGROUND ANIMATION -->
     <div class="ambient-bg" id="ambientBg"></div>
 
-    <!-- FLOATING QUICK MUSIC PLAYER BUTTON -->
     <div class="floating-music-btn" id="quickMusicBtn" onclick="toggleQuickMusic()" title="Putar/Jeda Lagu">
         🎵
     </div>
@@ -624,7 +609,7 @@
     <!-- MAIN APP OS CONTAINER -->
     <div class="app-container">
 
-        <!-- HERO PHOTO CARD (BINGKAI FOTO BERDUA DENGAN BORDER PINK) -->
+        <!-- HERO PHOTO CARD (BINGKAI FOTO BERDUA) -->
         <div class="hero-photo-card">
             <div class="hero-photo-wrapper">
                 <img src="https://i.ibb.co.com/vxGVQbjG/IMG-2605.png" alt="Acum & Nasyha">
@@ -641,7 +626,7 @@
             <p>Dibuat khusus & tulus untuk kamu yang paling spesial!</p>
         </div>
 
-        <!-- GRID 12 FITUR UTAMA -->
+        <!-- GRID 18 FITUR UTAMA -->
         <div class="grid" id="cardGrid"></div>
     </div>
 
@@ -654,12 +639,8 @@
         </div>
     </div>
 
-    <!-- HIDDEN YOUTUBE PLAYER SPACE -->
     <div id="ytPlayerSpace" style="display:none"></div>
 
-    <!-- ==========================================================================
-       10. JAVASCRIPT LOGIC & INTERACTION ENGINE
-       ========================================================================== -->
     <script>
         /* ----------------------------------------------------------------------
            10.1 BUBBLE GENERATOR & AMBIENT EFFECTS
@@ -677,7 +658,6 @@
             bg.appendChild(b);
         }
 
-        // Sparkle effect on click anywhere
         document.addEventListener('click', function(e) {
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle-particle';
@@ -689,7 +669,7 @@
         });
 
         /* ----------------------------------------------------------------------
-           10.2 AUDIO SYNTHESIZER (WEB AUDIO API)
+           10.2 AUDIO SYNTHESIZER
            ---------------------------------------------------------------------- */
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         
@@ -831,7 +811,7 @@
         function triggerConfetti() {
             confettiParticles = [];
             const colors = ['#ff4d6d', '#ff758c', '#ffb3c1', '#ffffff', '#ffd166'];
-            for(let i = 0; i < 70; i++) {
+            for(let i = 0; i < 75; i++) {
                 confettiParticles.push({
                     x: canvas.width / 2,
                     y: canvas.height / 2,
@@ -855,7 +835,7 @@
                     active = true;
                     p.x += p.vx;
                     p.y += p.vy;
-                    p.vy += 0.25; // gravity
+                    p.vy += 0.25;
                     p.alpha -= 0.015;
                     p.rotation += p.vRot;
 
@@ -872,17 +852,17 @@
         }
 
         /* ----------------------------------------------------------------------
-           10.6 12 FEATURE DATA & MODAL CONTENT
+           10.6 18 FEATURE DATA & EXTENDED MODAL CONTENT
            ---------------------------------------------------------------------- */
         const cards = [
             { 
                 icon: "📜", 
                 title: "Surat Refleksi Usia 20", 
                 body: `
-                <strong>Selamat memasuki usia 20 tahun, Acum! 🥂✨</strong><br><br>
-                Angka kepala dua bukan tentang tuntutan untuk harus serba tahu atau terburu-buru meraih segalanya. Usia 20 adalah tentang belajar menikmati proses, menghargai setiap usaha kecilmu, dan berani melangkah dengan tenang.<br><br>
-                Terima kasih ya sudah terus berjuang dan tumbuh jadi pribadi yang penuh tanggung jawab serta hangat. Ingat, kapan pun kamu merasa lelah, kamu selalu punya tempat untuk pulang dan berbagi cerita denganku.<br><br>
-                Happy 20th Birthday, cowok favorit aku! 💕
+                <strong>Selamat memasuki usia 20 tahun, Acum sayang! 🥂✨</strong><br><br>
+                Gak terasa ya kamu sekarang udah resmi menginjak usia kepala dua. Memasuki usia 20 bukan tentang tuntutan untuk harus serba tahu atau terburu-buru meraih segalanya. Usia 20 adalah tentang belajar menikmati proses, menghargai setiap usaha kecilmu, dan berani melangkah dengan tenang.<br><br>
+                Terima kasih ya sudah terus berjuang dan tumbuh jadi pribadi yang penuh tanggung jawab, sabar, dan selalu hangat. Kamu adalah rumah paling nyaman buat aku. Ingat, kapan pun kamu merasa lelah atau kewalahan, kamu selalu punya tempat untuk pulang dan berbagi cerita denganku.<br><br>
+                Semoga di umur 20 ini semua hal baik, rezeki, dan impian kamu dikabulkan. Aku bakal selalu ada buat dukung kamu dalam kondisi apa pun. Happy 20th Birthday, cowok favorit aku! I love you! 💕
                 ` 
             },
             { 
@@ -894,7 +874,7 @@
                 \"Telah lama kucari dirimu... Dipelukku tempatmu... Kau yang kutunggu...\" 🎶
                 </p>
                 <p style='font-size:0.82rem; color:var(--text-sub); text-align:center; margin-bottom:12px;'>
-                Lagu ini pengingat betapa bersyukurnya aku bisa nemuin sosok sehebat kamu dalam hidupku.
+                Lagu ini pengingat betapa bersyukurnya aku bisa nemuin sosok sehebat kamu dalam hidupku. Terima kasih ya sudah hadir dan jadi bagian paling indah di hidupku.
                 </p>
                 <div class='music-bar'>
                     <div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div>
@@ -907,7 +887,7 @@
                 icon: "🎟️", 
                 title: "Voucher Momen Quality Time", 
                 body: `
-                <p id='kBox' style='text-align:center;'>Ambil voucher momen kebersamaan yang bisa kamu klaim kapan saja kamu butuh jeda:</p>
+                <p id='kBox' style='text-align:center;'>Ambil voucher momen kebersamaan yang bisa kamu klaim kapan saja kamu butuh jeda dan waktu santai:</p>
                 <button class='btn-main' onclick='ambilKupon()'>Ambil Voucher Momen 🪙</button>
                 ` 
             },
@@ -986,6 +966,65 @@
                 ` 
             },
             { 
+                icon: "🔮", 
+                title: "Ramalan Harapan Hari Ini", 
+                body: `
+                <p id='rBox' style='text-align:center;'>Tekan tombol di bawah untuk mendapatkan ramalan energi positif harianmu:</p>
+                <button class='btn-main' onclick='acakRamalan()'>Kocok Ramalan Energi ✨</button>
+                ` 
+            },
+            { 
+                icon: "💌", 
+                title: "Alasan Sayang Acum", 
+                body: `
+                💌 <strong>Kenapa Acum Begitu Spesial:</strong><br><br>
+                1. Karena Acum selalu sabar dengerin cerita Acim.<br>
+                2. Caramu berusaha selalu bikin bersyukur.<br>
+                3. Kebiasaan kecilmu yang selalu merawat & peduli.<br>
+                4. Karena bersamamu, semuanya terasa jauh lebih tenang. 💕
+                ` 
+            },
+            { 
+                icon: "☕", 
+                title: "Resep Bebas Stress", 
+                body: `
+                ☕ <strong>Resep Hari Bebas Stress Khusus Acum:</strong><br><br>
+                - 1 cangkir minuman favorit.<br>
+                - 0% memikirkan tugas / beban kerjaan.<br>
+                - 100% obrolan santai tanpa terburu-buru.<br>
+                - Dosis makanan enak secukupnya! 🍲
+                ` 
+            },
+            { 
+                icon: "🎈", 
+                title: "Tiup Lilin Virtual", 
+                body: `
+                <p style='text-align:center; font-size:2.5rem; margin-bottom:10px;'>🎂🎂🎂</p>
+                <p id='lilinTxt' style='text-align:center;'>Make a wish di dalam hati, lalu tiup lilinnya!</p>
+                <button class='btn-main' onclick='tiupLilin()'>💨 Tiup Lilin Ulang Tahun</button>
+                ` 
+            },
+            { 
+                icon: "🏆", 
+                title: "Sertifikat Terfavorit", 
+                body: `
+                <div style='border:2px dashed var(--pink-main); padding:15px; border-radius:16px; text-align:center; background:var(--pink-light);'>
+                    <h3 style='color:var(--pink-deep); font-size:1rem; margin-bottom:6px;'>🏆 SERTIFIKAT RESMI 🏆</h3>
+                    <p style='font-size:0.85rem;'>Diberikan kepada:</p>
+                    <p style='font-weight:bold; font-size:1.05rem; color:var(--pink-deep); margin:6px 0;'>ACUM</p>
+                    <p style='font-size:0.78rem;'>Sebagai Cowok Paling Sabar, Hebat & Paling Disayang Acim! ❤️</p>
+                </div>
+                ` 
+            },
+            { 
+                icon: "🧩", 
+                title: "Kuis Singkat Acum-Acim", 
+                body: `
+                <p id='qBox' style='text-align:center;'>Tes seberapa kompak kita hari ini:</p>
+                <button class='btn-main' onclick='mainKuis()'>Mulai Kuis Singkat 🎯</button>
+                ` 
+            },
+            { 
                 icon: "🔒", 
                 title: "Kapsul Waktu Kedewasaan", 
                 body: `
@@ -1027,7 +1066,8 @@
                 "🎟️ Voucher Coffee Date & Deep Talk Santai",
                 "🎟️ Voucher Unwind Day (Hari Bebas Gangguan & Bebas Stress)",
                 "🎟️ Voucher Traktir Makanan Favorit Bebas Pilih",
-                "🎟️ Voucher Temani Ngobrol & Dengar Cerita Kapan Saja"
+                "🎟️ Voucher Temani Ngobrol & Dengar Cerita Kapan Saja",
+                "🎟️ Voucher Jalan-Jalan Cari Udara Segar Seharian"
             ];
             document.getElementById('kBox').innerHTML = `
                 <div style='text-align:center;'>
@@ -1060,6 +1100,32 @@
                 "🕊️ Semoga setiap keputusan yang kamu ambil di usia 20 ini membawa kebaikan dan keberkahan."
             ];
             document.getElementById('dBox').innerHTML = list[Math.floor(Math.random()*list.length)];
+        }
+
+        function acakRamalan() {
+            playTone(950, 'sine', 0.12);
+            triggerConfetti();
+            const listR = [
+                "🔮 Energy Today: 100% Keberuntungan & Ketenangan Pikiran!",
+                "🔮 Energy Today: Hari yang pas buat santai & makan makanan enak!",
+                "🔮 Energy Today: Segala hal berat bakal terasa lebih ringan hari ini."
+            ];
+            document.getElementById('rBox').innerHTML = `<span style='color:var(--pink-deep); font-weight:bold;'>${listR[Math.floor(Math.random()*listR.length)]}</span>`;
+        }
+
+        function tiupLilin() {
+            playTone(1200, 'triangle', 0.2);
+            triggerConfetti();
+            document.getElementById('lilinTxt').innerHTML = "<span style='color:var(--pink-deep); font-weight:bold; font-size:1rem;'>🎉 YAY! Semoga semua impian Acum terkabul! ✨</span>";
+        }
+
+        function mainKuis() {
+            playTone(850, 'sine', 0.1);
+            const listQ = [
+                "🎯 Siapa cowok yang paling sabar & ganteng hari ini? (Jawaban: Acum! ❤️)",
+                "🎯 Siapa yang selalu siap nemenin Acum? (Jawaban: Acim! 💕)"
+            ];
+            document.getElementById('qBox').innerHTML = `<span style='color:var(--pink-deep); font-weight:bold;'>${listQ[Math.floor(Math.random()*listQ.length)]}</span>`;
         }
 
         let mVal = 60;
