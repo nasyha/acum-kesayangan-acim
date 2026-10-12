@@ -78,7 +78,7 @@
         }
         .hero-photo-wrapper {
             width: 100%;
-            height: 380px;
+            height: 360px;
             border-radius: 20px;
             overflow: hidden;
             position: relative;
@@ -96,7 +96,7 @@
         .hero-badge {
             position: absolute;
             bottom: 12px; left: 12px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(10px);
             border: 1.5px solid #ffb3c1;
             padding: 6px 14px;
@@ -124,7 +124,7 @@
         }
         .lock-time { font-size: 3.8rem; font-weight: 300; color: #d90429; text-shadow: 0 4px 15px rgba(217, 4, 41, 0.15); }
         .lock-date { font-size: 0.95rem; color: #ff4d6d; margin-bottom: 25px; font-weight: 600; }
-        .lock-title { font-size: 0.85rem; color: #6b3e4a; margin-bottom: 18px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; }
+        .lock-title { font-size: 0.85rem; color: #6b3e4a; margin-bottom: 18px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; text-align: center; }
         
         .pin-dots { display: flex; gap: 15px; margin-bottom: 35px; }
         .dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid #ff4d6d; transition: 0.2s; }
@@ -162,24 +162,24 @@
             background: linear-gradient(135deg, #ffffff, #ffe5ec);
             border: 2px solid #ffb3c1;
             border-radius: 22px;
-            padding: 18px 16px;
+            padding: 16px;
             box-shadow: 0 6px 20px rgba(255, 101, 132, 0.12);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
-        .header h1 { font-size: 1.35rem; font-weight: 800; color: #d90429; }
-        .header p { font-size: 0.8rem; color: #8c5563; margin-top: 4px; font-weight: 600; }
+        .header h1 { font-size: 1.25rem; font-weight: 800; color: #d90429; }
+        .header p { font-size: 0.78rem; color: #8c5563; margin-top: 4px; font-weight: 600; }
 
         /* GRID 8 FITUR */
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
+            gap: 12px;
         }
         .card-item {
             background: white;
             border: 2px solid #ffb3c1;
-            border-radius: 22px;
-            padding: 20px 14px;
+            border-radius: 20px;
+            padding: 18px 12px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -190,8 +190,8 @@
             box-shadow: 0 6px 18px rgba(255, 101, 132, 0.12);
         }
         .card-item:active { transform: scale(0.93); background: #ffe5ec; }
-        .card-item .icon { font-size: 2.2rem; margin-bottom: 8px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1)); }
-        .card-item .card-title { font-size: 0.85rem; font-weight: 700; color: #4a2e35; line-height: 1.3; }
+        .card-item .icon { font-size: 2rem; margin-bottom: 6px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1)); }
+        .card-item .card-title { font-size: 0.82rem; font-weight: 700; color: #4a2e35; line-height: 1.3; }
 
         /* POPUP MODAL CUTE */
         .modal-overlay {
@@ -294,10 +294,10 @@
     <!-- MAIN APP CUTE PINK -->
     <div class="app-container">
 
-        <!-- FOTO BESAR DI PALING ATAS -->
+        <!-- FOTO BESAR BERDUA DI PALING ATAS -->
         <div class="hero-photo-card">
             <div class="hero-photo-wrapper">
-                <img src="https://i.ibb.co.com/vxGVQbjG/IMG-2605.png" alt="Acum Photo">
+                <img src="https://i.ibb.co.com/vxGVQbjG/IMG-2605.png" alt="Acum & Nasyha">
                 <div class="hero-badge">✨ Special Birthday Boy • 20th</div>
             </div>
         </div>
@@ -308,7 +308,7 @@
             <p>Dibuat khusus untuk kamu yang paling spesial!</p>
         </div>
 
-        <!-- GRID FITUR -->
+        <!-- GRID 8 FITUR -->
         <div class="grid" id="cardGrid"></div>
     </div>
 
@@ -503,7 +503,7 @@
                 "🎟️ Kupon Ditraktir Makanan Favorit Kamu",
                 "🎟️ Kupon Bebas Pilih Tempat Jalan-Jalan",
                 "🎟️ Kupon Temani Ngobrol / Dengerin Cerita Kamu Seharian",
-                "🎟️ Kupon Pelukan Hangat"
+                "🎟️ Kupon Pelukan Hangat Tanpa Batas Waktu"
             ];
             document.getElementById('kBox').innerHTML = `<div style='text-align:center;'><strong>Hadiah Kupon Kamu:</strong><br><span style='color:#d90429; font-weight:bold; font-size:1rem;'>${listK[Math.floor(Math.random()*listK.length)]}</span><br><small style='color:#6b3e4a;'>(Screenshot kupon ini buat ditagih ke aku ya!)</small></div>`;
         }
@@ -513,7 +513,7 @@
             document.getElementById('camTxt').innerText = "Memindai senyuman...";
             setTimeout(() => {
                 playTone(1400, 'sine', 0.3);
-                document.getElementById('camTxt').innerText = "HASIL: 1000% GANTENG & BIKIN ACIM SAYANG! 😳❤️";
+                document.getElementById('camTxt').innerText = "HASIL: 1000% GANTENG & BIKIN ACIM MAKIN SAYANG! 😳❤️";
             }, 1400);
         }
 
