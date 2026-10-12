@@ -171,4 +171,314 @@
             max-width: 360px;
             border-radius: 28px;
             padding: 24px;
-            box-shadow: 0 20px 40px rgba(
+            box-shadow: 0 20px 40px rgba(255, 101, 132, 0.25);
+            text-align: center;
+            animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 84vh;
+            overflow-y: auto;
+        }
+        @keyframes modalPop {
+            from { transform: scale(0.8) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .modal-title { font-size: 1.15rem; font-weight: 800; color: #d90429; margin-bottom: 14px; }
+        .modal-body { font-size: 0.88rem; line-height: 1.65; color: #4a2e35; text-align: left; }
+
+        .btn-main {
+            background: linear-gradient(135deg, #ff4d6d, #ff758c);
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+            transition: transform 0.15s;
+        }
+        .btn-main:active { transform: scale(0.95); }
+        .btn-close {
+            background: #ffe5ec;
+            color: #d90429;
+            border: 2px solid #ffb3c1;
+            margin-top: 10px;
+        }
+
+        /* FOTO TAJAM & BERSIH */
+        .cam-frame {
+            width: 100%;
+            height: 220px;
+            background: #fff;
+            border-radius: 18px;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #ff4d6d;
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .cam-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            image-rendering: -webkit-optimize-contrast;
+        }
+        .cam-overlay-text {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            background: rgba(255, 77, 109, 0.85);
+            padding: 8px;
+            z-index: 3;
+            text-align: center;
+            color: white;
+        }
+
+        .music-bar { display: flex; align-items: center; justify-content: center; gap: 5px; height: 32px; margin: 12px 0; }
+        .bar-line { width: 4px; background: #ff4d6d; border-radius: 4px; animation: bounce 0.6s infinite alternate ease-in-out; }
+        .bar-line:nth-child(2) { animation-delay: 0.15s; }
+        .bar-line:nth-child(3) { animation-delay: 0.3s; }
+        .bar-line:nth-child(4) { animation-delay: 0.45s; }
+        @keyframes bounce { from { height: 6px; } to { height: 28px; } }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-bg" id="ambientBg"></div>
+
+    <!-- LOCK SCREEN CUTE -->
+    <div id="lockScreen">
+        <div class="lock-time" id="lockClock">00:00</div>
+        <div class="lock-date">Special 20th Birthday</div>
+        <div class="lock-title">Masukkan PIN Tanggal Ultah Kamu, Acum</div>
+        
+        <div class="pin-dots" id="pinDots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+
+        <div class="keypad">
+            <div class="key" onclick="pressKey('1')">1</div>
+            <div class="key" onclick="pressKey('2')">2</div>
+            <div class="key" onclick="pressKey('3')">3</div>
+            <div class="key" onclick="pressKey('4')">4</div>
+            <div class="key" onclick="pressKey('5')">5</div>
+            <div class="key" onclick="pressKey('6')">6</div>
+            <div class="key" onclick="pressKey('7')">7</div>
+            <div class="key" onclick="pressKey('8')">8</div>
+            <div class="key" onclick="pressKey('9')">9</div>
+            <div class="key" style="opacity:0; pointer-events:none;"></div>
+            <div class="key" onclick="pressKey('0')">0</div>
+            <div class="key" onclick="deleteKey()">⌫</div>
+        </div>
+        <div class="key-hint">PIN: 1310 atau 20</div>
+    </div>
+
+    <!-- MAIN APP CUTE PINK -->
+    <div class="app-container">
+        <div class="header">
+            <h1>ACUM'S 20th BIRTHDAY 💖</h1>
+            <p>Dibuat khusus untuk kamu yang paling spesial!</p>
+        </div>
+
+        <div class="grid" id="cardGrid"></div>
+    </div>
+
+    <!-- POPUP MODAL -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-box">
+            <div class="modal-title" id="mTitle">Menu</div>
+            <div class="modal-body" id="mBody">Konten</div>
+            <button class="btn-main btn-close" onclick="closeModal()">Tutup ✖</button>
+        </div>
+    </div>
+
+    <div id="ytPlayerSpace" style="display:none"></div>
+
+    <script>
+        // BUBBLE FLOATING GENERATOR
+        const bg = document.getElementById('ambientBg');
+        for(let i=0; i<15; i++) {
+            const b = document.createElement('div');
+            b.className = 'bubble';
+            const size = Math.random() * 25 + 10;
+            b.style.width = size + 'px';
+            b.style.height = size + 'px';
+            b.style.left = Math.random() * 100 + 'vw';
+            b.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            b.style.animationDelay = (Math.random() * 5) + 's';
+            bg.appendChild(b);
+        }
+
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playTone(freq, type = 'sine', duration = 0.15) {
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e){}
+        }
+
+        function playUnlockSound() {
+            playTone(523.25, 'sine', 0.1);
+            setTimeout(() => playTone(659.25, 'sine', 0.15), 100);
+            setTimeout(() => playTone(783.99, 'sine', 0.25), 200);
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('lockClock').innerText = `${h}:${m}`;
+        }
+        setInterval(updateClock, 1000); updateClock();
+
+        let inputPin = "";
+        const validPins = ["1310", "2026", "0020", "20"];
+
+        function pressKey(num) {
+            playTone(600, 'sine', 0.08);
+            if(inputPin.length < 4) {
+                inputPin += num;
+                updateDots();
+                if(inputPin.length === 4 || inputPin === "20") {
+                    setTimeout(checkPin, 150);
+                }
+            }
+        }
+
+        function deleteKey() {
+            playTone(300, 'sine', 0.08);
+            inputPin = inputPin.slice(0, -1);
+            updateDots();
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, idx) => {
+                if(idx < inputPin.length) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+        }
+
+        function checkPin() {
+            if(validPins.includes(inputPin) || inputPin === "20") {
+                playUnlockSound();
+                if(ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
+                document.getElementById('lockScreen').style.transform = 'translateY(-100%)';
+                document.getElementById('lockScreen').style.opacity = '0';
+                setTimeout(() => document.getElementById('lockScreen').style.display = 'none', 600);
+            } else {
+                playTone(180, 'sawtooth', 0.3);
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach(d => d.classList.add('error'));
+                setTimeout(() => {
+                    dots.forEach(d => d.classList.remove('error'));
+                    inputPin = "";
+                    updateDots();
+                }, 500);
+            }
+        }
+
+        // YOUTUBE AFGAN FT ROSSA
+        let ytPlayer;
+        const tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api";
+        document.body.appendChild(tag);
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('ytPlayerSpace', {
+                height: '0', width: '0', videoId: 'eI24fJkG4zY',
+                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'eI24fJkG4zY' }
+            });
+        }
+
+        let photoUrl = "https://i.ibb.co.com/vxGVQbjG/IMG-2605.png";
+
+        // 4 FITUR UTAMA DENGAN BAHASA "AKU-KAMU" YANG MANIS
+        const cards = [
+            { 
+                icon: "💌", 
+                title: "Surat Spesial Untukmu", 
+                body: "Happy 20th Birthday, Acum sayang! 🎂✨<br><br>Gak terasa ya kamu sekarang udah resmi menginjak usia kepala dua. Makasih banyak ya udah selalu sabar, baik, dan nemenin aku selama ini. Kamu adalah rumah paling nyaman buat aku.<br><br>Semoga di umur 20 ini semua hal baik, rezeki, dan impian kamu dikabulkan. Aku bakal selalu ada buat dukung kamu dalam kondisi apa pun. I love you! 💕" 
+            },
+            { 
+                icon: "🎵", 
+                title: "Lagu Kita Berdua", 
+                body: "<p style='text-align:center;'><strong>Kamu Yang Kutunggu - Afgan & Rossa</strong></p><p style='text-align:center; font-style:italic; color:#d90429; font-size:0.82rem; margin:10px 0;'>\"Telah lama kucari dirimu... Dipelukku tempatmu... Kau yang kutunggu...\" 🎶</p><div class='music-bar'><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div><div class='bar-line'></div></div><button class='btn-main' onclick='ytPlayer.playVideo()'>▶ Putar Lagu</button><button class='btn-main btn-close' onclick='ytPlayer.pauseVideo()'>⏸ Jeda Lagu</button>" 
+            },
+            { 
+                icon: "🎟️", 
+                title: "Kupon Hadiah Spesial", 
+                body: "<p id='kBox' style='text-align:center;'>Ambil satu kupon spesial dari aku khusus hari ulang tahunmu!</p><button class='btn-main' onclick='ambilKupon()'>Ambil Kupon 🪙</button>" 
+            },
+            { 
+                icon: "📸", 
+                title: "Foto & Detektor Salting", 
+                body: `
+                <div class="cam-frame">
+                    <img src="${photoUrl}" alt="Acum">
+                    <div class="cam-overlay-text">
+                        <p id="camTxt" style="font-size:0.8rem; font-weight:bold;">Ketampanan Acum Level 100%! 😍</p>
+                    </div>
+                </div>
+                <button class="btn-main" onclick="scanSalting()">Cek Tingkat Salting ⚡</button>
+                ` 
+            }
+        ];
+
+        const gridEl = document.getElementById('cardGrid');
+        cards.forEach((c, i) => {
+            const card = document.createElement('div');
+            card.className = 'card-item';
+            card.onclick = () => openCard(i);
+            card.innerHTML = `<span class="icon">${c.icon}</span><span class="card-title">${c.title}</span>`;
+            gridEl.appendChild(card);
+        });
+
+        function openCard(idx) {
+            playTone(800, 'sine', 0.1);
+            document.getElementById('mTitle').innerText = cards[idx].title;
+            document.getElementById('mBody').innerHTML = cards[idx].body;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            playTone(400, 'sine', 0.08);
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function ambilKupon() {
+            playTone(1000, 'triangle', 0.15);
+            const listK = [
+                "🎟️ Kupon Ditraktir Makanan Favorit Kamu",
+                "🎟️ Kupon Bebas Pilih Tempat Jalan-Jalan",
+                "🎟️ Kupon Temani Ngobrol / Dengerin Cerita Kamu Seharian",
+                "🎟️ Kupon Pelukan Hangat Tanpa Batas Waktu"
+            ];
+            document.getElementById('kBox').innerHTML = `<div style='text-align:center;'><strong>Hadiah Kupon Kamu:</strong><br><span style='color:#d90429; font-weight:bold; font-size:1rem;'>${listK[Math.floor(Math.random()*listK.length)]}</span><br><small style='color:#6b3e4a;'>(Screenshot kupon ini buat ditagih ke aku ya!)</small></div>`;
+        }
+
+        function scanSalting() {
+            playTone(700, 'sawtooth', 0.2);
+            document.getElementById('camTxt').innerText = "Memindai senyuman...";
+            setTimeout(() => {
+                playTone(1400, 'sine', 0.3);
+                document.getElementById('camTxt').innerText = "HASIL: 1000% GANTENG & BIKIN AKU SAYANG! 😳❤️";
+            }, 1400);
+        }
+    </script>
+</body>
+</html>
