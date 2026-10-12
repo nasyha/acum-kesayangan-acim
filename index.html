@@ -1,152 +1,391 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Music Player - Afgan</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Acum - Celebrating 20 Years</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f0c1b;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-light: rgba(255, 255, 255, 0.12);
+            --accent: #e879f9;
+            --accent-glow: rgba(232, 121, 249, 0.35);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
 
-    body {
-      background-color: #f4f4f7;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
 
-    .player-card {
-      background: #ffffff;
-      padding: 24px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-      width: 320px;
-      text-align: center;
-    }
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-    .cover-art {
-      width: 100%;
-      height: 240px;
-      background: linear-gradient(135deg, #2c3e50, #4ca1af);
-      border-radius: 14px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 48px;
-    }
+        /* BACKGROUND GLOW EFEK */
+        .bg-gradient {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+        }
 
-    .song-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #222;
-      margin-bottom: 4px;
-    }
+        /* CONTAINER APLIKASI */
+        .app-container {
+            width: 100%; max-width: 430px;
+            min-height: 100vh;
+            background: rgba(15, 12, 27, 0.85);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border-light);
+            border-right: 1px solid var(--border-light);
+            padding: 24px 18px 80px 18px;
+            position: relative; z-index: 1;
+        }
 
-    .artist-name {
-      font-size: 14px;
-      color: #777;
-      margin-bottom: 20px;
-    }
+        /* PHOTO HERO FRAME */
+        .photo-card {
+            width: 100%;
+            border-radius: 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            padding: 12px;
+            margin-bottom: 22px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            position: relative;
+        }
 
-    .progress-container {
-      background: #e0e0e0;
-      height: 6px;
-      border-radius: 3px;
-      width: 100%;
-      margin-bottom: 8px;
-      cursor: pointer;
-      position: relative;
-    }
+        .photo-wrapper {
+            width: 100%;
+            height: 380px;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+            background: #18122b;
+        }
 
-    .progress-bar {
-      background: #4ca1af;
-      height: 100%;
-      width: 35%;
-      border-radius: 3px;
-    }
+        .photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            /* Filter tajam agar foto jernih & berestetika */
+            filter: contrast(102%) brightness(102%);
+        }
 
-    .time-stamps {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: #888;
-      margin-bottom: 20px;
-    }
+        .photo-tag {
+            position: absolute;
+            bottom: 12px; left: 12px;
+            background: rgba(15, 12, 27, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 0.78rem;
+            color: #f1f5f9;
+            letter-spacing: 0.5px;
+        }
 
-    .controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-    }
+        /* HEADER & UCAPAN UTAMA */
+        .header-title {
+            margin-bottom: 20px;
+        }
 
-    .btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 20px;
-      color: #444;
-      transition: color 0.2s;
-    }
+        .header-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ffffff 30%, #e879f9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
 
-    .btn:hover {
-      color: #4ca1af;
-    }
+        .header-title p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
 
-    .btn-play {
-      width: 50px;
-      height: 50px;
-      background: #4ca1af;
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      box-shadow: 0 4px 12px rgba(76, 161, 175, 0.3);
-    }
+        /* FEATURE CARDS LIST */
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+        }
 
-    .btn-play:hover {
-      background: #3b8d9b;
-      color: white;
-    }
-  </style>
+        .feature-card:active {
+            transform: scale(0.98);
+            background: rgba(232, 121, 249, 0.1);
+            border-color: rgba(232, 121, 249, 0.4);
+        }
+
+        .fc-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .fc-icon {
+            width: 42px; height: 42px;
+            border-radius: 12px;
+            background: rgba(232, 121, 249, 0.12);
+            border: 1px solid rgba(232, 121, 249, 0.25);
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.3rem;
+        }
+
+        .fc-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #f8fafc;
+        }
+
+        .fc-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        /* LILIN HARAPAN WIDGET */
+        .candle-widget {
+            background: linear-gradient(135deg, rgba(30, 20, 50, 0.7), rgba(15, 10, 25, 0.8));
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .candle-icon {
+            font-size: 2.8rem;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        .candle-icon:active { transform: scale(0.9); }
+
+        /* MODAL POPUP */
+        .modal-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(5, 3, 10, 0.85);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-box {
+            background: rgba(24, 18, 43, 0.95);
+            border: 1px solid var(--border-light);
+            border-radius: 28px;
+            padding: 24px;
+            width: 100%; max-width: 380px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalPop { 
+            from { transform: scale(0.9); opacity: 0; } 
+            to { transform: scale(1); opacity: 1; } 
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin-bottom: 14px;
+            text-align: center;
+        }
+
+        .modal-text {
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            line-height: 1.7;
+            text-align: left;
+            margin-bottom: 20px;
+            white-space: pre-line;
+        }
+
+        .btn-close {
+            width: 100%; padding: 12px;
+            border-radius: 14px; border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: #f8fafc; font-weight: 600;
+            font-size: 0.85rem; cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-close:active { background: rgba(255, 255, 255, 0.2); }
+    </style>
 </head>
 <body>
 
-  <div class="player-card">
-    <!-- Album Cover / Aesthetic Block -->
-    <div class="cover-art">
-      🎵
+    <div class="bg-gradient"></div>
+
+    <div class="app-container">
+        
+        <!-- FOTO TAJAM UTAMA -->
+        <div class="photo-card">
+            <div class="photo-wrapper">
+                <img src="https://i.ibb.co.com/vxGVQbjG/IMG-2605.png" alt="Acum Photo">
+                <div class="photo-tag">✨ Chapter 20 • Acum</div>
+            </div>
+        </div>
+
+        <!-- HEADER UCAPAN -->
+        <div class="header-title">
+            <h1>Happy 20th Birthday, Acum ✨</h1>
+            <p>Selamat memasuki usia kepala dua! Semoga langkah-langkah baru di depan selalu dipenuhi hal-hal baik, ketenangan, dan kebahagiaan.</p>
+        </div>
+
+        <!-- LILIN HARAPAN (INTERAKTIF) -->
+        <div class="candle-widget">
+            <div class="candle-icon" id="candleEmoji" onclick="blowCandle()">🕯️</div>
+            <h3 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 4px;">Lilin Harapan Digital</h3>
+            <p id="candleText" style="font-size: 0.78rem; color: var(--text-muted);">Klik lilin di atas untuk meniup & mengaminkan doa di usia 20 tahun ini.</p>
+        </div>
+
+        <!-- LIST FITUR ELEGAN -->
+        
+        <!-- FITUR 1: SURAT PANJANG -->
+        <div class="feature-card" onclick="openModal('📜 Surat Terbuka: Memasuki Usia 20', letterText)">
+            <div class="fc-top">
+                <div class="fc-icon">💌</div>
+                <div class="fc-title">Surat Terbuka Usia 20</div>
+            </div>
+            <div class="fc-desc">Pesan khusus yang cukup panjang tentang perjalanan hidup, pendewasaan, dan apresiasi untuk Acum.</div>
+        </div>
+
+        <!-- FITUR 2: BUKU KECIL HARAPAN -->
+        <div class="feature-card" onclick="openModal('🌷 Catatan & Doa Baik', wishesText)">
+            <div class="fc-top">
+                <div class="fc-icon">✨</div>
+                <div class="fc-title">Doa & Harapan untuk Acum</div>
+            </div>
+            <div class="fc-desc">Rangkaian doa tulus untuk kesehatan, proses belajar, karier, dan ketenangan hati.</div>
+        </div>
+
+        <!-- FITUR 3: KUPON KEBERSAMAAN -->
+        <div class="feature-card" onclick="openKuponModal()">
+            <div class="fc-top">
+                <div class="fc-icon">🎟️</div>
+                <div class="fc-title">Kupon Kenangan Santai</div>
+            </div>
+            <div class="fc-desc">Koleksi tiket kecil yang bisa klaim kapan saja kalau kamu lagi butuh suasana santai.</div>
+        </div>
+
+        <!-- FITUR 4: SPOTIFY CORNER -->
+        <div class="feature-card" onclick="openModal('🎧 Soundtracks Of Life', musicText)">
+            <div class="fc-top">
+                <div class="fc-icon">🎵</div>
+                <div class="fc-title">Lagu & Refleksi Singkat</div>
+            </div>
+            <div class="fc-desc">Sepotong lirik lagu dan alasan kenapa lagu ini cocok menemani hari lahirmu.</div>
+        </div>
+
+        <!-- FITUR 5: KAPSUL WAKTU -->
+        <div class="feature-card" onclick="openModal('⏳ Pesan untuk Masa Depan', timeCapsuleText)">
+            <div class="fc-top">
+                <div class="fc-icon">⏳</div>
+                <div class="fc-title">Kapsul Waktu Masa Depan</div>
+            </div>
+            <div class="fc-desc">Pesan pengingat ramah untuk Acum saat melewati hari-hari lelah nanti.</div>
+        </div>
+
     </div>
 
-    <!-- Song Info -->
-    <div class="song-title">Bukan Cinta Biasa</div>
-    <div class="artist-name">Afgan</div>
-
-    <!-- Progress Bar -->
-    <div class="progress-container">
-      <div class="progress-bar"></div>
-    </div>
-    <div class="time-stamps">
-      <span>1:24</span>
-      <span>4:06</span>
+    <!-- MODAL POPUP UNIVERSAL -->
+    <div class="modal-bg" id="modal">
+        <div class="modal-box">
+            <div class="modal-title" id="mTitle">Judul</div>
+            <div class="modal-text" id="mBody">Isi teks ucapan...</div>
+            <button class="btn-close" onclick="closeModal()">Tutup Pesan ✕</button>
+        </div>
     </div>
 
-    <!-- Minimal Controls -->
-    <div class="controls">
-      <button class="btn">⏮</button>
-      <button class="btn btn-play">▶</button>
-      <button class="btn">⏭</button>
-    </div>
-  </div>
+    <script>
+        // TEKS PANJANG (LONG TEXT)
+        const letterText = `Selamat ulang tahun yang ke-20, Acum! 🎉
 
+Memasuki umur 20 tahun itu sering kali terasa seperti langkah yang besar. Ada banyak hal baru, tanggung jawab yang pelan-pelan bertambah, serta proses belajar mengenal diri sendiri yang makin dalam.
+
+Terima kasih ya sudah terus berjuang dan bertahan sampai sejauh ini. Segala lelah, cerita seru, tantangan, dan pencapaian kecil maupun besar yang sudah kamu lewati adalah bukti betapa hebatnya proses tumbuhmu.
+
+Di umur kepala dua ini, jangan terlalu menuntut dirimu untuk selalu sempurna. Tidak apa-apa untuk berjalan perlahan, mengambil jeda saat lelah, dan menikmati setiap momen tanpa harus terburu-buru. 
+
+Semoga kamu selalu dikelilingi oleh hal-hal hangat, pikiran yang tenang, dan orang-orang yang tulus mendukungmu. Selamat merayakan hari kelahiranmu! ❤️`;
+
+        const wishesText = `Berikut beberapa doa dan harapan terbaik untuk Acum di angka 20 ini:
+
+1. 🌿 Ketenangan Pikiran: Semoga di tengah kesibukan apa pun, kamu selalu punya ruang santai dan ketenangan di dalam hati.
+2. 💫 Kesehatan & Energi: Semoga fisik dan mentalmu selalu diberi kesehatan yang cukup untuk mengejar semua hal yang kamu impikan.
+3. 🎯 Kemudahan Langkah: Semoga tiap rencana, tugas, dan perjalanan akademis maupun pribadi dipermudah jalannya.
+4. ✨ Senyuman yang Tulus: Semoga hari-harimu diisi dengan lebih banyak alasan untuk tersenyum dan bahagia.`;
+
+        const musicText = `🎵 "Teruslah berjalan, nikmati setiap ritme hidupmu."
+
+Lagu ini pengingat sederhana buat Acum:
+Usia 20 bukan tentang seberapa cepat kamu sampai di tujuan, tapi tentang seberapa besar kamu bisa menikmati dan menghargai perjalanan yang sedang kamu jalani.
+
+Tetap jadi diri sendiri yang hangat dan keren ya! ✨`;
+
+        const timeCapsuleText = `⏳ Catatan Pengingat untuk Acum:
+
+Kalau suatu saat kamu merasa lelah, jenuh, atau kebingungan dengan proses yang lagi kamu jalani, coba baca pesan singkat ini:
+
+"Kamu sudah melewati banyak hal berat sebelumnya dan berhasil melaluinya. Hari ini pun kamu pasti bisa melaluinya dengan baik. Istirahat sejenak, lalu melangkah lagi pelan-pelan ya."`;
+
+        // INTERAKSI LILIN
+        let blown = false;
+        function blowCandle() {
+            if(!blown) {
+                document.getElementById('candleEmoji').innerText = '✨';
+                document.getElementById('candleText').innerHTML = '<span style="color:#e879f9; font-weight:600;">Lilin berhasil ditiup! 🥳</span><br>Semoga semua harapan baik Acum di usia 20 tahun dikabulkan satu per satu.';
+                blown = true;
+            }
+        }
+
+        // KUPON HANDLER
+        function openKuponModal() {
+            const listKupon = [
+                "🎟️ Kupon Bebas Pilih Tempat Makan / Jajan",
+                "🎟️ Kupon Temani Ngobrol / Dengar Cerita Kapan Saja",
+                "🎟️ Kupon Jam Istirahat Bebas Stress 1 Hari",
+                "🎟️ Kupon Ditraktir Minuman Favorit"
+            ];
+            const randomKupon = listKupon[Math.floor(Math.random() * listKupon.length)];
+            openModal("🎟️ Kupon Spesial Acum", `Selamat! Kamu mendapatkan kupon berikut:\n\n👉 **${randomKupon}**\n\n(Kupon ini berlaku kapan pun kamu mau klaim tanpa tanggal kadaluarsa!)`);
+        }
+
+        // MODAL HANDLER
+        function openModal(title, text) {
+            document.getElementById('mTitle').innerText = title;
+            document.getElementById('mBody').innerText = text;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
